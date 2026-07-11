@@ -15,7 +15,15 @@
       "tweet": "Anthropic just launched Cowork — a Claude Desktop agent that operates directly in your files, no coding needed. Built in ~10 days, largely by Claude itself. Agentic AI… https://venturebeat.com/technology/anthropic-launches-cowork-a-claude-desktop-agent-that-works-in-your-files-no",
       "tweet_id": "2075920751111323716",
       "posted_at": "2026-07-11T12:30:50.708195+00:00"
+    },
+    {
+      "url": "https://techcrunch.com/2026/07/10/us-cyber-agency-cisa-had-to-build-its-incident-playbook-during-the-incident-agency-reveals",
+      "title": "US cybersecurity agency CISA had to build its incident playbook during the incident, agency reveals",
+      "source": "TechCrunch",
+      "tweet": "CISA wrote its incident response playbook while responding to the incident. Every team laughs at that until they check whether their own runbooks exist before the pager goes off.",
+      "tweet_id": "2075921543641874576",
+      "posted_at": "2026-07-11T12:33:59.606742+00:00"
     }
   ],
-  "last_updated": "2026-07-11T12:30:50.708291+00:00"
+  "last_updated": "2026-07-11T12:33:59.606793+00:00"
 }

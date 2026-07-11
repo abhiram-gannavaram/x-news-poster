@@ -98,7 +98,9 @@ AI_KEYWORDS = re.compile(
 
 # Max items kept per feed and overall after fetch
 MAX_PER_FEED = 8
-MAX_CANDIDATES = 40
+MAX_CANDIDATES = 30
+# Drop stale stories so Claude doesn't rewrite day-old product PR
+MAX_AGE_HOURS = 48.0
 
 
 def normalize_url(url: str) -> str:
@@ -161,16 +163,46 @@ def entry_published(entry: Any) -> str | None:
     return None
 
 
-def score_item(title: str, summary: str, category: str) -> float:
+def age_hours_from_iso(published: str | None) -> float | None:
+    """Hours since publish time, or None if unknown."""
+    if not published:
+        return None
+    try:
+        dt = datetime.fromisoformat(published)
+        if dt.tzinfo is None:
+            dt = dt.replace(tzinfo=timezone.utc)
+        return max(0.0, (datetime.now(timezone.utc) - dt).total_seconds() / 3600.0)
+    except (TypeError, ValueError):
+        return None
+
+
+def score_item(
+    title: str,
+    summary: str,
+    category: str,
+    age_hours: float | None = None,
+) -> float:
     """
-    Lightweight relevance score so AI-heavy items rank higher before Claude.
+    Relevance + recency score. Fresher AI signal ranks above old PR.
 
     Pure heuristic — Claude still does the final pick.
     """
     text = f"{title} {summary}"
     matches = len(AI_KEYWORDS.findall(text))
     base = 1.0 if category == "ai" else 0.5
-    return base + min(matches * 0.4, 3.0)
+    score = base + min(matches * 0.4, 3.0)
+
+    if age_hours is not None:
+        # Strong boost for last 12h; decay after that; hard-filter applied separately
+        if age_hours <= 12:
+            score += 3.0
+        elif age_hours <= 24:
+            score += 2.0
+        elif age_hours <= 48:
+            score += 0.5
+        else:
+            score -= 2.0
+    return score
 
 
 def fetch_feed(feed: dict[str, str]) -> list[dict[str, Any]]:
@@ -208,6 +240,8 @@ def fetch_feed(feed: dict[str, str]) -> list[dict[str, Any]]:
         summary = strip_html(
             entry.get("summary") or entry.get("description") or ""
         )[:500]
+        published = entry_published(entry)
+        age_hours = age_hours_from_iso(published)
 
         items.append(
             {
@@ -216,8 +250,9 @@ def fetch_feed(feed: dict[str, str]) -> list[dict[str, Any]]:
                 "summary": summary,
                 "source": name,
                 "category": category,
-                "published": entry_published(entry),
-                "relevance_score": score_item(title, summary, category),
+                "published": published,
+                "age_hours": age_hours,
+                "relevance_score": score_item(title, summary, category, age_hours),
             }
         )
 
@@ -243,22 +278,37 @@ def fetch_all_news(
     for feed in feeds:
         raw.extend(fetch_feed(feed))
 
-    # Dedup within this run + filter history
+    # Dedup within this run + filter history + drop stale items
     seen_urls: set[str] = set()
     fresh: list[dict[str, Any]] = []
+    dropped_stale = 0
     for item in raw:
         url = item["url"]
         if url in seen_urls or url in seen_posted:
             continue
+        age = item.get("age_hours")
+        # Keep unknown-age items (some feeds omit dates) but prefer dated fresh ones
+        if age is not None and age > MAX_AGE_HOURS:
+            dropped_stale += 1
+            continue
         seen_urls.add(url)
         fresh.append(item)
 
-    fresh.sort(key=lambda x: x["relevance_score"], reverse=True)
+    # Newest + most relevant first
+    fresh.sort(
+        key=lambda x: (
+            x.get("age_hours") is None,  # dated items first
+            x.get("age_hours") if x.get("age_hours") is not None else 9999,
+            -(x.get("relevance_score") or 0),
+        )
+    )
     candidates = fresh[:MAX_CANDIDATES]
     logger.info(
-        "Collected %d raw → %d unique fresh → keeping top %d",
+        "Collected %d raw → %d unique fresh (dropped %d stale >%sh) → keeping top %d",
         len(raw),
         len(fresh),
+        dropped_stale,
+        int(MAX_AGE_HOURS),
         len(candidates),
     )
     return candidates

@@ -94,13 +94,22 @@ def save_history(history: dict[str, Any], path: Path = HISTORY_PATH) -> None:
 
 def final_quality_check(tweet: str) -> tuple[bool, str]:
     """Last-chance validation right before calling X API."""
+    import re
+
     text = (tweet or "").strip()
     if not text:
         return False, "empty"
     if len(text) > MAX_TWEET_LEN:
         return False, f"length {len(text)} > {MAX_TWEET_LEN}"
-    if len(text) < 20:
+    if len(text) < 40:
         return False, "too short"
+    # Never post half-baked truncated lines or link spam
+    if text.endswith(("…", "...")) or "…" in text[-4:]:
+        return False, "ellipsis / truncated"
+    if re.search(r"https?://|www\.", text, re.I):
+        return False, "url not allowed"
+    if re.search(r"(?<!\w)#\w+", text):
+        return False, "hashtag not allowed"
     return True, "ok"
 
 
