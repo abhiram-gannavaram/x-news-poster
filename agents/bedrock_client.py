@@ -16,6 +16,17 @@ logger = logging.getLogger("bedrock_client")
 
 DEFAULT_MODEL_ID = "us.anthropic.claude-sonnet-4-6"
 
+_RETRYABLE_CODES = {
+    "ThrottlingException",
+    "ServiceUnavailableException",
+    "InternalServerException",
+    "ModelTimeoutException",
+    "ModelErrorException",
+    "ModelNotReadyException",
+    "RequestTimeout",
+    "TooManyRequestsException",
+}
+
 
 def get_client():
     region = (
@@ -26,13 +37,33 @@ def get_client():
     return boto3.client("bedrock-runtime", region_name=region)
 
 
+def _is_retryable(exc: Exception) -> bool:
+    code = ""
+    if hasattr(exc, "response") and exc.response:
+        code = exc.response.get("Error", {}).get("Code", "") or ""
+    if code in _RETRYABLE_CODES:
+        return True
+    msg = str(exc).lower()
+    return any(
+        token in msg
+        for token in (
+            "throttl",
+            "timeout",
+            "temporar",
+            "unavailable",
+            "empty bedrock",
+            "rate",
+        )
+    )
+
+
 def invoke_claude(
     prompt: str,
     *,
     model_id: str | None = None,
     max_tokens: int = 2048,
     temperature: float = 0.3,
-    retries: int = 4,
+    retries: int = 5,
 ) -> str:
     model_id = model_id or os.environ.get("BEDROCK_MODEL_ID") or DEFAULT_MODEL_ID
     client = get_client()
@@ -43,7 +74,7 @@ def invoke_claude(
         "messages": [{"role": "user", "content": [{"type": "text", "text": prompt}]}],
     }
 
-    delays = [1, 2, 4, 8]
+    delays = [1, 2, 4, 8, 16]
     last_err: Exception | None = None
     for attempt in range(retries):
         try:
@@ -60,16 +91,12 @@ def invoke_claude(
             if not text.strip():
                 raise RuntimeError(f"Empty Bedrock response: {payload!r}")
             return text.strip()
-        except (ClientError, BotoCoreError, RuntimeError) as exc:
+        except (ClientError, BotoCoreError, RuntimeError, json.JSONDecodeError) as exc:
             last_err = exc
-            code = ""
-            if hasattr(exc, "response") and exc.response:
-                code = exc.response.get("Error", {}).get("Code", "")
-            if code in {"ThrottlingException", "ServiceUnavailableException"} and attempt < retries - 1:
-                time.sleep(delays[min(attempt, len(delays) - 1)])
-                continue
-            if attempt < retries - 1 and "throttl" in str(exc).lower():
-                time.sleep(delays[min(attempt, len(delays) - 1)])
+            if attempt < retries - 1 and _is_retryable(exc):
+                delay = delays[min(attempt, len(delays) - 1)]
+                logger.warning("Bedrock retryable error (%s), sleep %ss", exc, delay)
+                time.sleep(delay)
                 continue
             raise
     raise RuntimeError(f"Bedrock failed after retries: {last_err}")
@@ -84,12 +111,18 @@ def extract_json(text: str) -> dict[str, Any]:
         start, end = cleaned.find("{"), cleaned.rfind("}")
         if start != -1 and end != -1 and end > start:
             cleaned = cleaned[start : end + 1]
-    return json.loads(cleaned)
+    data = json.loads(cleaned)
+    if not isinstance(data, dict):
+        raise TypeError(f"Expected JSON object, got {type(data).__name__}")
+    return data
 
 
 def extract_json_safe(text: str, fallback: dict[str, Any]) -> dict[str, Any]:
     try:
-        return extract_json(text)
+        data = extract_json(text)
+        if not isinstance(data, dict):
+            raise TypeError(f"Expected dict, got {type(data).__name__}")
+        return data
     except (json.JSONDecodeError, TypeError, ValueError) as exc:
-        logger.error("JSON parse failed: %s | raw=%s", exc, text[:300])
+        logger.error("JSON parse failed: %s | raw=%s", exc, (text or "")[:300])
         return fallback

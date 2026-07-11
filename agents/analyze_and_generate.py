@@ -8,7 +8,6 @@ Draft only — validate.py must approve before post_to_x runs.
 
 from __future__ import annotations
 
-import json
 import logging
 import sys
 from datetime import datetime, timezone
@@ -20,6 +19,13 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from agents.bedrock_client import extract_json_safe, invoke_claude  # noqa: E402
+from agents.utils import (  # noqa: E402
+    atomic_write_json,
+    coerce_index,
+    load_history_strict,
+    load_json_safe,
+    normalize_url,
+)
 
 logging.basicConfig(
     level=logging.INFO,
@@ -36,26 +42,25 @@ MIN_TWEET_LEN = 70
 
 
 def load_brief(path: Path = BRIEF_PATH) -> list[dict[str, Any]]:
-    if not path.exists():
-        logger.error("Missing research brief %s — run research.py first", path)
+    data = load_json_safe(path, {"items": []})
+    if not isinstance(data, dict):
         return []
-    with path.open(encoding="utf-8") as f:
-        return json.load(f).get("items") or []
+    items = data.get("items") or []
+    return items if isinstance(items, list) else []
 
 
 def load_recent_posts(path: Path = HISTORY_PATH, n: int = 8) -> list[str]:
-    if not path.exists():
-        return []
     try:
-        with path.open(encoding="utf-8") as f:
-            posted = json.load(f).get("posted") or []
-        texts = []
-        for item in posted[-n:]:
-            if isinstance(item, dict) and item.get("tweet"):
-                texts.append(item["tweet"])
-        return texts
-    except (json.JSONDecodeError, OSError):
-        return []
+        history = load_history_strict(path)
+    except RuntimeError as exc:
+        logger.error("%s", exc)
+        # Fail closed for recency context only — do not invent empty if corrupt
+        raise
+    texts = []
+    for item in (history.get("posted") or [])[-n:]:
+        if isinstance(item, dict) and item.get("tweet"):
+            texts.append(item["tweet"])
+    return texts
 
 
 def build_writer_prompt(items: list[dict[str, Any]], recent: list[str]) -> str:
@@ -97,7 +102,7 @@ HARD RULES
 1. No links, URLs, domains, hashtags, emojis
 2. No underscore characters _
 3. No em dash — or en dash – characters (use a period or plain comma instead)
-4. Avoid decorative hyphen stacks like "built-in" chains of jargon; prefer plain words ("built in")
+4. Prefer plain words over jargon stacks
 5. No trailing ellipsis … or "..."
 6. No AI voice / corporate sludge: delve, landscape, leverage, robust, unlock, game changer,
    navigate, tapestry, crucial, seamless, cutting edge, in today's world, it's worth noting,
@@ -111,10 +116,7 @@ OUTPUT only JSON (no markdown fences):
 {{
   "selections": [
     {{
-      "research_index": <1-based index>,
-      "title": "<source title>",
-      "url": "<source url for history>",
-      "source": "<source name>",
+      "research_index": <1-based index as integer>,
       "why_selected": "<one short sentence>",
       "grounding_notes": "<which facts the post uses>",
       "tweet": "<final post text>"
@@ -123,7 +125,7 @@ OUTPUT only JSON (no markdown fences):
   "skipped_reason_if_empty": "<if none>"
 }}
 
-Return 0 or 1 selection only.
+Return 0 or 1 selection only. Do not invent title/url — index only.
 """
 
 
@@ -144,26 +146,29 @@ def generate_drafts(items: list[dict[str, Any]] | None = None) -> list[dict[str,
         {"selections": [], "skipped_reason_if_empty": "writer JSON parse failure"},
     )
     selections = parsed.get("selections") or []
+    if not isinstance(selections, list):
+        selections = []
     if not selections:
         logger.info("Writer returned empty: %s", parsed.get("skipped_reason_if_empty"))
         return []
 
     drafts: list[dict[str, Any]] = []
     for sel in selections[:1]:
-        idx = sel.get("research_index")
-        title = (sel.get("title") or "").strip()
-        url = (sel.get("url") or "").strip()
-        source = (sel.get("source") or "").strip()
+        if not isinstance(sel, dict):
+            continue
+        idx = coerce_index(sel.get("research_index"), len(items))
+        if idx is None:
+            logger.warning("Invalid research_index %r — skipping selection", sel.get("research_index"))
+            continue
+
+        base = items[idx - 1]
+        # Prefer researched fields for history/dedup (never trust model URL)
+        title = (base.get("title") or "").strip()
+        url = normalize_url(base.get("url") or "")
+        source = (base.get("source") or "").strip()
         tweet = (sel.get("tweet") or "").strip()
         why = (sel.get("why_selected") or "").strip()
         grounding = (sel.get("grounding_notes") or "").strip()
-
-        base: dict[str, Any] = {}
-        if isinstance(idx, int) and 1 <= idx <= len(items):
-            base = items[idx - 1]
-            title = title or base.get("title", "")
-            url = url or base.get("url", "")
-            source = source or base.get("source", "")
 
         if not tweet:
             continue
@@ -180,7 +185,7 @@ def generate_drafts(items: list[dict[str, Any]] | None = None) -> list[dict[str,
                 "verified_facts": base.get("verified_facts") or [],
                 "builder_angle": base.get("builder_angle") or "",
                 "confidence": base.get("confidence"),
-                "validation_approved": False,  # must pass validate.py
+                "validation_approved": False,
                 "status": "draft",
             }
         )
@@ -190,20 +195,22 @@ def generate_drafts(items: list[dict[str, Any]] | None = None) -> list[dict[str,
 
 
 def save_drafts(drafts: list[dict[str, Any]], path: Path = DRAFTS_PATH) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
     payload = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "count": len(drafts),
         "tweets": drafts,
         "note": "Drafts only. validate.py must set validation_approved=true before posting.",
     }
-    with path.open("w", encoding="utf-8") as f:
-        json.dump(payload, f, indent=2, ensure_ascii=False)
+    atomic_write_json(path, payload)
     logger.info("Wrote drafts → %s", path)
 
 
 def main() -> int:
-    drafts = generate_drafts()
+    try:
+        drafts = generate_drafts()
+    except RuntimeError as exc:
+        logger.error("%s", exc)
+        return 1
     save_drafts(drafts)
     for i, d in enumerate(drafts, 1):
         logger.info("DRAFT %d (%d): %s", i, d["char_count"], d["tweet"])

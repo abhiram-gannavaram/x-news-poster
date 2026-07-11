@@ -1,14 +1,14 @@
 # X News Poster
 
-Automated **AI & Tech news** poster for X (Twitter), powered by:
+Automated **AI & Tech insight** posts for X (Twitter), powered by:
 
 | Piece | Tech |
 |--------|------|
 | Schedule | GitHub Actions (6× daily) |
-| News source | Free RSS feeds (`feedparser`) |
-| Analysis + tweets | Amazon Bedrock · Claude Sonnet 4.6 |
+| News | Free RSS feeds (`feedparser`) |
+| Research + write + validate | Amazon Bedrock · Claude Sonnet 4.6 |
 | Publishing | X API v2 (`tweepy`) |
-| Dedup history | `data/posted_news.json` (committed back each run) |
+| Dedup history | `data/posted_news.json` (atomic write + git commit) |
 
 ---
 
@@ -19,15 +19,12 @@ fetch → research → write → validate → (optional) post
   RSS     page+facts   insight    style/fact/quality     X API
 ```
 
-1. **Fetch** RSS (recency + blocklist + AI scoring)  
-2. **Research** top stories: download page text, extract **verified facts** only  
+1. **Fetch** RSS (recency, undated cap, blocklist, AI scoring)  
+2. **Research** top stories: SSRF-safe page fetch, extract **verified facts** only  
 3. **Write** one human insight (no links, no AI voice, no `_` / em dashes)  
-4. **Validate** in layers: style gate → fact grounding → quality score (≥7)  
+4. **Validate** style + fact grounding + quality (≥7); one rewrite if needed  
 5. **Post** only if `validation_approved=true` **and** `AUTO_POST=true`  
-6. **History** saved so the next run skips the same story  
-
-Manual runs default to **dry_run=true** so you can inspect drafts first.  
-
+6. **History** saved after each successful live post (atomic JSON)
 
 ---
 
@@ -35,115 +32,70 @@ Manual runs default to **dry_run=true** so you can inspect drafts first.
 
 ```
 x-news-poster/
-├── .github/workflows/
-│   └── post-x.yml          # cron (6×/day) + workflow_dispatch
+├── .github/workflows/post-x.yml
 ├── agents/
-│   ├── fetch_news.py       # RSS ingest + dedup
-│   ├── analyze_and_generate.py  # Bedrock Claude pick + tweet
-│   └── post_to_x.py        # quality gate + X post + history
-├── data/
-│   └── posted_news.json    # durable post history
+│   ├── utils.py                 # normalize_url, atomic JSON, coercions
+│   ├── bedrock_client.py
+│   ├── fetch_news.py
+│   ├── research.py
+│   ├── analyze_and_generate.py
+│   ├── validate.py
+│   └── post_to_x.py
+├── data/posted_news.json
 ├── requirements.txt
 └── README.md
 ```
 
 ---
 
-## Recommended free RSS feeds (included)
+## Posting controls (important)
 
-| # | Source | Feed URL | Focus |
-|---|--------|----------|--------|
-| 1 | **Hacker News** | `https://hnrss.org/frontpage` | High-signal tech discussion |
-| 2 | **TechCrunch** | `https://techcrunch.com/feed/` | Startups & product launches |
-| 3 | **The Verge** | `https://www.theverge.com/rss/index.xml` | Consumer tech & culture |
-| 4 | **Ars Technica** | `https://feeds.arstechnica.com/arstechnica/index` | Deep tech reporting |
-| 5 | **MIT Technology Review** | `https://www.technologyreview.com/feed/` | Serious AI & research |
-| 6 | **VentureBeat AI** | `https://venturebeat.com/category/ai/feed/` | AI business & products |
-| 7 | **Reddit r/MachineLearning** | `https://www.reddit.com/r/MachineLearning/.rss` | Research papers & discussion |
-| 8 | **OpenAI Blog** | `https://openai.com/blog/rss.xml` | First-party OpenAI news |
-| 9 | **Google AI Blog** | `https://blog.google/technology/ai/rss/` | Google / DeepMind AI |
-| 10 | **Wired AI** | `https://www.wired.com/feed/tag/ai/latest/rss` | AI long-form & industry |
+| Mode | How | Posts to X? |
+|------|-----|-------------|
+| Manual dry run (default) | Actions → dry_run=`true` | No |
+| Manual live | dry_run=`false` **and** auto_post=`true` | Yes (if validated) |
+| Schedule | Cron (unless kill-switch) | Yes (if validated) |
+| Schedule paused | Repo variable `ENABLE_AUTO_POST=false` | No (dry only) |
 
-Edit the list anytime in `agents/fetch_news.py` → `RSS_FEEDS`.
+**Local live post requires both:**
+
+```bash
+AUTO_POST=true python agents/post_to_x.py
+# or simulate:
+DRY_RUN=true python agents/post_to_x.py
+```
+
+Bare `python agents/post_to_x.py` **refuses** to post (safe default).
 
 ---
 
-## Prerequisites
+## Setup
 
-### 1. X (Twitter) developer app
-
-1. Go to [developer.x.com](https://developer.x.com/) and create a Project + App.  
-2. App permissions: **Read and Write**.  
-3. Generate:
-   - API Key + API Secret  
-   - Access Token + Access Token Secret (for the account that will post)  
-4. Ensure your plan can call **POST /2/tweets** (Free tier is limited — check current X pricing).
-
-### 2. AWS + Amazon Bedrock
-
-1. IAM user (or role) with permission to invoke Bedrock, e.g.:
-
-   ```json
-   {
-     "Effect": "Allow",
-     "Action": ["bedrock:InvokeModel"],
-     "Resource": [
-       "arn:aws:bedrock:*::foundation-model/anthropic.claude-sonnet-4-6",
-       "arn:aws:bedrock:*:*:inference-profile/*"
-     ]
-   }
-   ```
-
-2. In the Bedrock console, **enable model access** for Claude Sonnet 4.6 in your region.  
-3. Default model ID (US inference profile): `us.anthropic.claude-sonnet-4-6`  
-   - Sonnet 4.6 requires an inference profile (base model ID alone fails). Other geos: `eu.` / `jp.` / `global.anthropic.claude-sonnet-4-6`.  
-4. Create access keys for the IAM user (`AWS_ACCESS_KEY_ID` / `AWS_SECRET_ACCESS_KEY`) — or use an existing configured profile.
-
-### 3. GitHub repository secrets
+### Secrets (GitHub → Settings → Secrets and variables → Actions)
 
 | Secret | Description |
 |--------|-------------|
-| `X_API_KEY` | X API Key (consumer key) |
-| `X_API_SECRET` | X API Secret |
+| `X_API_KEY` | X consumer key |
+| `X_API_SECRET` | X consumer secret |
 | `X_ACCESS_TOKEN` | User access token |
 | `X_ACCESS_TOKEN_SECRET` | User access token secret |
-| `AWS_ACCESS_KEY_ID` | IAM access key |
-| `AWS_SECRET_ACCESS_KEY` | IAM secret key |
+| `AWS_ACCESS_KEY_ID` | IAM key with Bedrock invoke |
+| `AWS_SECRET_ACCESS_KEY` | IAM secret |
 | `AWS_REGION` | e.g. `us-east-1` |
 
-Optional **repository variable** (Settings → Secrets and variables → Actions → Variables):
+### Variables (optional)
 
 | Variable | Description |
 |----------|-------------|
-| `BEDROCK_MODEL_ID` | Override model / inference profile ID |
+| `BEDROCK_MODEL_ID` | Default: `us.anthropic.claude-sonnet-4-6` |
+| `ENABLE_AUTO_POST` | Set `false` to pause scheduled live posts |
 
----
+### First run
 
-## Setup (step by step)
-
-```bash
-# 1. Create repo and push this project
-cd x-news-poster
-git init
-git add .
-git commit -m "feat: initial X news poster"
-# create empty GitHub repo, then:
-git remote add origin git@github.com:<YOU>/x-news-poster.git
-git branch -M main
-git push -u origin main
-```
-
-2. In GitHub → **Settings → Secrets and variables → Actions**, add all secrets listed above.  
-3. Enable Actions (if first time).  
-4. Open **Actions → Post AI/Tech News to X → Run workflow**.  
-   - Use **dry_run = true** first to validate fetch + Claude without posting.  
-5. When dry run looks good, run with **dry_run = false** (or wait for the schedule).
-
-### Schedule
-
-Cron (UTC): `0 0,4,8,12,16,20 * * *` → **6 runs per day**, every 4 hours.
-
-> GitHub can delay scheduled workflows by a few minutes under load; that is normal.
+1. Push repo and add secrets  
+2. **Run workflow** with dry_run=`true`  
+3. Inspect artifacts / logs  
+4. For a real manual post: dry_run=`false` **and** auto_post=`true`  
 
 ---
 
@@ -151,11 +103,9 @@ Cron (UTC): `0 0,4,8,12,16,20 * * *` → **6 runs per day**, every 4 hours.
 
 ```bash
 cd x-news-poster
-python3 -m venv .venv
-source .venv/bin/activate
+python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 
-# Export credentials
 export AWS_ACCESS_KEY_ID=...
 export AWS_SECRET_ACCESS_KEY=...
 export AWS_REGION=us-east-1
@@ -164,62 +114,57 @@ export X_API_SECRET=...
 export X_ACCESS_TOKEN=...
 export X_ACCESS_TOKEN_SECRET=...
 
-# Pipeline
 python agents/fetch_news.py
+python agents/research.py
 python agents/analyze_and_generate.py
-DRY_RUN=true python agents/post_to_x.py   # safe
-python agents/post_to_x.py                # real post
+python agents/validate.py
+DRY_RUN=true python agents/post_to_x.py   # preview only
+AUTO_POST=true python agents/post_to_x.py # live
 ```
 
 ---
 
-## Quality checks
+## Quality gates (before post)
 
-Before posting, tweets must:
+Tweets must:
 
-- Be between ~40 and **280** characters  
-- Include the article URL  
-- Avoid spam patterns (`click here`, excessive hashtags / emojis / `!!!!`)  
-- Not already exist in `posted_news.json`  
-
-Claude is instructed to avoid clickbait and invented facts; the local gate is a second layer.
+- Be **70–240** characters  
+- Have **no** URLs, domains, hashtags, emojis  
+- Have **no** `_`, em/en dashes, or `…` / `...`  
+- Pass fact grounding vs researched page facts  
+- Quality score ≥ 7, substance ≥ 6, human ≥ 6  
+- Be marked `validation_approved: true`  
+- Not already exist in history (normalized URL + exact text)
 
 ---
 
-## Costs & limits (rough)
+## Safety notes
 
-| Service | Notes |
-|---------|--------|
-| **GitHub Actions** | Free tier is usually enough for 6 short Python jobs/day |
-| **Amazon Bedrock** | Claude Sonnet charged per input/output tokens; each run sends ~20–25 headlines |
-| **X API** | Posting requires a paid/eligible developer tier — confirm current plan limits |
+- History uses **atomic writes** (`tmp` + replace); corrupt history **fails the job** (no silent empty dedup)  
+- Research fetches are **HTTPS-only** with private/metadata IP blocks and redirect re-check  
+- Live X API failures return **non-zero exit** when all approved posts fail  
+- Rejected drafts are kept in `tweets_to_post.json` with `status: rejected` for debugging  
+
+---
+
+## RSS feeds
+
+Hacker News, TechCrunch, The Verge, Ars Technica, MIT Technology Review, VentureBeat AI, Reddit r/MachineLearning, OpenAI Blog, Google AI Blog, Wired AI — edit in `agents/fetch_news.py`.
 
 ---
 
 ## Troubleshooting
 
-| Symptom | What to check |
-|---------|----------------|
-| `AccessDeniedException` from Bedrock | Model access enabled? IAM `bedrock:InvokeModel`? Correct `AWS_REGION`? |
-| Model not found | Try inference profile ID via `BEDROCK_MODEL_ID` |
-| X `403 Forbidden` | App must be **Read and Write**; regenerate user tokens after permission change |
-| X `401 Unauthorized` | Wrong keys / tokens, or tokens for a different app |
-| No candidates | Feeds blocked? Check Actions logs; Reddit sometimes needs a proper User-Agent (already set) |
-| History not updating | Workflow needs `contents: write` (set in YAML); branch protection may block bot push |
-| Duplicate posts | Ensure `data/posted_news.json` is committed and pushed after each successful post |
-
----
-
-## Customization
-
-- **Tone / hashtags** → edit the prompt in `agents/analyze_and_generate.py`  
-- **Feeds** → `RSS_FEEDS` in `agents/fetch_news.py`  
-- **Post count** → Claude returns 1–2; capped in code at 2  
-- **Schedule** → cron in `.github/workflows/post-x.yml`  
-- **Model** → `BEDROCK_MODEL_ID` or `DEFAULT_MODEL_ID`  
+| Symptom | Check |
+|---------|--------|
+| WOULD POST but nothing on X | Need `AUTO_POST=true` (and dry_run false) |
+| Corrupt history error | Restore `data/posted_news.json` from git |
+| Bedrock access denied | Model access + inference profile `us.anthropic.claude-sonnet-4-6` |
+| Schedule not posting | `ENABLE_AUTO_POST` may be `false` |
+| Duplicate posts | Ensure history commit/push succeeded after live post |
 
 ---
 
 ## License
 
-MIT — use and modify freely.
+MIT

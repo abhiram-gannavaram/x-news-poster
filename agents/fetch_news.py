@@ -8,15 +8,24 @@ and writes fresh candidates to data/candidates.json.
 
 from __future__ import annotations
 
-import json
 import logging
 import re
+import sys
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
-from urllib.parse import urlparse, urlunparse
 
 import feedparser
+
+ROOT = Path(__file__).resolve().parent.parent
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from agents.utils import (  # noqa: E402
+    atomic_write_json,
+    load_history_strict,
+    normalize_url,
+)
 
 logging.basicConfig(
     level=logging.INFO,
@@ -24,30 +33,13 @@ logging.basicConfig(
 )
 logger = logging.getLogger("fetch_news")
 
-# Project root (parent of agents/)
-ROOT = Path(__file__).resolve().parent.parent
 HISTORY_PATH = ROOT / "data" / "posted_news.json"
 CANDIDATES_PATH = ROOT / "data" / "candidates.json"
 
-# ---------------------------------------------------------------------------
-# Free AI / Tech RSS feeds (8–10 solid sources)
-# ---------------------------------------------------------------------------
 RSS_FEEDS: list[dict[str, str]] = [
-    {
-        "name": "Hacker News",
-        "url": "https://hnrss.org/frontpage",
-        "category": "tech",
-    },
-    {
-        "name": "TechCrunch",
-        "url": "https://techcrunch.com/feed/",
-        "category": "tech",
-    },
-    {
-        "name": "The Verge",
-        "url": "https://www.theverge.com/rss/index.xml",
-        "category": "tech",
-    },
+    {"name": "Hacker News", "url": "https://hnrss.org/frontpage", "category": "tech"},
+    {"name": "TechCrunch", "url": "https://techcrunch.com/feed/", "category": "tech"},
+    {"name": "The Verge", "url": "https://www.theverge.com/rss/index.xml", "category": "tech"},
     {
         "name": "Ars Technica",
         "url": "https://feeds.arstechnica.com/arstechnica/index",
@@ -68,11 +60,7 @@ RSS_FEEDS: list[dict[str, str]] = [
         "url": "https://www.reddit.com/r/MachineLearning/.rss",
         "category": "ai",
     },
-    {
-        "name": "OpenAI Blog",
-        "url": "https://openai.com/blog/rss.xml",
-        "category": "ai",
-    },
+    {"name": "OpenAI Blog", "url": "https://openai.com/blog/rss.xml", "category": "ai"},
     {
         "name": "Google AI Blog",
         "url": "https://blog.google/technology/ai/rss/",
@@ -85,7 +73,6 @@ RSS_FEEDS: list[dict[str, str]] = [
     },
 ]
 
-# Keywords that strongly signal AI / ML relevance (used for soft ranking)
 AI_KEYWORDS = re.compile(
     r"\b("
     r"ai|artificial intelligence|machine learning|deep learning|llm|gpt|"
@@ -96,42 +83,14 @@ AI_KEYWORDS = re.compile(
     re.IGNORECASE,
 )
 
-# Max items kept per feed and overall after fetch
 MAX_PER_FEED = 8
 MAX_CANDIDATES = 30
-# Drop stale stories so Claude doesn't rewrite day-old product PR
 MAX_AGE_HOURS = 48.0
-
-
-def normalize_url(url: str) -> str:
-    """Strip tracking params and fragments for stable dedup keys."""
-    if not url:
-        return ""
-    parsed = urlparse(url.strip())
-    # Drop common trackers; keep path + netloc
-    clean = urlunparse(
-        (parsed.scheme, parsed.netloc.lower(), parsed.path.rstrip("/"), "", "", "")
-    )
-    return clean
-
-
-def load_history(path: Path = HISTORY_PATH) -> dict[str, Any]:
-    """Load posted-news history; return empty structure if missing/corrupt."""
-    if not path.exists():
-        return {"posted": [], "last_updated": None}
-    try:
-        with path.open(encoding="utf-8") as f:
-            data = json.load(f)
-        if "posted" not in data or not isinstance(data["posted"], list):
-            data["posted"] = []
-        return data
-    except (json.JSONDecodeError, OSError) as exc:
-        logger.warning("Could not read history %s: %s — starting fresh", path, exc)
-        return {"posted": [], "last_updated": None}
+# Undated items are capped (cannot prove freshness)
+MAX_UNDATED = 5
 
 
 def posted_url_set(history: dict[str, Any]) -> set[str]:
-    """Build a set of normalized URLs already posted."""
     urls: set[str] = set()
     for item in history.get("posted", []):
         if isinstance(item, dict) and item.get("url"):
@@ -142,16 +101,18 @@ def posted_url_set(history: dict[str, Any]) -> set[str]:
 
 
 def strip_html(text: str) -> str:
-    """Remove simple HTML tags from feed summaries."""
     if not text:
         return ""
     clean = re.sub(r"<[^>]+>", " ", text)
-    clean = re.sub(r"\s+", " ", clean).strip()
-    return clean
+    return re.sub(r"\s+", " ", clean).strip()
 
 
 def entry_published(entry: Any) -> str | None:
-    """Best-effort ISO timestamp from a feed entry."""
+    """
+    Best-effort ISO timestamp.
+
+    feedparser times are treated as UTC when TZ is unknown (RSS limitation).
+    """
     for key in ("published_parsed", "updated_parsed"):
         parsed = entry.get(key)
         if parsed:
@@ -164,7 +125,6 @@ def entry_published(entry: Any) -> str | None:
 
 
 def age_hours_from_iso(published: str | None) -> float | None:
-    """Hours since publish time, or None if unknown."""
     if not published:
         return None
     try:
@@ -182,18 +142,12 @@ def score_item(
     category: str,
     age_hours: float | None = None,
 ) -> float:
-    """
-    Relevance + recency score. Fresher AI signal ranks above old PR.
-
-    Pure heuristic — Claude still does the final pick.
-    """
     text = f"{title} {summary}"
     matches = len(AI_KEYWORDS.findall(text))
     base = 1.0 if category == "ai" else 0.5
     score = base + min(matches * 0.4, 3.0)
 
     if age_hours is not None:
-        # Strong boost for last 12h; decay after that; hard-filter applied separately
         if age_hours <= 12:
             score += 3.0
         elif age_hours <= 24:
@@ -202,23 +156,24 @@ def score_item(
             score += 0.5
         else:
             score -= 2.0
+    else:
+        # Undated: mild penalty vs known-fresh
+        score -= 1.0
     return score
 
 
 def fetch_feed(feed: dict[str, str]) -> list[dict[str, Any]]:
-    """Parse one RSS feed and return normalized article dicts."""
     name, url, category = feed["name"], feed["url"], feed["category"]
     logger.info("Fetching %s …", name)
 
     try:
-        # User-Agent helps some feeds (e.g. Reddit) avoid 403s
         parsed = feedparser.parse(
             url,
             request_headers={
                 "User-Agent": "x-news-poster/1.0 (+https://github.com/x-news-poster)"
             },
         )
-    except Exception as exc:  # noqa: BLE001 — keep other feeds running
+    except Exception as exc:  # noqa: BLE001
         logger.error("Failed to fetch %s: %s", name, exc)
         return []
 
@@ -237,9 +192,7 @@ def fetch_feed(feed: dict[str, str]) -> list[dict[str, Any]]:
         if not title or not link:
             continue
 
-        summary = strip_html(
-            entry.get("summary") or entry.get("description") or ""
-        )[:500]
+        summary = strip_html(entry.get("summary") or entry.get("description") or "")[:500]
         published = entry_published(entry)
         age_hours = age_hours_from_iso(published)
 
@@ -264,13 +217,8 @@ def fetch_all_news(
     feeds: list[dict[str, str]] | None = None,
     history_path: Path = HISTORY_PATH,
 ) -> list[dict[str, Any]]:
-    """
-    Fetch all feeds, drop already-posted URLs, sort by relevance.
-
-    Returns up to MAX_CANDIDATES unique stories.
-    """
     feeds = feeds or RSS_FEEDS
-    history = load_history(history_path)
+    history = load_history_strict(history_path)
     seen_posted = posted_url_set(history)
     logger.info("History has %d previously posted URL(s)", len(seen_posted))
 
@@ -278,61 +226,66 @@ def fetch_all_news(
     for feed in feeds:
         raw.extend(fetch_feed(feed))
 
-    # Dedup within this run + filter history + drop stale items
     seen_urls: set[str] = set()
-    fresh: list[dict[str, Any]] = []
+    dated: list[dict[str, Any]] = []
+    undated: list[dict[str, Any]] = []
     dropped_stale = 0
+
     for item in raw:
         url = item["url"]
         if url in seen_urls or url in seen_posted:
             continue
         age = item.get("age_hours")
-        # Keep unknown-age items (some feeds omit dates) but prefer dated fresh ones
         if age is not None and age > MAX_AGE_HOURS:
             dropped_stale += 1
             continue
         seen_urls.add(url)
-        fresh.append(item)
+        if age is None:
+            undated.append(item)
+        else:
+            dated.append(item)
 
-    # Newest + most relevant first
+    undated = undated[:MAX_UNDATED]
+    fresh = dated + undated
+
     fresh.sort(
         key=lambda x: (
-            x.get("age_hours") is None,  # dated items first
+            x.get("age_hours") is None,
             x.get("age_hours") if x.get("age_hours") is not None else 9999,
             -(x.get("relevance_score") or 0),
         )
     )
     candidates = fresh[:MAX_CANDIDATES]
     logger.info(
-        "Collected %d raw → %d unique fresh (dropped %d stale >%sh) → keeping top %d",
+        "Collected %d raw → %d unique (dropped %d stale >%sh, undated kept %d) → top %d",
         len(raw),
         len(fresh),
         dropped_stale,
         int(MAX_AGE_HOURS),
+        len(undated),
         len(candidates),
     )
     return candidates
 
 
-def save_candidates(
-    candidates: list[dict[str, Any]], path: Path = CANDIDATES_PATH
-) -> None:
-    """Write candidates for the analyze step."""
-    path.parent.mkdir(parents=True, exist_ok=True)
+def save_candidates(candidates: list[dict[str, Any]], path: Path = CANDIDATES_PATH) -> None:
     payload = {
         "fetched_at": datetime.now(timezone.utc).isoformat(),
         "count": len(candidates),
         "candidates": candidates,
     }
-    with path.open("w", encoding="utf-8") as f:
-        json.dump(payload, f, indent=2, ensure_ascii=False)
+    atomic_write_json(path, payload)
     logger.info("Wrote %d candidates → %s", len(candidates), path)
 
 
 def main() -> int:
-    candidates = fetch_all_news()
+    try:
+        candidates = fetch_all_news()
+    except RuntimeError as exc:
+        logger.error("%s", exc)
+        return 1
     if not candidates:
-        logger.warning("No fresh candidates found. Exiting successfully (nothing to do).")
+        logger.warning("No fresh candidates found.")
         save_candidates([])
         return 0
     save_candidates(candidates)

@@ -3,22 +3,23 @@
 Deep-dive research on top RSS candidates.
 
 1. Rank candidates (recency + AI signal + blocklist).
-2. Fetch article HTML and extract readable text.
+2. Safely fetch article HTML (SSRF-hardened) and extract text.
 3. Use Claude to pull ONLY verified facts / skip weak PR.
 4. Write data/research_brief.json for the writer + validator.
 """
 
 from __future__ import annotations
 
-import json
+import ipaddress
 import logging
 import re
+import socket
 import sys
 from datetime import datetime, timezone
 from html import unescape
 from pathlib import Path
 from typing import Any
-from urllib.parse import urlparse
+from urllib.parse import urljoin, urlparse
 
 import requests
 
@@ -27,6 +28,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from agents.bedrock_client import extract_json_safe, invoke_claude  # noqa: E402
+from agents.utils import atomic_write_json, load_json_safe  # noqa: E402
 
 logging.basicConfig(
     level=logging.INFO,
@@ -37,10 +39,10 @@ logger = logging.getLogger("research")
 CANDIDATES_PATH = ROOT / "data" / "candidates.json"
 BRIEF_PATH = ROOT / "data" / "research_brief.json"
 
-# How many stories to deep-read each run
 TOP_N = 6
 MAX_PAGE_CHARS = 6000
 REQUEST_TIMEOUT = 12
+MIN_PAGE_CHARS = 400
 
 BLOCKLIST = (
     "sponsored",
@@ -76,13 +78,21 @@ LOW_VALUE = (
     "acquisition of",
 )
 
+# Hosts we never fetch (defense in depth)
+_BLOCKED_HOST_SUFFIXES = (
+    "localhost",
+    ".local",
+    ".internal",
+    ".intranet",
+)
+
 
 def load_candidates(path: Path = CANDIDATES_PATH) -> list[dict[str, Any]]:
-    if not path.exists():
-        logger.error("Missing %s — run fetch_news first", path)
+    data = load_json_safe(path, {"candidates": []})
+    if not isinstance(data, dict):
         return []
-    with path.open(encoding="utf-8") as f:
-        return (json.load(f).get("candidates") or [])
+    cands = data.get("candidates") or []
+    return cands if isinstance(cands, list) else []
 
 
 def is_blocked(title: str, summary: str) -> bool:
@@ -101,7 +111,6 @@ def research_score(item: dict[str, Any]) -> float:
     for p in LOW_VALUE:
         if p in text:
             score -= 3.0
-    # Reddit discussion threads are usually low signal for fact-checked posts
     if "reddit" in source:
         score -= 4.0
         if re.search(r"\[d\]|\[p\]|\[r\]|\[n\]", title, re.I):
@@ -116,6 +125,8 @@ def research_score(item: dict[str, Any]) -> float:
             score += 1.0
         else:
             score -= 3.0
+    else:
+        score -= 1.5
     return score
 
 
@@ -130,25 +141,103 @@ def strip_html(html: str) -> str:
     return text
 
 
+def _is_private_ip(ip_str: str) -> bool:
+    """Return True if ip_str is a private/reserved IP. Hostnames → False (not an IP)."""
+    try:
+        ip = ipaddress.ip_address(ip_str)
+    except ValueError:
+        return False
+    return bool(
+        ip.is_private
+        or ip.is_loopback
+        or ip.is_link_local
+        or ip.is_reserved
+        or ip.is_multicast
+        or ip.is_unspecified
+    )
+
+
+def is_safe_public_url(url: str) -> bool:
+    """SSRF guard: https only, public DNS, no metadata/private hosts."""
+    try:
+        parsed = urlparse(url)
+    except Exception:
+        return False
+    if parsed.scheme.lower() != "https":
+        return False
+    host = (parsed.hostname or "").lower().strip(".")
+    if not host:
+        return False
+    if host == "localhost" or any(host == s or host.endswith(s) for s in _BLOCKED_HOST_SUFFIXES):
+        return False
+    # Cloud metadata hostnames / literal metadata IP as host
+    if host in {"metadata.google.internal", "metadata", "169.254.169.254"}:
+        return False
+    # Block literal private IPs used as hostname
+    if _is_private_ip(host):
+        return False
+    # Resolve and check all A/AAAA records
+    try:
+        infos = socket.getaddrinfo(host, 443, type=socket.SOCK_STREAM)
+    except socket.gaierror:
+        logger.warning("DNS resolve failed for %s", host)
+        return False
+    if not infos:
+        return False
+    for info in infos:
+        addr = info[4][0]
+        if _is_private_ip(addr):
+            logger.warning("Blocked private IP %s for host %s", addr, host)
+            return False
+    return True
+
+
 def fetch_article_text(url: str) -> str:
-    """Best-effort page fetch. Returns empty string on failure."""
-    if not url:
+    """SSRF-hardened page fetch. Returns empty string on failure."""
+    if not url or not is_safe_public_url(url):
+        logger.warning("Blocked unsafe URL: %s", url)
         return ""
+
     headers = {
         "User-Agent": (
-            "Mozilla/5.0 (compatible; x-news-poster-research/1.0; +https://github.com/x-news-poster)"
+            "Mozilla/5.0 (compatible; x-news-poster-research/1.1; "
+            "+https://github.com/x-news-poster)"
         ),
         "Accept": "text/html,application/xhtml+xml",
     }
+
+    current = url
     try:
-        resp = requests.get(url, headers=headers, timeout=REQUEST_TIMEOUT, allow_redirects=True)
-        if resp.status_code >= 400:
-            logger.warning("HTTP %s for %s", resp.status_code, url)
-            return ""
-        ctype = (resp.headers.get("Content-Type") or "").lower()
-        if "html" not in ctype and "text" not in ctype and ctype:
-            return ""
-        return strip_html(resp.text)[:MAX_PAGE_CHARS]
+        session = requests.Session()
+        session.max_redirects = 0
+        for _hop in range(5):
+            if not is_safe_public_url(current):
+                logger.warning("Blocked redirect target: %s", current)
+                return ""
+            resp = session.get(
+                current,
+                headers=headers,
+                timeout=REQUEST_TIMEOUT,
+                allow_redirects=False,
+            )
+            if resp.is_redirect or resp.status_code in {301, 302, 303, 307, 308}:
+                loc = resp.headers.get("Location")
+                if not loc:
+                    return ""
+                current = urljoin(current, loc)
+                continue
+            if resp.status_code >= 400:
+                logger.warning("HTTP %s for %s", resp.status_code, current)
+                return ""
+            # Final URL after hops
+            if not is_safe_public_url(current):
+                return ""
+            ctype = (resp.headers.get("Content-Type") or "").lower()
+            if ctype and "html" not in ctype and "text" not in ctype:
+                return ""
+            return strip_html(resp.text)[:MAX_PAGE_CHARS]
+        logger.warning("Too many redirects for %s", url)
+        return ""
     except requests.RequestException as exc:
         logger.warning("Fetch failed %s: %s", url, exc)
         return ""
@@ -166,16 +255,13 @@ def pick_top(candidates: list[dict[str, Any]], n: int = TOP_N) -> list[dict[str,
 
 
 def extract_facts_with_claude(item: dict[str, Any], body: str) -> dict[str, Any]:
-    """
-    Extract grounded facts. Reject thin PR / unverifiable noise.
-    """
     title = item.get("title") or ""
     summary = item.get("summary") or ""
     source = item.get("source") or ""
     url = item.get("url") or ""
     age = item.get("age_hours")
 
-    body_clip = body[:4500] if body else "(page body unavailable — use title/summary carefully)"
+    body_clip = body[:4500] if body else "(page body unavailable)"
 
     prompt = f"""You are a careful research analyst for an engineer who posts on X.
 
@@ -198,7 +284,7 @@ TASK
 
 RULES
 - Prefer concrete: who did what, what changed, numbers, constraints, tradeoffs.
-- Mark confidence low if page body was empty and only headline exists.
+- If page body is unavailable/empty, set worth_posting=false and confidence=low.
 - If story is weak/stale/PR, set worth_posting=false.
 
 Return ONLY JSON:
@@ -213,7 +299,7 @@ Return ONLY JSON:
 }}
 """
     raw = invoke_claude(prompt, max_tokens=900, temperature=0.15)
-    result = extract_json_safe(
+    return extract_json_safe(
         raw,
         {
             "worth_posting": False,
@@ -225,7 +311,6 @@ Return ONLY JSON:
             "entity_names": [],
         },
     )
-    return result
 
 
 def run_research(candidates: list[dict[str, Any]] | None = None) -> dict[str, Any]:
@@ -246,22 +331,24 @@ def run_research(candidates: list[dict[str, Any]] | None = None) -> dict[str, An
     items: list[dict[str, Any]] = []
     for i, cand in enumerate(top, 1):
         url = cand.get("url") or ""
-        logger.info("[%d/%d] Research %s", i, len(top), cand.get("title", "")[:80])
+        logger.info("[%d/%d] Research %s", i, len(top), (cand.get("title") or "")[:80])
         body = fetch_article_text(url)
         logger.info("  page chars=%d domain=%s", len(body), urlparse(url).netloc)
+
+        # Hard require real page body — no headline-only confidence games
+        if len(body) < MIN_PAGE_CHARS:
+            logger.info("  skip: page body too thin (%d < %d)", len(body), MIN_PAGE_CHARS)
+            continue
 
         analysis = extract_facts_with_claude(cand, body)
         if not analysis.get("worth_posting"):
             logger.info("  skip: %s", analysis.get("skip_reason") or "not worth posting")
             continue
-        if len(body) < 400 and analysis.get("confidence") != "high":
-            logger.info("  skip: thin page body (%d chars) and not high confidence", len(body))
-            continue
         if analysis.get("confidence") == "low":
             logger.info("  skip: low confidence research")
             continue
         facts = analysis.get("verified_facts") or []
-        if len(facts) < 2:
+        if not isinstance(facts, list) or len(facts) < 2:
             logger.info("  skip: fewer than 2 verified facts")
             continue
 
@@ -299,9 +386,7 @@ def run_research(candidates: list[dict[str, Any]] | None = None) -> dict[str, An
 
 
 def save_brief(brief: dict[str, Any], path: Path = BRIEF_PATH) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("w", encoding="utf-8") as f:
-        json.dump(brief, f, indent=2, ensure_ascii=False)
+    atomic_write_json(path, brief)
     logger.info("Wrote research brief (%d items) → %s", brief.get("count", 0), path)
 
 

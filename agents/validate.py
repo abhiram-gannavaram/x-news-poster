@@ -3,15 +3,15 @@
 Multi-layer validation before anything can be posted.
 
 Layers:
-1. Deterministic style gate (length, no URL, no _, no emdash, no AI tells, no ellipsis)
-2. Fact grounding check vs verified research facts (Claude)
-3. Quality score like the old Lambda quality agent (Claude)
-4. Optional single rewrite if close but fixable — then re-run style gate
+1. Deterministic style gate
+2. Fact grounding vs verified research facts
+3. Quality score
+4. Optional single rewrite, then re-check all gates
 5. Mark validation_approved only if ALL pass
 
-Never posts. Writes:
-- data/tweets_to_post.json (approved or empty)
-- data/validation_report.json (full audit trail)
+Writes:
+- data/tweets_to_post.json (approved + rejected drafts for debugging)
+- data/validation_report.json
 """
 
 from __future__ import annotations
@@ -30,6 +30,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from agents.bedrock_client import extract_json_safe, invoke_claude  # noqa: E402
+from agents.utils import atomic_write_json, load_json_safe, safe_float  # noqa: E402
 
 logging.basicConfig(
     level=logging.INFO,
@@ -84,7 +85,6 @@ AI_TELLS = (
 PR_TELLS = (
     "just launched",
     "just announced",
-    "breaking",
     "check this out",
     "must read",
     "thread:",
@@ -92,13 +92,27 @@ PR_TELLS = (
     "game changing",
 )
 
-_URL_RE = re.compile(r"https?://|www\.|\b[\w-]+\.(com|ai|io|org|net|co|dev)/\S*", re.I)
+# Bare domains + full URLs (word-ish boundaries)
+_URL_RE = re.compile(
+    r"(https?://|www\.)|"
+    r"\b[\w-]+\.(com|ai|io|org|net|co|dev|app|news|tech)(?:/[\w./?%&=-]*)?\b",
+    re.I,
+)
 _HASHTAG_RE = re.compile(r"(?<!\w)#\w+")
-_EMOJI_RE = re.compile(r"[\U0001F300-\U0001FAFF]")
+_EMOJI_RE = re.compile(
+    r"[\U0001F300-\U0001FAFF\U00002700-\U000027BF\U0001F600-\U0001F64F]"
+)
+_ELLIPSIS_RE = re.compile(r"…|\.\.\.")
+
+
+def _phrase_in_text(phrase: str, text: str) -> bool:
+    """Word-boundary-ish match to avoid 'breaking' in 'groundbreaking'."""
+    if " " in phrase or "-" in phrase:
+        return phrase in text
+    return re.search(rf"(?<![a-z0-9]){re.escape(phrase)}(?![a-z0-9])", text) is not None
 
 
 def style_gate(tweet: str, url: str = "") -> tuple[bool, list[str]]:
-    """Deterministic hard rejects. Fail closed."""
     violations: list[str] = []
     text = (tweet or "").strip()
 
@@ -112,7 +126,7 @@ def style_gate(tweet: str, url: str = "") -> tuple[bool, list[str]]:
         violations.append("contains underscore _")
     if "—" in text or "–" in text:
         violations.append("contains em/en dash")
-    if "…" in text or text.rstrip().endswith("..."):
+    if _ELLIPSIS_RE.search(text):
         violations.append("ellipsis / truncated")
     if text.endswith((",", ";", ":", "-")):
         violations.append("ends mid-thought")
@@ -129,17 +143,20 @@ def style_gate(tweet: str, url: str = "") -> tuple[bool, list[str]]:
 
     low = text.lower()
     for phrase in AI_TELLS:
-        if phrase in low:
+        if _phrase_in_text(phrase, low):
             violations.append(f"AI voice: '{phrase}'")
             break
     for phrase in PR_TELLS:
-        if phrase in low:
+        if _phrase_in_text(phrase, low):
             violations.append(f"PR voice: '{phrase}'")
             break
+    # "breaking" as standalone PR word, not "groundbreaking"
+    if re.search(r"(?<![a-z])breaking(?![a-z])", low):
+        violations.append("PR voice: 'breaking'")
 
-    # News-bot lead patterns
     if re.match(
-        r"(?i)^(anthropic|openai|google|meta|microsoft|amazon|nvidia)\s+(just|launched|announced|unveiled)\b",
+        r"(?i)^(anthropic|openai|google|meta|microsoft|amazon|nvidia)\s+"
+        r"(just|launched|announced|unveiled)\b",
         text,
     ):
         violations.append("news-bot lead")
@@ -147,8 +164,29 @@ def style_gate(tweet: str, url: str = "") -> tuple[bool, list[str]]:
     return (len(violations) == 0), violations
 
 
+def is_grounded(fact: dict[str, Any], facts: list[Any]) -> bool:
+    if not facts:
+        return False
+    if not bool(fact.get("grounded")):
+        return False
+    risk = (fact.get("risk_level") or "high").lower()
+    # Missing risk_level defaults high (fail closed)
+    return risk in {"low", "medium"}
+
+
+def quality_ok(quality: dict[str, Any]) -> bool:
+    q_score = safe_float(quality.get("score"), 0.0)
+    substance = safe_float(quality.get("substance"), 0.0)
+    human = safe_float(quality.get("human"), 0.0)
+    return (
+        bool(quality.get("approved"))
+        and q_score >= MIN_QUALITY_SCORE
+        and substance >= MIN_SUBSTANCE_SCORE
+        and human >= 6
+    )
+
+
 def fact_check(tweet: str, facts: list[str], title: str, angle: str) -> dict[str, Any]:
-    """Claude: are claims grounded? Any invented detail?"""
     facts_txt = "\n".join(f"- {f}" for f in facts) if facts else "(no verified facts)"
     prompt = f"""You are a strict fact checker for short social posts about tech/AI.
 
@@ -175,12 +213,13 @@ Respond ONLY JSON:
 }}
 
 Rules:
+- ALWAYS include risk_level
 - grounded=false if risk_level is high OR any material invented claim
 - Opinions are OK if clearly framed as takes, not fake facts
-- If verified facts are empty, grounded=false
+- If verified facts are empty, grounded=false and risk_level=high
 """
     raw = invoke_claude(prompt, max_tokens=700, temperature=0.1)
-    return extract_json_safe(
+    result = extract_json_safe(
         raw,
         {
             "grounded": False,
@@ -190,10 +229,12 @@ Rules:
             "score": 0,
         },
     )
+    if not result.get("risk_level"):
+        result["risk_level"] = "high"
+    return result
 
 
 def quality_check(tweet: str) -> dict[str, Any]:
-    """Claude quality scorer — ported from the Lambda quality agent."""
     prompt = f"""You are a quality reviewer for X posts by a real engineer (not a news bot).
 
 Post:
@@ -241,6 +282,8 @@ def validate_one(draft: dict[str, Any]) -> dict[str, Any]:
     tweet = (draft.get("tweet") or "").strip()
     url = (draft.get("url") or "").strip()
     facts = draft.get("verified_facts") or []
+    if not isinstance(facts, list):
+        facts = []
     title = draft.get("title") or ""
     angle = draft.get("builder_angle") or ""
 
@@ -252,22 +295,18 @@ def validate_one(draft: dict[str, Any]) -> dict[str, Any]:
         "approved": False,
         "final_tweet": "",
         "reject_reasons": [],
+        "used_rewrite": False,
     }
 
-    # Layer 1: style
     ok, violations = style_gate(tweet, url)
     report["layers"]["style"] = {"passed": ok, "violations": violations}
     if not ok:
         report["reject_reasons"].extend(violations)
-        # Try quality improved rewrite path only if style is the only issue and model can fix
-        # First still run fact/quality for diagnostics, but prefer rewrite once
         logger.warning("Style gate failed: %s", violations)
 
-    # Layer 2: facts
     fact = fact_check(tweet, facts, title, angle)
-    grounded = bool(fact.get("grounded")) and fact.get("risk_level") != "high"
+    grounded = is_grounded(fact, facts)
     if not facts:
-        grounded = False
         fact["feedback"] = (fact.get("feedback") or "") + " | no verified facts"
     report["layers"]["fact"] = fact
     if not grounded:
@@ -275,20 +314,20 @@ def validate_one(draft: dict[str, Any]) -> dict[str, Any]:
             f"fact: {fact.get('feedback') or fact.get('invented_claims') or 'not grounded'}"
         )
 
-    # Layer 3: quality
     quality = quality_check(tweet)
-    q_score = float(quality.get("score") or 0)
-    substance = float(quality.get("substance") or 0)
-    human = float(quality.get("human") or 0)
-    q_ok = bool(quality.get("approved")) and q_score >= MIN_QUALITY_SCORE and substance >= MIN_SUBSTANCE_SCORE and human >= 6
+    q_ok = quality_ok(quality)
     report["layers"]["quality"] = quality
     if not q_ok:
         report["reject_reasons"].append(
-            f"quality score={q_score} substance={substance} human={human}: {quality.get('feedback')}"
+            f"quality score={safe_float(quality.get('score'))} "
+            f"substance={safe_float(quality.get('substance'))} "
+            f"human={safe_float(quality.get('human'))}: {quality.get('feedback')}"
         )
 
     candidate = tweet
-    # One forced rewrite if any gate failed
+    fact_final = fact
+    quality_final = quality
+
     if not ok or not grounded or not q_ok:
         rewrite_seed = (quality.get("improved_post") or tweet).strip()
         rewrite_prompt = f"""Rewrite this X post so it passes every rule. Keep the same meaning and stay inside the verified facts.
@@ -297,7 +336,7 @@ ORIGINAL:
 \"\"\"{tweet}\"\"\"
 
 VERIFIED FACTS:
-{chr(10).join('- ' + f for f in facts) if facts else '(none)'}
+{chr(10).join('- ' + str(f) for f in facts) if facts else '(none)'}
 
 FAILURES TO FIX:
 {json.dumps(report.get('reject_reasons') or [], ensure_ascii=False)}
@@ -314,18 +353,15 @@ Rules for rewrite:
 Return ONLY JSON: {{"tweet": "<rewritten post>"}}
 """
         raw_rw = invoke_claude(rewrite_prompt, max_tokens=400, temperature=0.35)
-        improved = (extract_json_safe(raw_rw, {"tweet": rewrite_seed}).get("tweet") or rewrite_seed).strip()
+        improved = (
+            extract_json_safe(raw_rw, {"tweet": rewrite_seed}).get("tweet") or rewrite_seed
+        ).strip()
         logger.info("Trying rewrite (%d chars): %s", len(improved), improved[:120])
         ok2, viol2 = style_gate(improved, url)
         fact2 = fact_check(improved, facts, title, angle)
-        grounded2 = bool(fact2.get("grounded")) and fact2.get("risk_level") != "high" and bool(facts)
+        grounded2 = is_grounded(fact2, facts)
         quality2 = quality_check(improved)
-        q2 = (
-            bool(quality2.get("approved"))
-            and float(quality2.get("score") or 0) >= MIN_QUALITY_SCORE
-            and float(quality2.get("substance") or 0) >= MIN_SUBSTANCE_SCORE
-            and float(quality2.get("human") or 0) >= 6
-        )
+        q2 = quality_ok(quality2)
         report["layers"]["rewrite"] = {
             "tweet": improved,
             "style_passed": ok2,
@@ -336,6 +372,8 @@ Return ONLY JSON: {{"tweet": "<rewritten post>"}}
         if ok2 and grounded2 and q2:
             candidate = improved
             ok, grounded, q_ok = True, True, True
+            fact_final, quality_final = fact2, quality2
+            report["used_rewrite"] = True
             report["reject_reasons"] = []
             logger.info("Rewrite passed all gates")
         else:
@@ -350,12 +388,18 @@ Return ONLY JSON: {{"tweet": "<rewritten post>"}}
             logger.info("Rewrite still failed: %s", reasons)
 
     if ok and grounded and q_ok:
-        # Final style recheck on candidate
         final_ok, final_viol = style_gate(candidate, url)
         if final_ok:
             report["approved"] = True
             report["final_tweet"] = candidate
             report["reject_reasons"] = []
+            report["final_scores"] = {
+                "quality_score": safe_float(quality_final.get("score")),
+                "substance": safe_float(quality_final.get("substance")),
+                "human": safe_float(quality_final.get("human")),
+                "fact_score": safe_float(fact_final.get("score")),
+                "risk_level": fact_final.get("risk_level") or "high",
+            }
         else:
             report["reject_reasons"] = final_viol
     else:
@@ -366,35 +410,39 @@ Return ONLY JSON: {{"tweet": "<rewritten post>"}}
 
 
 def load_drafts(path: Path = DRAFTS_PATH) -> list[dict[str, Any]]:
-    if not path.exists():
+    data = load_json_safe(path, {"tweets": []})
+    if not isinstance(data, dict):
         return []
-    with path.open(encoding="utf-8") as f:
-        return json.load(f).get("tweets") or []
+    tweets = data.get("tweets") or []
+    return tweets if isinstance(tweets, list) else []
 
 
 def save_outputs(
-    approved: list[dict[str, Any]],
+    queue: list[dict[str, Any]],
     reports: list[dict[str, Any]],
+    approved_count: int,
 ) -> None:
+    """
+    Persist full queue: approved items first, then rejected (for debugging).
+    post_to_x only uses validation_approved=true.
+    """
     payload = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
-        "count": len(approved),
-        "tweets": approved,
-        "note": "Only validation_approved=true items may be posted.",
+        "count": approved_count,
+        "tweets": queue,
+        "note": "Only validation_approved=true items may be posted. Rejected kept for debug.",
     }
-    with DRAFTS_PATH.open("w", encoding="utf-8") as f:
-        json.dump(payload, f, indent=2, ensure_ascii=False)
+    atomic_write_json(DRAFTS_PATH, payload)
 
     report = {
         "validated_at": datetime.now(timezone.utc).isoformat(),
-        "approved_count": len(approved),
+        "approved_count": approved_count,
         "reports": reports,
     }
-    with REPORT_PATH.open("w", encoding="utf-8") as f:
-        json.dump(report, f, indent=2, ensure_ascii=False)
+    atomic_write_json(REPORT_PATH, report)
     logger.info(
         "Validation done: %d approved → %s | report → %s",
-        len(approved),
+        approved_count,
         DRAFTS_PATH,
         REPORT_PATH,
     )
@@ -403,15 +451,22 @@ def save_outputs(
 def run_validation(drafts: list[dict[str, Any]] | None = None) -> list[dict[str, Any]]:
     if drafts is None:
         drafts = load_drafts()
+    # Only validate unapproved drafts (or all with status draft)
     if not drafts:
         logger.warning("No drafts to validate.")
-        save_outputs([], [])
+        save_outputs([], [], 0)
         return []
 
     reports: list[dict[str, Any]] = []
     approved: list[dict[str, Any]] = []
+    rejected: list[dict[str, Any]] = []
 
     for draft in drafts:
+        # Skip already-approved leftovers
+        if draft.get("validation_approved") is True and draft.get("status") == "approved":
+            approved.append(draft)
+            continue
+
         logger.info("Validating: %s", (draft.get("tweet") or "")[:100])
         rep = validate_one(draft)
         reports.append(rep)
@@ -421,17 +476,29 @@ def run_validation(drafts: list[dict[str, Any]] | None = None) -> list[dict[str,
             out["char_count"] = len(rep["final_tweet"])
             out["validation_approved"] = True
             out["status"] = "approved"
+            scores = rep.get("final_scores") or {}
             out["validation"] = {
-                "quality_score": (rep.get("layers") or {}).get("quality", {}).get("score"),
-                "fact_score": (rep.get("layers") or {}).get("fact", {}).get("score"),
-                "risk_level": (rep.get("layers") or {}).get("fact", {}).get("risk_level"),
+                "quality_score": scores.get("quality_score"),
+                "substance": scores.get("substance"),
+                "human": scores.get("human"),
+                "fact_score": scores.get("fact_score"),
+                "risk_level": scores.get("risk_level"),
+                "used_rewrite": rep.get("used_rewrite", False),
             }
             approved.append(out)
             logger.info("APPROVED (%d chars): %s", out["char_count"], out["tweet"])
         else:
+            out = dict(draft)
+            out["validation_approved"] = False
+            out["status"] = "rejected"
+            out["reject_reasons"] = rep.get("reject_reasons") or []
+            out["original_tweet"] = rep.get("original_tweet")
+            rejected.append(out)
             logger.warning("REJECTED: %s", rep.get("reject_reasons"))
 
-    save_outputs(approved, reports)
+    # Approved only in the postable prefix for clarity; rejected retained
+    queue = approved + rejected
+    save_outputs(queue, reports, approved_count=len(approved))
     return approved
 
 
@@ -439,6 +506,8 @@ def main() -> int:
     approved = run_validation()
     if not approved:
         logger.warning("Nothing approved — will not post.")
+        # Not a hard failure: empty news day is OK
+        return 0
     return 0
 
 

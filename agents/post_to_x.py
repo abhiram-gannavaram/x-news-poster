@@ -4,17 +4,17 @@ Post ONLY validation-approved tweets to X (Twitter) via API v2.
 
 Safety:
 - Requires validation_approved=true on each item
-- Final style recheck (no _, no emdash, no URL, no ellipsis)
-- DRY_RUN=true never calls X
-- AUTO_POST=false (default) refuses to post unless explicitly enabled
+- Final style recheck aligned with validate gates
+- DRY_RUN=true never calls X, never writes history
+- AUTO_POST=false (default) refuses live posts
 """
 
 from __future__ import annotations
 
-import json
 import logging
 import os
 import re
+import sys
 import time
 from datetime import datetime, timezone
 from pathlib import Path
@@ -22,18 +22,37 @@ from typing import Any
 
 import tweepy
 
+ROOT = Path(__file__).resolve().parent.parent
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from agents.utils import (  # noqa: E402
+    atomic_write_json,
+    load_history_strict,
+    load_json_safe,
+    normalize_url,
+)
+
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
 )
 logger = logging.getLogger("post_to_x")
 
-ROOT = Path(__file__).resolve().parent.parent
 TWEETS_PATH = ROOT / "data" / "tweets_to_post.json"
 HISTORY_PATH = ROOT / "data" / "posted_news.json"
 
-MAX_TWEET_LEN = 280
+# Align with validate.py hard limits
+MAX_TWEET_LEN = 240
+MIN_TWEET_LEN = 70
 MAX_HISTORY_ENTRIES = 1200
+
+_URL_RE = re.compile(
+    r"(https?://|www\.)|"
+    r"\b[\w-]+\.(com|ai|io|org|net|co|dev|app|news|tech)(?:/[\w./?%&=-]*)?\b",
+    re.I,
+)
+_ELLIPSIS_RE = re.compile(r"…|\.\.\.")
 
 
 def require_env(name: str) -> str:
@@ -44,44 +63,30 @@ def require_env(name: str) -> str:
 
 
 def get_x_client() -> tweepy.Client:
+    # wait_on_rate_limit=False: fail fast rather than hang until GHA timeout
     return tweepy.Client(
         consumer_key=require_env("X_API_KEY"),
         consumer_secret=require_env("X_API_SECRET"),
         access_token=require_env("X_ACCESS_TOKEN"),
         access_token_secret=require_env("X_ACCESS_TOKEN_SECRET"),
-        wait_on_rate_limit=True,
+        wait_on_rate_limit=False,
     )
 
 
 def load_tweets(path: Path = TWEETS_PATH) -> list[dict[str, Any]]:
-    if not path.exists():
-        logger.warning("No tweets file at %s", path)
+    data = load_json_safe(path, {"tweets": []})
+    if not isinstance(data, dict):
         return []
-    with path.open(encoding="utf-8") as f:
-        return json.load(f).get("tweets") or []
-
-
-def load_history(path: Path = HISTORY_PATH) -> dict[str, Any]:
-    if not path.exists():
-        return {"posted": [], "last_updated": None}
-    try:
-        with path.open(encoding="utf-8") as f:
-            data = json.load(f)
-        if not isinstance(data.get("posted"), list):
-            data["posted"] = []
-        return data
-    except (json.JSONDecodeError, OSError):
-        return {"posted": [], "last_updated": None}
+    tweets = data.get("tweets") or []
+    return tweets if isinstance(tweets, list) else []
 
 
 def save_history(history: dict[str, Any], path: Path = HISTORY_PATH) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
     posted = history.get("posted") or []
     if len(posted) > MAX_HISTORY_ENTRIES:
         history["posted"] = posted[-MAX_HISTORY_ENTRIES:]
     history["last_updated"] = datetime.now(timezone.utc).isoformat()
-    with path.open("w", encoding="utf-8") as f:
-        json.dump(history, f, indent=2, ensure_ascii=False)
+    atomic_write_json(path, history)
     logger.info("History saved (%d entries) → %s", len(history["posted"]), path)
 
 
@@ -91,15 +96,15 @@ def final_quality_check(tweet: str) -> tuple[bool, str]:
         return False, "empty"
     if len(text) > MAX_TWEET_LEN:
         return False, f"length {len(text)} > {MAX_TWEET_LEN}"
-    if len(text) < 40:
+    if len(text) < MIN_TWEET_LEN:
         return False, "too short"
     if "_" in text:
         return False, "underscore"
     if "—" in text or "–" in text:
         return False, "em/en dash"
-    if text.endswith(("…", "...")) or "…" in text:
+    if _ELLIPSIS_RE.search(text):
         return False, "ellipsis"
-    if re.search(r"https?://|www\.", text, re.I):
+    if _URL_RE.search(text):
         return False, "url"
     if re.search(r"(?<!\w)#\w+", text):
         return False, "hashtag"
@@ -107,10 +112,11 @@ def final_quality_check(tweet: str) -> tuple[bool, str]:
 
 
 def already_posted(history: dict[str, Any], url: str, tweet: str) -> bool:
+    norm = normalize_url(url) if url else ""
     for item in history.get("posted", []):
         if not isinstance(item, dict):
             continue
-        if url and item.get("url") == url:
+        if norm and normalize_url(item.get("url") or "") == norm:
             return True
         if tweet and item.get("tweet") == tweet:
             return True
@@ -120,6 +126,9 @@ def already_posted(history: dict[str, Any], url: str, tweet: str) -> bool:
 def post_tweet(client: tweepy.Client, text: str) -> str | None:
     try:
         response = client.create_tweet(text=text)
+    except tweepy.TooManyRequests as exc:
+        logger.error("X rate limited: %s", exc)
+        return None
     except tweepy.TweepyException as exc:
         logger.error("X API error: %s", exc)
         return None
@@ -135,15 +144,18 @@ def post_all(
     *,
     dry_run: bool = False,
     auto_post: bool = False,
-) -> int:
+) -> tuple[int, int]:
+    """
+    Returns (posted_count, failure_count).
+    failure_count: approved items that failed final gate or X API (live only).
+    """
     if tweets is None:
         tweets = load_tweets()
 
-    # Hard filter: only validated items
     tweets = [t for t in tweets if t.get("validation_approved") is True]
     if not tweets:
         logger.info("No validation_approved tweets — nothing to post.")
-        return 0
+        return 0, 0
 
     if not auto_post and not dry_run:
         logger.warning(
@@ -152,17 +164,18 @@ def post_all(
         )
         for t in tweets:
             logger.info("WOULD POST (%d): %s", len(t.get("tweet") or ""), t.get("tweet"))
-        return 0
+        return 0, 0
 
-    history = load_history()
+    history = load_history_strict(HISTORY_PATH)
     posted_count = 0
+    failure_count = 0
     client: tweepy.Client | None = None
     if not dry_run:
         client = get_x_client()
 
     for i, item in enumerate(tweets, start=1):
         tweet = (item.get("tweet") or "").strip()
-        url = (item.get("url") or "").strip()
+        url = normalize_url(item.get("url") or "")
         title = (item.get("title") or "").strip()
         source = (item.get("source") or "").strip()
 
@@ -172,6 +185,7 @@ def post_all(
         ok, reason = final_quality_check(tweet)
         if not ok:
             logger.warning("Skipped (final gate): %s", reason)
+            failure_count += 1
             continue
         if already_posted(history, url, tweet):
             logger.warning("Skipped (already posted)")
@@ -184,6 +198,7 @@ def post_all(
             assert client is not None
             tweet_id = post_tweet(client, tweet)
             if not tweet_id:
+                failure_count += 1
                 continue
             if i < len(tweets):
                 time.sleep(2)
@@ -201,14 +216,16 @@ def post_all(
         )
         posted_count += 1
 
-    if posted_count and not dry_run:
-        save_history(history)
-    elif posted_count and dry_run:
+        # Persist after EACH successful live post (crash-safe)
+        if not dry_run:
+            save_history(history)
+
+    if dry_run and posted_count:
         logger.info("Dry run complete (%d). History not written.", posted_count)
-    else:
+    elif not posted_count:
         logger.info("No new posts.")
 
-    return posted_count
+    return posted_count, failure_count
 
 
 def main() -> int:
@@ -219,8 +236,25 @@ def main() -> int:
     if auto_post:
         logger.info("AUTO_POST enabled.")
 
-    count = post_all(dry_run=dry_run, auto_post=auto_post)
-    logger.info("Done. Posted %d tweet(s).", count)
+    try:
+        count, failures = post_all(dry_run=dry_run, auto_post=auto_post)
+    except RuntimeError as exc:
+        logger.error("%s", exc)
+        return 1
+    except EnvironmentError as exc:
+        logger.error("%s", exc)
+        return 1
+
+    logger.info("Done. Posted %d tweet(s), failures=%d.", count, failures)
+
+    # Live mode: if we intended to post and had approved tweets but zero success → fail CI
+    if auto_post and not dry_run:
+        approved = [t for t in load_tweets() if t.get("validation_approved") is True]
+        if approved and count == 0:
+            logger.error("Live post failed for all approved tweets.")
+            return 1
+        if failures and count == 0:
+            return 1
     return 0
 
 
