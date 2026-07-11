@@ -112,6 +112,13 @@ HARD RULES
 9. If facts are thin, return empty selections rather than padding
 10. 70 to 220 characters preferred (hard max 240). Complete sentences that land. Sound like a person, not a model.
 
+CONTENT SAFETY (must follow):
+- Zero racism, casteism, xenophobia, or hate toward any race, religion, ethnicity, gender, or nationality
+- No harassment, personal attacks, bullying, or dehumanizing language
+- No violence glorification, self-harm content, or illegal harm instructions
+- No toxic pile-ons; keep takes constructive and technical
+- Skip stories that are only about politics/hate/violence — return empty selections instead
+
 OUTPUT only JSON (no markdown fences):
 {{
   "selections": [

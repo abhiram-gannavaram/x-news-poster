@@ -30,6 +30,11 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from agents.bedrock_client import extract_json_safe, invoke_claude  # noqa: E402
+from agents.content_safety import (  # noqa: E402
+    hard_block_violations,
+    parse_safety_result,
+    safety_check_prompt,
+)
 from agents.utils import atomic_write_json, load_json_safe, safe_float  # noqa: E402
 
 logging.basicConfig(
@@ -161,7 +166,23 @@ def style_gate(tweet: str, url: str = "") -> tuple[bool, list[str]]:
     ):
         violations.append("news-bot lead")
 
+    # Hard safety blocklist (racism / extreme harm phrases)
+    violations.extend(hard_block_violations(text))
+
     return (len(violations) == 0), violations
+
+
+def content_safety_check(tweet: str) -> dict[str, Any]:
+    """Claude safety reviewer — fail closed."""
+    raw = invoke_claude(safety_check_prompt(tweet), max_tokens=400, temperature=0.0)
+    return extract_json_safe(
+        raw,
+        {
+            "safe": False,
+            "categories": ["safety_parse_failure"],
+            "feedback": "safety JSON parse failure",
+        },
+    )
 
 
 def is_grounded(fact: dict[str, Any], facts: list[Any]) -> bool:
@@ -324,11 +345,19 @@ def validate_one(draft: dict[str, Any]) -> dict[str, Any]:
             f"human={safe_float(quality.get('human'))}: {quality.get('feedback')}"
         )
 
+    # Content safety (no racism / hate / harmful / toxic attacks)
+    safety = content_safety_check(tweet)
+    safe_ok, safe_reason = parse_safety_result(safety)
+    report["layers"]["safety"] = safety
+    if not safe_ok:
+        report["reject_reasons"].append(f"safety: {safe_reason}")
+
     candidate = tweet
     fact_final = fact
     quality_final = quality
+    safety_final = safety
 
-    if not ok or not grounded or not q_ok:
+    if not ok or not grounded or not q_ok or not safe_ok:
         rewrite_seed = (quality.get("improved_post") or tweet).strip()
         rewrite_prompt = f"""Rewrite this X post so it passes every rule. Keep the same meaning and stay inside the verified facts.
 
@@ -349,6 +378,7 @@ Rules for rewrite:
 - Human engineer voice, no corporate AI sludge
 - Complete sentences
 - No invented claims
+- No racism, hate, harassment, or harmful content; keep constructive
 
 Return ONLY JSON: {{"tweet": "<rewritten post>"}}
 """
@@ -362,17 +392,20 @@ Return ONLY JSON: {{"tweet": "<rewritten post>"}}
         grounded2 = is_grounded(fact2, facts)
         quality2 = quality_check(improved)
         q2 = quality_ok(quality2)
+        safety2 = content_safety_check(improved)
+        safe2, safe2_reason = parse_safety_result(safety2)
         report["layers"]["rewrite"] = {
             "tweet": improved,
             "style_passed": ok2,
             "style_violations": viol2,
             "fact": fact2,
             "quality": quality2,
+            "safety": safety2,
         }
-        if ok2 and grounded2 and q2:
+        if ok2 and grounded2 and q2 and safe2:
             candidate = improved
-            ok, grounded, q_ok = True, True, True
-            fact_final, quality_final = fact2, quality2
+            ok, grounded, q_ok, safe_ok = True, True, True, True
+            fact_final, quality_final, safety_final = fact2, quality2, safety2
             report["used_rewrite"] = True
             report["reject_reasons"] = []
             logger.info("Rewrite passed all gates")
@@ -384,11 +417,19 @@ Return ONLY JSON: {{"tweet": "<rewritten post>"}}
                 reasons.append(f"fact: {fact2.get('feedback')}")
             if not q2:
                 reasons.append(f"quality: {quality2.get('feedback')}")
+            if not safe2:
+                reasons.append(f"safety: {safe2_reason}")
             report["reject_reasons"] = reasons
             logger.info("Rewrite still failed: %s", reasons)
 
-    if ok and grounded and q_ok:
+    if ok and grounded and q_ok and safe_ok:
         final_ok, final_viol = style_gate(candidate, url)
+        # Re-check safety on final text
+        if final_ok:
+            hard = hard_block_violations(candidate)
+            if hard:
+                final_ok = False
+                final_viol = hard
         if final_ok:
             report["approved"] = True
             report["final_tweet"] = candidate
@@ -399,6 +440,7 @@ Return ONLY JSON: {{"tweet": "<rewritten post>"}}
                 "human": safe_float(quality_final.get("human")),
                 "fact_score": safe_float(fact_final.get("score")),
                 "risk_level": fact_final.get("risk_level") or "high",
+                "safety_safe": bool(safety_final.get("safe")),
             }
         else:
             report["reject_reasons"] = final_viol

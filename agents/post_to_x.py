@@ -26,6 +26,7 @@ ROOT = Path(__file__).resolve().parent.parent
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+from agents.content_safety import hard_block_violations  # noqa: E402
 from agents.utils import (  # noqa: E402
     atomic_write_json,
     load_history_strict,
@@ -46,6 +47,10 @@ HISTORY_PATH = ROOT / "data" / "posted_news.json"
 MAX_TWEET_LEN = 240
 MIN_TWEET_LEN = 70
 MAX_HISTORY_ENTRIES = 1200
+# Minimum hours between live posts (env MIN_POST_GAP_HOURS overrides)
+DEFAULT_MIN_POST_GAP_HOURS = 2.0
+# Live schedule starts this UTC date (YYYY-MM-DD); env LIVE_START_DATE overrides
+DEFAULT_LIVE_START_DATE = "2026-07-12"
 
 _URL_RE = re.compile(
     r"(https?://|www\.)|"
@@ -108,7 +113,55 @@ def final_quality_check(tweet: str) -> tuple[bool, str]:
         return False, "url"
     if re.search(r"(?<!\w)#\w+", text):
         return False, "hashtag"
+    hard = hard_block_violations(text)
+    if hard:
+        return False, hard[0]
     return True, "ok"
+
+
+def live_start_date() -> str:
+    return (os.environ.get("LIVE_START_DATE") or DEFAULT_LIVE_START_DATE).strip()
+
+
+def min_post_gap_hours() -> float:
+    raw = os.environ.get("MIN_POST_GAP_HOURS") or str(DEFAULT_MIN_POST_GAP_HOURS)
+    try:
+        return max(0.0, float(raw))
+    except ValueError:
+        return DEFAULT_MIN_POST_GAP_HOURS
+
+
+def before_live_start(now: datetime | None = None) -> bool:
+    """True if we should not live-post yet (before LIVE_START_DATE UTC)."""
+    now = now or datetime.now(timezone.utc)
+    try:
+        start = datetime.strptime(live_start_date(), "%Y-%m-%d").replace(tzinfo=timezone.utc)
+    except ValueError:
+        logger.warning("Invalid LIVE_START_DATE %r — allowing posts", live_start_date())
+        return False
+    return now < start
+
+
+def hours_since_last_post(history: dict[str, Any]) -> float | None:
+    """Hours since most recent successful post; None if no history."""
+    latest: datetime | None = None
+    for item in history.get("posted") or []:
+        if not isinstance(item, dict):
+            continue
+        ts = item.get("posted_at")
+        if not ts:
+            continue
+        try:
+            dt = datetime.fromisoformat(str(ts).replace("Z", "+00:00"))
+            if dt.tzinfo is None:
+                dt = dt.replace(tzinfo=timezone.utc)
+        except ValueError:
+            continue
+        if latest is None or dt > latest:
+            latest = dt
+    if latest is None:
+        return None
+    return (datetime.now(timezone.utc) - latest).total_seconds() / 3600.0
 
 
 def already_posted(history: dict[str, Any], url: str, tweet: str) -> bool:
@@ -144,10 +197,10 @@ def post_all(
     *,
     dry_run: bool = False,
     auto_post: bool = False,
-) -> tuple[int, int]:
+) -> tuple[int, int, str]:
     """
-    Returns (posted_count, failure_count).
-    failure_count: approved items that failed final gate or X API (live only).
+    Returns (posted_count, failure_count, skip_reason).
+    skip_reason is set for intentional skips (not CI failures).
     """
     if tweets is None:
         tweets = load_tweets()
@@ -155,7 +208,7 @@ def post_all(
     tweets = [t for t in tweets if t.get("validation_approved") is True]
     if not tweets:
         logger.info("No validation_approved tweets — nothing to post.")
-        return 0, 0
+        return 0, 0, "no_approved"
 
     if not auto_post and not dry_run:
         logger.warning(
@@ -164,9 +217,32 @@ def post_all(
         )
         for t in tweets:
             logger.info("WOULD POST (%d): %s", len(t.get("tweet") or ""), t.get("tweet"))
-        return 0, 0
+        return 0, 0, "auto_post_disabled"
+
+    # Schedule goes live only from LIVE_START_DATE (default tomorrow 2026-07-12 UTC)
+    if not dry_run and before_live_start():
+        logger.info(
+            "Before LIVE_START_DATE=%s UTC — skipping live post (starts tomorrow).",
+            live_start_date(),
+        )
+        for t in tweets:
+            logger.info("HELD UNTIL START (%d): %s", len(t.get("tweet") or ""), t.get("tweet"))
+        return 0, 0, "before_live_start"
 
     history = load_history_strict(HISTORY_PATH)
+
+    # Enforce ≥2h gap between live posts
+    gap_h = min_post_gap_hours()
+    if not dry_run and gap_h > 0:
+        since = hours_since_last_post(history)
+        if since is not None and since < gap_h:
+            logger.info(
+                "Last post was %.2fh ago (< %.1fh gap) — skipping to keep spacing.",
+                since,
+                gap_h,
+            )
+            return 0, 0, "min_gap"
+
     posted_count = 0
     failure_count = 0
     client: tweepy.Client | None = None
@@ -179,7 +255,7 @@ def post_all(
         title = (item.get("title") or "").strip()
         source = (item.get("source") or "").strip()
 
-        logger.info("--- Tweet %d/%d ---", i, len(tweets))
+        logger.info("--- Tweet 1 live max (gap enforced); item %d/%d ---", i, len(tweets))
         logger.info("Text (%d): %s", len(tweet), tweet)
 
         ok, reason = final_quality_check(tweet)
@@ -200,8 +276,6 @@ def post_all(
             if not tweet_id:
                 failure_count += 1
                 continue
-            if i < len(tweets):
-                time.sleep(2)
 
         history.setdefault("posted", []).append(
             {
@@ -216,16 +290,18 @@ def post_all(
         )
         posted_count += 1
 
-        # Persist after EACH successful live post (crash-safe)
         if not dry_run:
             save_history(history)
+
+        # At most one live post per run (gap is between runs)
+        break
 
     if dry_run and posted_count:
         logger.info("Dry run complete (%d). History not written.", posted_count)
     elif not posted_count:
         logger.info("No new posts.")
 
-    return posted_count, failure_count
+    return posted_count, failure_count, ""
 
 
 def main() -> int:
@@ -237,7 +313,7 @@ def main() -> int:
         logger.info("AUTO_POST enabled.")
 
     try:
-        count, failures = post_all(dry_run=dry_run, auto_post=auto_post)
+        count, failures, skip = post_all(dry_run=dry_run, auto_post=auto_post)
     except RuntimeError as exc:
         logger.error("%s", exc)
         return 1
@@ -245,16 +321,16 @@ def main() -> int:
         logger.error("%s", exc)
         return 1
 
-    logger.info("Done. Posted %d tweet(s), failures=%d.", count, failures)
+    logger.info("Done. Posted %d tweet(s), failures=%d, skip=%s.", count, failures, skip or "none")
 
-    # Live mode: if we intended to post and had approved tweets but zero success → fail CI
-    if auto_post and not dry_run:
-        approved = [t for t in load_tweets() if t.get("validation_approved") is True]
-        if approved and count == 0:
-            logger.error("Live post failed for all approved tweets.")
-            return 1
-        if failures and count == 0:
-            return 1
+    # Intentional skips are success (green CI)
+    if skip in {"before_live_start", "min_gap", "no_approved", "auto_post_disabled"}:
+        return 0
+
+    # Live mode: hard fail only when we tried and failed
+    if auto_post and not dry_run and failures and count == 0:
+        logger.error("Live post failed for approved tweets.")
+        return 1
     return 0
 
 

@@ -3,8 +3,9 @@ name: Post AI/Tech News to X
 
 on:
   schedule:
-    # Every 4 hours UTC → 6 runs/day
-    - cron: "0 0,4,8,12,16,20 * * *"
+    # Every 2 hours UTC → up to 12 attempts/day; code enforces ≥2h between live posts
+    # Live posting starts 2026-07-12 (see LIVE_START_DATE in post_to_x.py)
+    - cron: "0 */2 * * *"
   workflow_dispatch:
     inputs:
       dry_run:
@@ -39,6 +40,9 @@ jobs:
     # Optional kill-switch: set repo variable ENABLE_AUTO_POST=false to pause scheduled live posts
     env:
       ENABLE_AUTO_POST: ${{ vars.ENABLE_AUTO_POST }}
+      # First day live posts are allowed (UTC date YYYY-MM-DD). Override via repo variable if needed.
+      LIVE_START_DATE: ${{ vars.LIVE_START_DATE != '' && vars.LIVE_START_DATE || '2026-07-12' }}
+      MIN_POST_GAP_HOURS: ${{ vars.MIN_POST_GAP_HOURS != '' && vars.MIN_POST_GAP_HOURS || '2' }}
 
     steps:
       - name: Checkout repository
@@ -156,6 +160,8 @@ jobs:
           X_ACCESS_TOKEN_SECRET: ${{ secrets.X_ACCESS_TOKEN_SECRET }}
           DRY_RUN: ${{ steps.mode.outputs.dry_run }}
           AUTO_POST: ${{ steps.mode.outputs.auto_post }}
+          LIVE_START_DATE: ${{ env.LIVE_START_DATE }}
+          MIN_POST_GAP_HOURS: ${{ env.MIN_POST_GAP_HOURS }}
         run: python agents/post_to_x.py
 
       - name: Commit updated post history

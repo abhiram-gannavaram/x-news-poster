@@ -4,7 +4,7 @@ Automated **AI & Tech insight** posts for X (Twitter), powered by:
 
 | Piece | Tech |
 |--------|------|
-| Schedule | GitHub Actions (6× daily) |
+| Schedule | GitHub Actions every **2 hours** (live from **2026-07-12** UTC) |
 | News | Free RSS feeds (`feedparser`) |
 | Research + write + validate | Amazon Bedrock · Claude Sonnet 4.6 |
 | Publishing | X API v2 (`tweepy`) |
@@ -53,8 +53,9 @@ x-news-poster/
 | Mode | How | Posts to X? |
 |------|-----|-------------|
 | Manual dry run (default) | Actions → dry_run=`true` | No |
-| Manual live | dry_run=`false` **and** auto_post=`true` | Yes (if validated) |
-| Schedule | Cron (unless kill-switch) | Yes (if validated) |
+| Manual live | dry_run=`false` **and** auto_post=`true` | Yes (if validated; still respects 2h gap) |
+| Schedule | Every 2 hours UTC from **2026-07-12** | Yes (1 post max per run, ≥2h gap) |
+| Before start date | Until 2026-07-12 UTC | No (held) |
 | Schedule paused | Repo variable `ENABLE_AUTO_POST=false` | No (dry only) |
 
 **Local live post requires both:**
@@ -89,6 +90,8 @@ Bare `python agents/post_to_x.py` **refuses** to post (safe default).
 |----------|-------------|
 | `BEDROCK_MODEL_ID` | Default: `us.anthropic.claude-sonnet-4-6` |
 | `ENABLE_AUTO_POST` | Set `false` to pause scheduled live posts |
+| `LIVE_START_DATE` | First UTC day for live posts (default `2026-07-12`) |
+| `MIN_POST_GAP_HOURS` | Min hours between live posts (default `2`) |
 
 ### First run
 
@@ -124,7 +127,7 @@ AUTO_POST=true python agents/post_to_x.py # live
 
 ---
 
-## Quality gates (before post)
+## Quality + safety gates (before post)
 
 Tweets must:
 
@@ -133,8 +136,12 @@ Tweets must:
 - Have **no** `_`, em/en dashes, or `…` / `...`  
 - Pass fact grounding vs researched page facts  
 - Quality score ≥ 7, substance ≥ 6, human ≥ 6  
+- Pass **content safety** (no racism, hate, harassment, harmful content, toxic personal attacks)  
 - Be marked `validation_approved: true`  
-- Not already exist in history (normalized URL + exact text)
+- Not already exist in history (normalized URL + exact text)  
+- Respect **≥2 hour** gap since last live post  
+
+Constructive technical takes are OK. Hate, racism, and harmful posts are blocked.
 
 ---
 

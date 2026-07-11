@@ -28,6 +28,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from agents.bedrock_client import extract_json_safe, invoke_claude  # noqa: E402
+from agents.content_safety import topic_is_unsafe  # noqa: E402
 from agents.utils import atomic_write_json, load_json_safe  # noqa: E402
 
 logging.basicConfig(
@@ -104,7 +105,7 @@ def research_score(item: dict[str, Any]) -> float:
     title = item.get("title") or ""
     summary = item.get("summary") or ""
     source = (item.get("source") or "").lower()
-    if is_blocked(title, summary):
+    if is_blocked(title, summary) or topic_is_unsafe(title, summary):
         return -999.0
     text = f"{title} {summary}".lower()
     score = float(item.get("relevance_score") or 0)
@@ -286,6 +287,7 @@ RULES
 - Prefer concrete: who did what, what changed, numbers, constraints, tradeoffs.
 - If page body is unavailable/empty, set worth_posting=false and confidence=low.
 - If story is weak/stale/PR, set worth_posting=false.
+- If story is about racism, hate, violence, harassment, or pure culture-war politics, set worth_posting=false.
 
 Return ONLY JSON:
 {{
