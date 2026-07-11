@@ -1,4 +1,21 @@
 {
-  "posted": [],
-  "last_updated": null
+  "posted": [
+    {
+      "url": "https://www.technologyreview.com/2026/07/09/1140293/anthropic-found-a-hidden-space-where-claude-puzzles-over-concepts",
+      "title": "Anthropic found a hidden space where Claude puzzles over concepts",
+      "source": "MIT Technology Review",
+      "tweet": "Anthropic built a technique giving the clearest view yet of what's happening *inside* Claude as it thinks — and what they found ranges from mundane to unnerving.… https://www.technologyreview.com/2026/07/09/1140293/anthropic-found-a-hidden-space-where-claude-puzzles-over-concepts",
+      "tweet_id": "2075920740759785923",
+      "posted_at": "2026-07-11T12:30:50.219494+00:00"
+    },
+    {
+      "url": "https://venturebeat.com/technology/anthropic-launches-cowork-a-claude-desktop-agent-that-works-in-your-files-no",
+      "title": "Anthropic launches Cowork, a Claude Desktop agent that works in your files — no coding required",
+      "source": "VentureBeat AI",
+      "tweet": "Anthropic just launched Cowork — a Claude Desktop agent that operates directly in your files, no coding needed. Built in ~10 days, largely by Claude itself. Agentic AI… https://venturebeat.com/technology/anthropic-launches-cowork-a-claude-desktop-agent-that-works-in-your-files-no",
+      "tweet_id": "2075920751111323716",
+      "posted_at": "2026-07-11T12:30:50.708195+00:00"
+    }
+  ],
+  "last_updated": "2026-07-11T12:30:50.708291+00:00"
 }
