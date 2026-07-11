@@ -1,0 +1,106 @@
+# Post AI/Tech news to X (Twitter) — 6 times daily + manual trigger
+name: Post AI/Tech News to X
+
+on:
+  schedule:
+    # Every 4 hours UTC → 6 runs/day (00:00, 04:00, 08:00, 12:00, 16:00, 20:00)
+    - cron: "0 0,4,8,12,16,20 * * *"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Dry run (fetch + analyze only, do not post to X)"
+        required: false
+        default: "false"
+        type: choice
+        options:
+          - "false"
+          - "true"
+
+permissions:
+  contents: write  # needed to commit updated posted_news.json
+
+concurrency:
+  group: post-x-news
+  cancel-in-progress: false
+
+jobs:
+  post-news:
+    name: Fetch → Analyze → Post
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          # Full history not required; fetch token for later push of history
+          fetch-depth: 1
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: 1) Fetch latest news from RSS feeds
+        run: python agents/fetch_news.py
+
+      - name: 2) Analyze with Bedrock Claude & generate tweets
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          # Optional override, e.g. inference profile ARN in some regions
+          BEDROCK_MODEL_ID: ${{ vars.BEDROCK_MODEL_ID }}
+        run: python agents/analyze_and_generate.py
+
+      - name: 3) Quality-check and post to X
+        if: ${{ github.event_name != 'workflow_dispatch' || inputs.dry_run != 'true' }}
+        env:
+          X_API_KEY: ${{ secrets.X_API_KEY }}
+          X_API_SECRET: ${{ secrets.X_API_SECRET }}
+          X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
+          X_ACCESS_TOKEN_SECRET: ${{ secrets.X_ACCESS_TOKEN_SECRET }}
+        run: python agents/post_to_x.py
+
+      - name: 3b) Dry-run post step (no X API)
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run == 'true' }}
+        env:
+          DRY_RUN: "true"
+          # Dummy values so require_env is not hit in dry-run path... post_to_x skips client when DRY_RUN
+          X_API_KEY: dry
+          X_API_SECRET: dry
+          X_ACCESS_TOKEN: dry
+          X_ACCESS_TOKEN_SECRET: dry
+        run: python agents/post_to_x.py
+
+      - name: Commit updated post history
+        # Only commit when history actually changed (real posts)
+        if: ${{ github.event_name != 'workflow_dispatch' || inputs.dry_run != 'true' }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/posted_news.json
+          if git diff --staged --quiet; then
+            echo "No history changes to commit."
+          else
+            git commit -m "chore: update posted news history [skip ci]"
+            git push
+          fi
+
+      - name: Upload run artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: run-data-${{ github.run_id }}
+          path: |
+            data/candidates.json
+            data/tweets_to_post.json
+            data/posted_news.json
+          if-no-files-found: ignore
+          retention-days: 14
