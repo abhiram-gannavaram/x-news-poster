@@ -23,7 +23,23 @@
       "tweet": "CISA wrote its incident response playbook while responding to the incident. Every team laughs at that until they check whether their own runbooks exist before the pager goes off.",
       "tweet_id": "2075921543641874576",
       "posted_at": "2026-07-11T12:33:59.606742+00:00"
+    },
+    {
+      "url": "https://clickhouse.com/blog/pgbouncer-clickhouse-managed-postgres",
+      "title": "We scaled PgBouncer to 4x throughput",
+      "source": "Hacker News",
+      "tweet": "SO REUSEPORT multi-process PgBouncer breaks on query cancellation. Cancel requests arrive on a new connection and the kernel may route them to the wrong process.",
+      "tweet_id": "2075975169458487656",
+      "validation": {
+        "quality_score": 7.7,
+        "substance": 8.0,
+        "human": 7.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": true
+      },
+      "posted_at": "2026-07-11T16:07:05.011751+00:00"
     }
   ],
-  "last_updated": "2026-07-11T12:33:59.606793+00:00"
+  "last_updated": "2026-07-11T16:07:05.011769+00:00"
 }
