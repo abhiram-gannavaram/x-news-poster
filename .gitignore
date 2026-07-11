@@ -10,6 +10,8 @@ venv/
 # Runtime intermediates (history is tracked)
 data/candidates.json
 data/tweets_to_post.json
+data/research_brief.json
+data/validation_report.json
 
 # OS / IDE
 .DS_Store

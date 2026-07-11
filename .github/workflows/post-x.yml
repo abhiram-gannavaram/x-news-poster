@@ -1,14 +1,22 @@
-# Post AI/Tech news to X (Twitter) — 6 times daily + manual trigger
+# AI/Tech insight posts for X — research + multi-gate validation before publish
 name: Post AI/Tech News to X
 
 on:
   schedule:
-    # Every 4 hours UTC → 6 runs/day (00:00, 04:00, 08:00, 12:00, 16:00, 20:00)
+    # Every 4 hours UTC → 6 runs/day
     - cron: "0 0,4,8,12,16,20 * * *"
   workflow_dispatch:
     inputs:
       dry_run:
-        description: "Dry run (fetch + analyze only, do not post to X)"
+        description: "Dry run (never call X API)"
+        required: false
+        default: "true"
+        type: choice
+        options:
+          - "true"
+          - "false"
+      auto_post:
+        description: "Actually post if validation passes (ignored when dry_run=true)"
         required: false
         default: "false"
         type: choice
@@ -17,7 +25,7 @@ on:
           - "true"
 
 permissions:
-  contents: write  # needed to commit updated posted_news.json
+  contents: write
 
 concurrency:
   group: post-x-news
@@ -25,15 +33,14 @@ concurrency:
 
 jobs:
   post-news:
-    name: Fetch → Analyze → Post
+    name: Fetch → Research → Write → Validate → Post
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 25
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          # Full history not required; fetch token for later push of history
           fetch-depth: 1
 
       - name: Set up Python
@@ -47,41 +54,74 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: 1) Fetch latest news from RSS feeds
+      - name: 1) Fetch RSS candidates
         run: python agents/fetch_news.py
 
-      - name: 2) Analyze with Bedrock Claude & generate tweets
+      - name: 2) Deep research (fetch pages + extract verified facts)
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: ${{ secrets.AWS_REGION }}
-          # Optional override, e.g. inference profile ARN in some regions
+          BEDROCK_MODEL_ID: ${{ vars.BEDROCK_MODEL_ID }}
+        run: python agents/research.py
+
+      - name: 3) Write human insight draft
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
           BEDROCK_MODEL_ID: ${{ vars.BEDROCK_MODEL_ID }}
         run: python agents/analyze_and_generate.py
 
-      - name: 3) Quality-check and post to X
-        if: ${{ github.event_name != 'workflow_dispatch' || inputs.dry_run != 'true' }}
+      - name: 4) Validate (style + facts + quality)
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          BEDROCK_MODEL_ID: ${{ vars.BEDROCK_MODEL_ID }}
+        run: python agents/validate.py
+
+      - name: Show draft / validation summary
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          for name in ["research_brief.json", "validation_report.json", "tweets_to_post.json"]:
+              p = Path("data") / name
+              print(f"\n===== {name} =====")
+              if not p.exists():
+                  print("(missing)")
+                  continue
+              data = json.loads(p.read_text())
+              if name == "tweets_to_post.json":
+                  for t in data.get("tweets") or []:
+                      print("APPROVED:", t.get("validation_approved"))
+                      print("CHARS:", t.get("char_count"))
+                      print("TEXT:", t.get("tweet"))
+              elif name == "validation_report.json":
+                  print("approved_count:", data.get("approved_count"))
+                  for r in data.get("reports") or []:
+                      print("approved:", r.get("approved"), "reasons:", r.get("reject_reasons"))
+                      print("final:", r.get("final_tweet") or r.get("original_tweet"))
+              else:
+                  print("items:", data.get("count"))
+                  for it in (data.get("items") or [])[:3]:
+                      print("-", it.get("title"), "| conf=", it.get("confidence"))
+          PY
+
+      - name: 5) Post to X (only if validation_approved and auto_post)
         env:
           X_API_KEY: ${{ secrets.X_API_KEY }}
           X_API_SECRET: ${{ secrets.X_API_SECRET }}
           X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
           X_ACCESS_TOKEN_SECRET: ${{ secrets.X_ACCESS_TOKEN_SECRET }}
-        run: python agents/post_to_x.py
-
-      - name: 3b) Dry-run post step (no X API)
-        if: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run == 'true' }}
-        env:
-          DRY_RUN: "true"
-          # Dummy values so require_env is not hit in dry-run path... post_to_x skips client when DRY_RUN
-          X_API_KEY: dry
-          X_API_SECRET: dry
-          X_ACCESS_TOKEN: dry
-          X_ACCESS_TOKEN_SECRET: dry
+          # Scheduled runs auto-post only after validation; manual defaults to dry.
+          DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run || 'false' }}
+          AUTO_POST: ${{ github.event_name == 'schedule' && 'true' || inputs.auto_post }}
         run: python agents/post_to_x.py
 
       - name: Commit updated post history
-        # Only commit when history actually changed (real posts)
-        if: ${{ github.event_name != 'workflow_dispatch' || inputs.dry_run != 'true' }}
+        if: ${{ github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.dry_run == 'false' && inputs.auto_post == 'true') }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -100,7 +140,9 @@ jobs:
           name: run-data-${{ github.run_id }}
           path: |
             data/candidates.json
+            data/research_brief.json
             data/tweets_to_post.json
+            data/validation_report.json
             data/posted_news.json
           if-no-files-found: ignore
           retention-days: 14

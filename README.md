@@ -15,22 +15,19 @@ Automated **AI & Tech news** poster for X (Twitter), powered by:
 ## How it works
 
 ```
-┌─────────────┐    ┌──────────────────────┐    ┌─────────────┐
-│ fetch_news  │ →  │ analyze_and_generate │ →  │  post_to_x  │
-│  (RSS)      │    │  (Bedrock Claude)    │    │  (X API v2) │
-└─────────────┘    └──────────────────────┘    └─────────────┘
-        │                    │                        │
-        ▼                    ▼                        ▼
- candidates.json      tweets_to_post.json      posted_news.json
+fetch → research → write → validate → (optional) post
+  RSS     page+facts   insight    style/fact/quality     X API
 ```
 
-1. **Fetch** latest items from multiple AI/Tech RSS feeds  
-2. **Filter** URLs already present in `posted_news.json`  
-3. **Analyze** with Claude Sonnet — pick the best 1–2 stories  
-4. **Generate** engaging tweets (≤ 280 chars, with link)  
-5. **Quality-check** (length, URL present, spam patterns)  
-6. **Post** via X API v2  
-7. **Save** title/URL/tweet id to history and commit it so the next run skips them  
+1. **Fetch** RSS (recency + blocklist + AI scoring)  
+2. **Research** top stories: download page text, extract **verified facts** only  
+3. **Write** one human insight (no links, no AI voice, no `_` / em dashes)  
+4. **Validate** in layers: style gate → fact grounding → quality score (≥7)  
+5. **Post** only if `validation_approved=true` **and** `AUTO_POST=true`  
+6. **History** saved so the next run skips the same story  
+
+Manual runs default to **dry_run=true** so you can inspect drafts first.  
+
 
 ---
 
