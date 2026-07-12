@@ -55,7 +55,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-07-12T10:33:59.513123+00:00"
+    },
+    {
+      "url": "https://spectrum.ieee.org/ai-science-research-flattens-discovery",
+      "title": "AI Boosts Research Careers but Flattens Scientific Discovery",
+      "source": "Hacker News",
+      "tweet": "AI tools make individual researchers more productive. A study of 40 million papers found they also narrow what science gets done. More output, less range. That tradeoff probably runs through your codebase too.",
+      "tweet_id": "2076314152075948120",
+      "validation": {
+        "quality_score": 8.0,
+        "substance": 8.0,
+        "human": 8.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-07-12T14:34:04.689205+00:00"
     }
   ],
-  "last_updated": "2026-07-12T10:33:59.513143+00:00"
+  "last_updated": "2026-07-12T14:34:04.689220+00:00"
 }
