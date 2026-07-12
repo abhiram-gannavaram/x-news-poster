@@ -46,12 +46,12 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           fetch-depth: 1
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.12"
           cache: "pip"
@@ -132,13 +132,13 @@ jobs:
               echo "auto_post=false" >> "$GITHUB_OUTPUT"
               echo "live=false" >> "$GITHUB_OUTPUT"
               echo "Schedule kill-switch active (ENABLE_AUTO_POST=false) — dry run only"
-            else
+            else:
               echo "dry_run=false" >> "$GITHUB_OUTPUT"
               echo "auto_post=true" >> "$GITHUB_OUTPUT"
               echo "live=true" >> "$GITHUB_OUTPUT"
               echo "Schedule live post enabled"
             fi
-          else
+          else:
             # Manual: explicit string compares (never truthy "false")
             DR="${{ inputs.dry_run }}"
             AP="${{ inputs.auto_post }}"
@@ -146,7 +146,7 @@ jobs:
             echo "auto_post=${AP}" >> "$GITHUB_OUTPUT"
             if [ "$DR" = "false" ] && [ "$AP" = "true" ]; then
               echo "live=true" >> "$GITHUB_OUTPUT"
-            else
+            else:
               echo "live=false" >> "$GITHUB_OUTPUT"
             fi
             echo "Manual dry_run=${DR} auto_post=${AP}"
@@ -173,7 +173,7 @@ jobs:
           git add data/posted_news.json
           if git diff --staged --quiet; then
             echo "No history changes to commit."
-          else
+          else:
             git commit -m "chore: update posted news history [skip ci]"
             # Retry push once after pull --rebase to reduce race with concurrent human commits
             git pull --rebase origin "${{ github.ref_name }}" || true
@@ -182,7 +182,7 @@ jobs:
 
       - name: Upload run artifacts
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: run-data-${{ github.run_id }}
           path: |
