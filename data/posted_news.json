@@ -71,7 +71,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-07-12T14:34:04.689205+00:00"
+    },
+    {
+      "url": "https://systima.ai/blog/claude-code-vs-opencode-token-overhead",
+      "title": "Claude Code sends 33k tokens before reading the prompt; OpenCode sends 7k",
+      "source": "Hacker News",
+      "tweet": "Claude Code sends 33k tokens before your prompt. OpenCode sends 7k. OpenCode caches once. Claude Code rewrites its cache mid-session, generating up to 54x more cache write tokens. Cache writes cost extra. That adds up.",
+      "tweet_id": "2076401394836218124",
+      "validation": {
+        "quality_score": 8.8,
+        "substance": 9.0,
+        "human": 8.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": true
+      },
+      "posted_at": "2026-07-12T20:20:44.980114+00:00"
     }
   ],
-  "last_updated": "2026-07-12T14:34:04.689220+00:00"
+  "last_updated": "2026-07-12T20:20:44.980129+00:00"
 }
