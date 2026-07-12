@@ -87,7 +87,23 @@
         "used_rewrite": true
       },
       "posted_at": "2026-07-12T20:20:44.980114+00:00"
+    },
+    {
+      "url": "https://adaptiverecall.com",
+      "title": "Show HN: Adaptive Recall, persistent memory for AI assistants over MCP",
+      "source": "Hacker News",
+      "tweet": "Running four retrieval strategies in parallel plus a knowledge graph plus ACT-R cognitive scoring sounds thorough. It also sounds like four ways to add latency with no published numbers showing it beats a well-tuned vector search baseline.",
+      "tweet_id": "2076431737006268874",
+      "validation": {
+        "quality_score": 8.7,
+        "substance": 8.0,
+        "human": 9.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-07-12T22:21:19.109474+00:00"
     }
   ],
-  "last_updated": "2026-07-12T20:20:44.980129+00:00"
+  "last_updated": "2026-07-12T22:21:19.109490+00:00"
 }
