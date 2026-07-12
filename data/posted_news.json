@@ -39,7 +39,23 @@
         "used_rewrite": true
       },
       "posted_at": "2026-07-11T16:07:05.011751+00:00"
+    },
+    {
+      "url": "https://github.com/cosmtrek/mindwalk",
+      "title": "Show HN: Mindwalk – Replay coding-agent sessions on a 3D map of your codebase",
+      "source": "Hacker News",
+      "tweet": "Coding agents touch more of your codebase than you think. Mindwalk replays the session as a 3D map where edited files glow and untouched areas stay dark. Scope creep becomes visible before you merge.",
+      "tweet_id": "2076253732409311656",
+      "validation": {
+        "quality_score": 8.0,
+        "substance": 8.0,
+        "human": 7.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-07-12T10:33:59.513123+00:00"
     }
   ],
-  "last_updated": "2026-07-11T16:07:05.011769+00:00"
+  "last_updated": "2026-07-12T10:33:59.513143+00:00"
 }
