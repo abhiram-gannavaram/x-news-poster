@@ -135,7 +135,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-07-13T03:11:37.234703+00:00"
+    },
+    {
+      "url": "https://github.com/schlae/BeavisUltrasound",
+      "title": "Beavis Ultrasound PnP ISA Sound Card Replica",
+      "source": "Hacker News",
+      "tweet": "Someone fully reverse-engineered the Gravis Ultrasound PnP down to the GAL logic, published the schematic and KiCad files, and the whole thing hinges on one AMD chip that may not exist anymore. Complete documentation, zero buildable units.",
+      "tweet_id": "2076566775282782211",
+      "validation": {
+        "quality_score": 8.7,
+        "substance": 8.0,
+        "human": 9.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-07-13T07:17:54.741409+00:00"
     }
   ],
-  "last_updated": "2026-07-13T03:11:37.234725+00:00"
+  "last_updated": "2026-07-13T07:17:54.741427+00:00"
 }
