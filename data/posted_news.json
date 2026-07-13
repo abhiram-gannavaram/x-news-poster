@@ -103,7 +103,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-07-12T22:21:19.109474+00:00"
+    },
+    {
+      "url": "https://billiondollarpdf.com",
+      "title": "Billion Dollar PDFs",
+      "source": "Hacker News",
+      "tweet": "117 documents that moved billions of dollars. Only 16 were technical papers. 24 were VC doctrine. 9 were pitch decks. Engineers write the papers. Someone else writes the narrative that allocates the money.",
+      "tweet_id": "2076468387752890473",
+      "validation": {
+        "quality_score": 7.7,
+        "substance": 7.0,
+        "human": 7.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-07-13T00:46:57.322077+00:00"
     }
   ],
-  "last_updated": "2026-07-12T22:21:19.109490+00:00"
+  "last_updated": "2026-07-13T00:46:57.322097+00:00"
 }
