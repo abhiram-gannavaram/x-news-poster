@@ -151,7 +151,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-07-13T07:17:54.741409+00:00"
+    },
+    {
+      "url": "https://github.com/floodtide/dom-docx",
+      "title": "Show HN: DOM-docx – HTML to native, editable Word docs (MIT)",
+      "source": "Hacker News",
+      "tweet": "dom-docx validates HTML-to-Word output by rendering in Chromium, converting, rasterizing via LibreOffice, then scoring against human-approved layouts. Most converters skip that loop and just hope for the best.",
+      "tweet_id": "2076651883163222174",
+      "validation": {
+        "quality_score": 7.5,
+        "substance": 8.0,
+        "human": 7.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": true
+      },
+      "posted_at": "2026-07-13T12:56:06.062526+00:00"
     }
   ],
-  "last_updated": "2026-07-13T07:17:54.741427+00:00"
+  "last_updated": "2026-07-13T12:56:06.062543+00:00"
 }
