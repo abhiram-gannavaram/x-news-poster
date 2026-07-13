@@ -167,7 +167,23 @@
         "used_rewrite": true
       },
       "posted_at": "2026-07-13T12:56:06.062526+00:00"
+    },
+    {
+      "url": "https://planwright.tools",
+      "title": "Show HN: PlanWright – A control plane for AI coding agents",
+      "source": "Hacker News",
+      "tweet": "Coding agents made the coding fast. Now the bottleneck is the human on either end. Planning and acceptance review run at human pace and that's where agentic pipelines actually stall.",
+      "tweet_id": "2076766401289982064",
+      "validation": {
+        "quality_score": 7.3,
+        "substance": 7.0,
+        "human": 7.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-07-13T20:31:09.295062+00:00"
     }
   ],
-  "last_updated": "2026-07-13T12:56:06.062543+00:00"
+  "last_updated": "2026-07-13T20:31:09.295077+00:00"
 }
