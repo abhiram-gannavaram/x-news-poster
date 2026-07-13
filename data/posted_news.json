@@ -119,7 +119,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-07-13T00:46:57.322077+00:00"
+    },
+    {
+      "url": "https://vilkeliskis.com/b/2026/0711.html",
+      "title": "Designing and assembling my first PCB",
+      "source": "Hacker News",
+      "tweet": "First PCB project pattern: wire it on a breadboard, pick one protocol (I2C, not SPI), copy the datasheet schematic into KiCad, and build only what you actually use. Scope reduction is the skill, not the compromise.",
+      "tweet_id": "2076504793858646155",
+      "validation": {
+        "quality_score": 8.2,
+        "substance": 8.0,
+        "human": 8.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-07-13T03:11:37.234703+00:00"
     }
   ],
-  "last_updated": "2026-07-13T00:46:57.322097+00:00"
+  "last_updated": "2026-07-13T03:11:37.234725+00:00"
 }
