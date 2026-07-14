@@ -199,7 +199,23 @@
         "used_rewrite": true
       },
       "posted_at": "2026-07-14T00:41:14.339092+00:00"
+    },
+    {
+      "url": "https://github.com/Danau5tin/ai-trains-ai",
+      "title": "Show HN: I RL-trained an agent that trains models with RL (for –$1.3k)",
+      "source": "Hacker News",
+      "tweet": "Someone RL-trained an agent to write RL training jobs, reward went from 0.0 to 0.63 over 54 steps, it transferred to held-out tasks, total cost was $1,300. The meta loop is closed. The price of that experiment is now a rounding error.",
+      "tweet_id": "2077040265995464787",
+      "validation": {
+        "quality_score": 8.0,
+        "substance": 7.0,
+        "human": 8.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-07-14T14:39:23.742617+00:00"
     }
   ],
-  "last_updated": "2026-07-14T00:41:14.339112+00:00"
+  "last_updated": "2026-07-14T14:39:23.742636+00:00"
 }
