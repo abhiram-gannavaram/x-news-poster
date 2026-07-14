@@ -215,7 +215,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-07-14T14:39:23.742617+00:00"
+    },
+    {
+      "url": "https://agnost.ai",
+      "title": "Launch HN: Agnost AI (YC S26) – Extract user feedback from agent conversations",
+      "source": "Hacker News",
+      "tweet": "Your evals pass. Users are still cursing at the agent, rephrasing the same question four times, then leaving anyway. That gap is where the actual failures live, and most teams never look at it.",
+      "tweet_id": "2077098302193946918",
+      "validation": {
+        "quality_score": 8.5,
+        "substance": 8.0,
+        "human": 9.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-07-14T18:30:00.640389+00:00"
     }
   ],
-  "last_updated": "2026-07-14T14:39:23.742636+00:00"
+  "last_updated": "2026-07-14T18:30:00.640409+00:00"
 }
