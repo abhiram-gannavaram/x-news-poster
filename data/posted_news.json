@@ -183,7 +183,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-07-13T20:31:09.295062+00:00"
+    },
+    {
+      "url": "https://sleuth-io.github.io/sx/2026/07/10/your-dropbox-is-now-a-skill-server.html",
+      "title": "Show HN: Sx 2.0 – Share AI skills with your team through a Dropbox folder",
+      "source": "Hacker News",
+      "tweet": "SX 2.0 shares AI skills via a cloud folder. No server, no accounts. Works great until you need access control or an audit trail. Then the folder is the server, and it has none of that.",
+      "tweet_id": "2076829337035198705",
+      "validation": {
+        "quality_score": 8.5,
+        "substance": 8.0,
+        "human": 9.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": true
+      },
+      "posted_at": "2026-07-14T00:41:14.339092+00:00"
     }
   ],
-  "last_updated": "2026-07-13T20:31:09.295077+00:00"
+  "last_updated": "2026-07-14T00:41:14.339112+00:00"
 }
