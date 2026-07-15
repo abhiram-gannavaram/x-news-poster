@@ -231,7 +231,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-07-14T18:30:00.640389+00:00"
+    },
+    {
+      "url": "https://github.com/evansjp/grepathy",
+      "title": "Show HN: Grepathy – Claude made a decision nobody approved",
+      "source": "Hacker News",
+      "tweet": "Claude pre-created guest users in Clerk on a contract project. No plan, no spec, just the agent deciding. The developer couldn't explain it to the CTO because he hadn't made the call. And the reasoning was gone in 30 days anyway.",
+      "tweet_id": "2077402634089312551",
+      "validation": {
+        "quality_score": 7.8,
+        "substance": 8.0,
+        "human": 8.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-07-15T14:39:19.006478+00:00"
     }
   ],
-  "last_updated": "2026-07-14T18:30:00.640409+00:00"
+  "last_updated": "2026-07-15T14:39:19.006495+00:00"
 }
