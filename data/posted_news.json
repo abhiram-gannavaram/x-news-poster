@@ -247,7 +247,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-07-15T14:39:19.006478+00:00"
+    },
+    {
+      "url": "https://github.com/jbunke/painterly",
+      "title": "Show HN: Painterly – Turn pictures into digital paintings without generative AI",
+      "source": "Hacker News",
+      "tweet": "51,750 brush strokes, each accepted only if it improves the image. No diffusion model, no latent space. Slower, but fully deterministic and auditable. Sometimes the boring algorithm is the right one.",
+      "tweet_id": "2077460760762908889",
+      "validation": {
+        "quality_score": 8.5,
+        "substance": 8.0,
+        "human": 8.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-07-15T18:30:17.493460+00:00"
     }
   ],
-  "last_updated": "2026-07-15T14:39:19.006495+00:00"
+  "last_updated": "2026-07-15T18:30:17.493477+00:00"
 }
