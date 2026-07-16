@@ -295,7 +295,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-07-16T06:57:08.078052+00:00"
+    },
+    {
+      "url": "https://joinedanthropic.com",
+      "title": "Where are YC founders now? OpenAI and Anthropic, mostly",
+      "source": "Hacker News",
+      "tweet": "105 YC founders ended up at OpenAI or Anthropic after their startups. 60% hold the same title: Member of Technical Staff. The labs are now the soft landing for the YC ecosystem.",
+      "tweet_id": "2077705701867041264",
+      "validation": {
+        "quality_score": 7.8,
+        "substance": 7.0,
+        "human": 8.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-07-16T10:43:36.020759+00:00"
     }
   ],
-  "last_updated": "2026-07-16T06:57:08.078072+00:00"
+  "last_updated": "2026-07-16T10:43:36.020773+00:00"
 }
