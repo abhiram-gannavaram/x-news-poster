@@ -263,7 +263,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-07-15T18:30:17.493460+00:00"
+    },
+    {
+      "url": "https://blog.greg.technology/2026/07/14/llm-networking-with-mikrotik.html",
+      "title": "LLM Networking with MikroTik",
+      "source": "Hacker News",
+      "tweet": "SSH text piping breaks in subtle ways when an LLM is driving. REST/JSON API is the cleaner call. Structured commands, predictable surface, less silent failure.",
+      "tweet_id": "2077591397968798145",
+      "validation": {
+        "quality_score": 7.0,
+        "substance": 7.0,
+        "human": 7.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": true
+      },
+      "posted_at": "2026-07-16T03:09:23.850077+00:00"
     }
   ],
-  "last_updated": "2026-07-15T18:30:17.493477+00:00"
+  "last_updated": "2026-07-16T03:09:23.850092+00:00"
 }
