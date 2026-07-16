@@ -279,7 +279,23 @@
         "used_rewrite": true
       },
       "posted_at": "2026-07-16T03:09:23.850077+00:00"
+    },
+    {
+      "url": "https://github.com/PrestigePvP/Voicebox",
+      "title": "Open Source, Free Tier Capable Whispr Using Cloudflare AI",
+      "source": "Hacker News",
+      "tweet": "Durable Objects exist specifically because plain Workers can't hold WebSocket state. Using one to stream PCM audio chunks to Whisper is a small architectural decision that makes the whole free-tier backend actually work.",
+      "tweet_id": "2077648709894947066",
+      "validation": {
+        "quality_score": 7.0,
+        "substance": 7.0,
+        "human": 7.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-07-16T06:57:08.078052+00:00"
     }
   ],
-  "last_updated": "2026-07-16T03:09:23.850092+00:00"
+  "last_updated": "2026-07-16T06:57:08.078072+00:00"
 }
