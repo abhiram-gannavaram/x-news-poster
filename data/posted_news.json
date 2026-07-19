@@ -327,7 +327,23 @@
         "used_rewrite": true
       },
       "posted_at": "2026-07-17T06:54:56.402807+00:00"
+    },
+    {
+      "url": "https://codex-resets.com",
+      "title": "Codex Resets",
+      "source": "Hacker News",
+      "tweet": "35 resets in 35 weeks. Cache misses during session compaction, reliability incidents, usage consumed faster than anyone modeled. The mechanism was different each time. That is the lesson.",
+      "tweet_id": "2078642454765412828",
+      "validation": {
+        "quality_score": 7.8,
+        "substance": 7.0,
+        "human": 8.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": true
+      },
+      "posted_at": "2026-07-19T00:45:55.317715+00:00"
     }
   ],
-  "last_updated": "2026-07-17T06:54:56.402826+00:00"
+  "last_updated": "2026-07-19T00:45:55.317731+00:00"
 }
