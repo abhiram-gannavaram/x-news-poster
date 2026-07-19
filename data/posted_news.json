@@ -343,7 +343,23 @@
         "used_rewrite": true
       },
       "posted_at": "2026-07-19T00:45:55.317715+00:00"
+    },
+    {
+      "url": "https://workshop.cjpais.com/projects/transcribe-cpp",
+      "title": "Transcribe.cpp",
+      "source": "Hacker News",
+      "tweet": "whisper.cpp works until you need a model it doesn't support. ONNX covers more models but drops GPU acceleration. transcribe.cpp is one ggml engine, 60+ validated models, Vulkan/Metal/CUDA. The gap was real and someone finally filled it.",
+      "tweet_id": "2078678899890770058",
+      "validation": {
+        "quality_score": 7.7,
+        "substance": 7.0,
+        "human": 8.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-07-19T03:10:44.522675+00:00"
     }
   ],
-  "last_updated": "2026-07-19T00:45:55.317731+00:00"
+  "last_updated": "2026-07-19T03:10:44.522697+00:00"
 }
