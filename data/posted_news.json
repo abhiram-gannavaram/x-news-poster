@@ -375,7 +375,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-07-19T06:58:52.760864+00:00"
+    },
+    {
+      "url": "https://thenextweb.com/news/ai-advice-suppresses-critical-thinking-wrong-answers-study",
+      "title": "AI advice made people 3x less accurate but 2x confident, researchers found",
+      "source": "Hacker News",
+      "tweet": "AI availability dropped willingness to say 'I don't know' from 44% to 3%. Accuracy fell by 3x. Confidence doubled. You didn't build an assistant. You built a confidence pump with a broken floor.",
+      "tweet_id": "2078968574534918604",
+      "validation": {
+        "quality_score": 8.7,
+        "substance": 7.0,
+        "human": 9.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-07-19T22:21:48.350043+00:00"
     }
   ],
-  "last_updated": "2026-07-19T06:58:52.760881+00:00"
+  "last_updated": "2026-07-19T22:21:48.350083+00:00"
 }
