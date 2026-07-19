@@ -359,7 +359,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-07-19T03:10:44.522675+00:00"
+    },
+    {
+      "url": "https://chipsandcheese.com/p/scrying-the-amd-gfx1250-llvm-tea",
+      "title": "Scrying the AMD GFX1250 LLVM Tea Leaves",
+      "source": "Hacker News",
+      "tweet": "AMD's MI455X runs Wave32 only. Every CDNA kernel tuned for Wave64 occupancy targets, register blocking, accumulator layout, starts over. The hardware ships soon and most porting guides don't reflect this yet.",
+      "tweet_id": "2078736312517931227",
+      "validation": {
+        "quality_score": 7.7,
+        "substance": 8.0,
+        "human": 7.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-07-19T06:58:52.760864+00:00"
     }
   ],
-  "last_updated": "2026-07-19T03:10:44.522697+00:00"
+  "last_updated": "2026-07-19T06:58:52.760881+00:00"
 }
