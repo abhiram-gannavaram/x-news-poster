@@ -391,7 +391,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-07-19T22:21:48.350043+00:00"
+    },
+    {
+      "url": "https://privacy.ca.gov",
+      "title": "Delete Your Data with Drop",
+      "source": "Hacker News",
+      "tweet": "California now has a single-request deletion platform for data brokers. One consumer request, your pipeline has to respond. If you build anything that sells or shares consumer data, the compliance surface just got a name and a portal.",
+      "tweet_id": "2079041485878525984",
+      "validation": {
+        "quality_score": 7.2,
+        "substance": 6.0,
+        "human": 7.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-07-20T03:11:31.758264+00:00"
     }
   ],
-  "last_updated": "2026-07-19T22:21:48.350083+00:00"
+  "last_updated": "2026-07-20T03:11:31.758282+00:00"
 }
