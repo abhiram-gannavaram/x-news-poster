@@ -423,7 +423,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-07-20T07:15:33.243980+00:00"
+    },
+    {
+      "url": "https://cursor.com/blog/agent-swarm-model-economics",
+      "title": "Agent swarms and the new model economics",
+      "source": "Hacker News",
+      "tweet": "Cursor's swarm insight: the win is context hygiene, not parallelism. Planners never implement, workers never plan. Mixed cheap workers with a frontier planner hit 80% of a SQL suite in four hours.",
+      "tweet_id": "2079304073208349087",
+      "validation": {
+        "quality_score": 7.2,
+        "substance": 7.0,
+        "human": 6.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": true
+      },
+      "posted_at": "2026-07-20T20:34:57.440333+00:00"
     }
   ],
-  "last_updated": "2026-07-20T07:15:33.243995+00:00"
+  "last_updated": "2026-07-20T20:34:57.440348+00:00"
 }
