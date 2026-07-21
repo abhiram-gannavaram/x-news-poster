@@ -439,7 +439,23 @@
         "used_rewrite": true
       },
       "posted_at": "2026-07-20T20:34:57.440333+00:00"
+    },
+    {
+      "url": "https://apnews.com/article/ai-anthropic-copyright-settlement-claude-books-bartz-74b140444023898aeba8579b6e9f0d63",
+      "title": "Judge approves $1.5B Anthropic settlement for pirated books used to train Claude",
+      "source": "Hacker News",
+      "tweet": "AP News reports a $1.5B settlement over pirated books used to train Claude. Not yet corroborated. Worth watching if you work on training data provenance.",
+      "tweet_id": "2079665732720152898",
+      "validation": {
+        "quality_score": 7.5,
+        "substance": 6.0,
+        "human": 8.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": true
+      },
+      "posted_at": "2026-07-21T20:32:03.814416+00:00"
     }
   ],
-  "last_updated": "2026-07-20T20:34:57.440348+00:00"
+  "last_updated": "2026-07-21T20:32:03.814433+00:00"
 }
