@@ -455,7 +455,23 @@
         "used_rewrite": true
       },
       "posted_at": "2026-07-21T20:32:03.814416+00:00"
+    },
+    {
+      "url": "https://ai.google.dev/gemini-api/docs/latest-model",
+      "title": "Gemini last models: temperature, top_p, and top_k are deprecated and ignored",
+      "source": "Hacker News",
+      "tweet": "Gemini 3.6 Flash and 3.5 Flash-Lite silently ignore temperature, top-p, and top-k. Your code won't break visibly. The output just stops behaving as tuned. Audit before you assume.",
+      "tweet_id": "2079728907293479424",
+      "validation": {
+        "quality_score": 8.0,
+        "substance": 7.0,
+        "human": 8.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": true
+      },
+      "posted_at": "2026-07-22T00:43:05.792140+00:00"
     }
   ],
-  "last_updated": "2026-07-21T20:32:03.814433+00:00"
+  "last_updated": "2026-07-22T00:43:05.792159+00:00"
 }
