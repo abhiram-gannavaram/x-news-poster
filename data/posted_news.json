@@ -471,7 +471,23 @@
         "used_rewrite": true
       },
       "posted_at": "2026-07-22T00:43:05.792140+00:00"
+    },
+    {
+      "url": "https://cameronmpalmer.medium.com/should-you-even-use-an-llm-b4f3b7914f4d",
+      "title": "Six questions before you add an LLM",
+      "source": "Hacker News",
+      "tweet": "Gave one LLM agent the full pipeline. Web search, deduplication, validation, database insertion. 10-20% error rate. 800+ records needing manual review. The mistake wasn't using an LLM. It was not asking whether that step even needed one.",
+      "tweet_id": "2079968508373262652",
+      "validation": {
+        "quality_score": 8.7,
+        "substance": 8.0,
+        "human": 9.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-07-22T16:35:11.179805+00:00"
     }
   ],
-  "last_updated": "2026-07-22T00:43:05.792159+00:00"
+  "last_updated": "2026-07-22T16:35:11.179825+00:00"
 }
