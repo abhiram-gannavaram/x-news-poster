@@ -503,7 +503,23 @@
         "used_rewrite": true
       },
       "posted_at": "2026-07-22T20:29:19.418026+00:00"
+    },
+    {
+      "url": "https://dfarq.homeip.net/amiga-1000-ten-years-ahead-of-its-time",
+      "title": "Amiga 1000: Ten years ahead of its time",
+      "source": "Hacker News",
+      "tweet": "The Amiga shipped preemptive multitasking in 1985 on 256 KB of RAM. The one cut to hit $1,295 was memory protection. That tradeoff haunted its stability for years. Cost cuts have a longer memory than you do.",
+      "tweet_id": "2080216235099210180",
+      "validation": {
+        "quality_score": 8.3,
+        "substance": 8.0,
+        "human": 8.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": true
+      },
+      "posted_at": "2026-07-23T08:59:33.793797+00:00"
     }
   ],
-  "last_updated": "2026-07-22T20:29:19.418042+00:00"
+  "last_updated": "2026-07-23T08:59:33.793816+00:00"
 }
