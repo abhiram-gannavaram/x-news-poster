@@ -519,7 +519,23 @@
         "used_rewrite": true
       },
       "posted_at": "2026-07-23T08:59:33.793797+00:00"
+    },
+    {
+      "url": "https://github.com/izeigerman/claude-thermos",
+      "title": "Show HN: Claude-thermos – keeps your Claude session warm for you",
+      "source": "Hacker News",
+      "tweet": "Claude Code's prompt cache expires after 5 minutes of inactivity, silently re-encoding your whole conversation at write-rate pricing. The author says this costs ~20% of billing on long sessions. claude-thermos fixes it. Why doesn't the CLI?",
+      "tweet_id": "2080360680558055757",
+      "validation": {
+        "quality_score": 7.8,
+        "substance": 7.0,
+        "human": 8.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": true
+      },
+      "posted_at": "2026-07-23T18:33:32.261318+00:00"
     }
   ],
-  "last_updated": "2026-07-23T08:59:33.793816+00:00"
+  "last_updated": "2026-07-23T18:33:32.261334+00:00"
 }
