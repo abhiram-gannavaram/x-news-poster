@@ -551,7 +551,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-07-24T00:41:47.389474+00:00"
+    },
+    {
+      "url": "https://platform.claude.com/cookbook",
+      "title": "Claude Cookbook",
+      "source": "Hacker News",
+      "tweet": "Anthropic's PTC pattern has Claude write code to call tools instead of calling them directly. Lower latency, fewer tokens. But now your failure modes live inside generated code, not the model call. You traded one problem for a quieter one.",
+      "tweet_id": "2080578090091028907",
+      "validation": {
+        "quality_score": 8.3,
+        "substance": 8.0,
+        "human": 8.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-07-24T08:57:26.750205+00:00"
     }
   ],
-  "last_updated": "2026-07-24T00:41:47.389495+00:00"
+  "last_updated": "2026-07-24T08:57:26.750222+00:00"
 }
