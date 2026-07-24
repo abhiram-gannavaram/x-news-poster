@@ -535,7 +535,23 @@
         "used_rewrite": true
       },
       "posted_at": "2026-07-23T18:33:32.261318+00:00"
+    },
+    {
+      "url": "https://arxiv.org/abs/2507.09369",
+      "title": "A Taxonomy of Omnicidal Futures Involving Artificial Intelligence",
+      "source": "Hacker News",
+      "tweet": "Critch and Tsimerman just published a formal taxonomy of AI omnicidal scenarios on arXiv. Not predictions. Categories. The goal is giving safety engineers something concrete to red-team against, not a list of reasons to panic.",
+      "tweet_id": "2080453354140930197",
+      "validation": {
+        "quality_score": 8.0,
+        "substance": 7.0,
+        "human": 8.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-07-24T00:41:47.389474+00:00"
     }
   ],
-  "last_updated": "2026-07-23T18:33:32.261334+00:00"
+  "last_updated": "2026-07-24T00:41:47.389495+00:00"
 }
