@@ -194,54 +194,50 @@ def is_safe_public_url(url: str) -> bool:
 
 
 def fetch_article_text(url: str) -> str:
-    """SSRF-hardened page fetch. Returns empty string on failure."""
+    """SSRF-hardened page fetch with Jina Reader fallback. Returns empty string on failure."""
     if not url or not is_safe_public_url(url):
         logger.warning("Blocked unsafe URL: %s", url)
         return ""
 
     headers = {
         "User-Agent": (
-            "Mozilla/5.0 (compatible; x-news-poster-research/1.1; "
-            "+https://github.com/x-news-poster)"
+            "Mozilla/5.0 (compatible; x-news-poster-research/1.2; "
+            "+https://github.com/abhiram-gannavaram/x-news-poster)"
         ),
-        "Accept": "text/html,application/xhtml+xml",
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
     }
 
-    current = url
+    # === Primary: Normal fetch (allow redirects) ===
     try:
-        session = requests.Session()
-        session.max_redirects = 0
-        for _hop in range(5):
-            if not is_safe_public_url(current):
-                logger.warning("Blocked redirect target: %s", current)
-                return ""
-            resp = session.get(
-                current,
-                headers=headers,
-                timeout=REQUEST_TIMEOUT,
-                allow_redirects=False,
-            )
-            if resp.is_redirect or resp.status_code in {301, 302, 303, 307, 308}:
-                loc = resp.headers.get("Location")
-                if not loc:
-                    return ""
-                current = urljoin(current, loc)
-                continue
-            if resp.status_code >= 400:
-                logger.warning("HTTP %s for %s", resp.status_code, current)
-                return ""
-            # Final URL after hops
-            if not is_safe_public_url(current):
-                return ""
+        resp = requests.get(
+            url,
+            headers=headers,
+            timeout=REQUEST_TIMEOUT,
+            allow_redirects=True,
+        )
+        if resp.status_code < 400:
             ctype = (resp.headers.get("Content-Type") or "").lower()
-            if ctype and "html" not in ctype and "text" not in ctype:
-                return ""
-            return strip_html(resp.text)[:MAX_PAGE_CHARS]
-        logger.warning("Too many redirects for %s", url)
-        return ""
+            if "html" in ctype or "text" in ctype:
+                body = strip_html(resp.text)
+                if len(body) >= MIN_PAGE_CHARS:
+                    return body[:MAX_PAGE_CHARS]
     except requests.RequestException as exc:
-        logger.warning("Fetch failed %s: %s", url, exc)
-        return ""
+        logger.warning("Primary fetch failed %s: %s", url, exc)
+
+    # === Fallback: Jina Reader (excellent for news/articles) ===
+    try:
+        jina_url = f"https://r.jina.ai/{url}"
+        jina_resp = requests.get(jina_url, timeout=REQUEST_TIMEOUT)
+        if jina_resp.status_code == 200 and jina_resp.text.strip():
+            body = jina_resp.text.strip()
+            if len(body) >= 150:
+                logger.info("Used Jina Reader fallback for %s", url)
+                return body[:MAX_PAGE_CHARS]
+    except Exception as exc:
+        logger.warning("Jina fallback failed for %s: %s", url, exc)
+
+    logger.warning("All fetch methods failed or too thin for %s", url)
+    return ""
 
 
 def pick_top(candidates: list[dict[str, Any]], n: int = TOP_N) -> list[dict[str, Any]]:
