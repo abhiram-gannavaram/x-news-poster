@@ -567,7 +567,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-07-24T08:57:26.750205+00:00"
+    },
+    {
+      "url": "https://bfl.ai/blog/flux-3-mimic",
+      "title": "Flux 3 X Mimic: The Next Generation of Video-Action Models",
+      "source": "Hacker News",
+      "tweet": "Adding robot action prediction to a large video model caused a ~10% quality drop on video tasks, then the backbone absorbed it. If that recovery holds generally, the case for training robotics models from scratch gets harder to defend.",
+      "tweet_id": "2080633560264741301",
+      "validation": {
+        "quality_score": 8.3,
+        "substance": 8.0,
+        "human": 8.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-07-24T12:37:51.872007+00:00"
     }
   ],
-  "last_updated": "2026-07-24T08:57:26.750222+00:00"
+  "last_updated": "2026-07-24T12:37:51.872026+00:00"
 }
