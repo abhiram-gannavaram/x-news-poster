@@ -599,7 +599,23 @@
         "used_rewrite": true
       },
       "posted_at": "2026-07-26T08:46:42.063004+00:00"
+    },
+    {
+      "url": "https://astral.sh/blog/ruff-v0.16.0",
+      "title": "Ruff v0.16.0 – Significant new updates – 413 default rules up from 59",
+      "source": "Hacker News",
+      "tweet": "Ruff v0.16.0 bumped default-enabled rules from 59 to 413. If you are not pinning your version, your CI is about to fail in ways that look like new bugs. Revert with select = ['E4', 'E7', 'E9', 'F'] until you are ready to audit.",
+      "tweet_id": "2081356429760553390",
+      "validation": {
+        "quality_score": 8.7,
+        "substance": 9.0,
+        "human": 8.0,
+        "fact_score": 10.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-07-26T12:30:17.390548+00:00"
     }
   ],
-  "last_updated": "2026-07-26T08:46:42.063019+00:00"
+  "last_updated": "2026-07-26T12:30:17.390568+00:00"
 }
