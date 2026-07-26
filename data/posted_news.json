@@ -615,7 +615,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-07-26T12:30:17.390548+00:00"
+    },
+    {
+      "url": "https://spectrum.ieee.org/origami-circuit-boards",
+      "title": "Make an Origami Circuit Board",
+      "source": "Hacker News",
+      "tweet": "Fabric soaked in liquid metal ink stays nonconductive until pressure cracks the oxide on each droplet, merging them into a trace. Fold, cut, done. No etching.",
+      "tweet_id": "2081415660102627588",
+      "validation": {
+        "quality_score": 8.0,
+        "substance": 8.0,
+        "human": 7.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": true
+      },
+      "posted_at": "2026-07-26T16:25:38.996798+00:00"
     }
   ],
-  "last_updated": "2026-07-26T12:30:17.390568+00:00"
+  "last_updated": "2026-07-26T16:25:38.996817+00:00"
 }
