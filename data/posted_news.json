@@ -631,7 +631,23 @@
         "used_rewrite": true
       },
       "posted_at": "2026-07-26T16:25:38.996798+00:00"
+    },
+    {
+      "url": "https://github.com/MicSm/boffin",
+      "title": "Show HN: Boffin – Staff-engineer layer for AI coding agents",
+      "source": "Hacker News",
+      "tweet": "Boffin routes architectural constraints per file, not globally. The DuckDB result: +17/-17 lines, 2104 assertions passing. Small scope enforced at edit time beats a long AGENTS.md nobody reads.",
+      "tweet_id": "2081446121541431420",
+      "validation": {
+        "quality_score": 7.2,
+        "substance": 7.0,
+        "human": 7.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-07-26T18:26:41.584373+00:00"
     }
   ],
-  "last_updated": "2026-07-26T16:25:38.996817+00:00"
+  "last_updated": "2026-07-26T18:26:41.584391+00:00"
 }
