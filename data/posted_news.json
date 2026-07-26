@@ -583,7 +583,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-07-24T12:37:51.872007+00:00"
+    },
+    {
+      "url": "https://github.com/mulfyx/w4me-station",
+      "title": "W4ME Station – a WASM-4 runtime for Java ME phones",
+      "source": "Hacker News",
+      "tweet": "Someone ran WASM-4 cartridges on mid-2000s feature phones: no JIT, no floats, 275 KB JAR, 13 games. The tradeoff was simple: drop everything modern Java ME could not handle.",
+      "tweet_id": "2081300161699992045",
+      "validation": {
+        "quality_score": 7.0,
+        "substance": 6.0,
+        "human": 7.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": true
+      },
+      "posted_at": "2026-07-26T08:46:42.063004+00:00"
     }
   ],
-  "last_updated": "2026-07-24T12:37:51.872026+00:00"
+  "last_updated": "2026-07-26T08:46:42.063019+00:00"
 }
