@@ -679,7 +679,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-07-27T05:22:53.570363+00:00"
+    },
+    {
+      "url": "https://huggingface.co/moonshotai/Kimi-K3",
+      "title": "Kimi-K3 Releases on HuggingFace 7/27",
+      "source": "Hacker News",
+      "tweet": "Kimi-K3 is live on HuggingFace as open weights. Moonshot calls it 3T-class but has not confirmed the exact parameter count. New architecture terms, no paper yet. Try it, but verify before trusting it on agent work.",
+      "tweet_id": "2081669617173627265",
+      "validation": {
+        "quality_score": 7.2,
+        "substance": 6.0,
+        "human": 7.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": true
+      },
+      "posted_at": "2026-07-27T09:14:47.072661+00:00"
     }
   ],
-  "last_updated": "2026-07-27T05:22:53.570381+00:00"
+  "last_updated": "2026-07-27T09:14:47.072701+00:00"
 }
