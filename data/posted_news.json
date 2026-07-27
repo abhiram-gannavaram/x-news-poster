@@ -663,7 +663,23 @@
         "used_rewrite": true
       },
       "posted_at": "2026-07-27T00:48:06.552864+00:00"
+    },
+    {
+      "url": "https://github.com/vercel-labs/scriptc",
+      "title": "Scriptc by Vercel: TypeScript-to-Native compiler, no JavaScript engine in binary",
+      "source": "Hacker News",
+      "tweet": "scriptc compiles TypeScript to a native binary, 178KB, starts in 2ms, no Node or V8 anywhere. The interesting part is the parity claim. 'Byte-for-byte like Node' is easy to say and hard to hold once async or npm deps enter the picture.",
+      "tweet_id": "2081611259699503145",
+      "validation": {
+        "quality_score": 8.0,
+        "substance": 8.0,
+        "human": 8.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-07-27T05:22:53.570363+00:00"
     }
   ],
-  "last_updated": "2026-07-27T00:48:06.552879+00:00"
+  "last_updated": "2026-07-27T05:22:53.570381+00:00"
 }
