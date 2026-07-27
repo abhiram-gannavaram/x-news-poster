@@ -647,7 +647,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-07-26T18:26:41.584373+00:00"
+    },
+    {
+      "url": "https://github.com/faizannraza/wattage",
+      "title": "Wattage: A token-spend profiler and cost-regression gate for AI agents",
+      "source": "Hacker News",
+      "tweet": "Wattage is an open-source token-spend profiler that reads OTel traces and fails CI if a code change makes your agent more expensive. One detection: a stable prompt prefix being re-sent instead of cached.",
+      "tweet_id": "2081542107861491748",
+      "validation": {
+        "quality_score": 7.2,
+        "substance": 8.0,
+        "human": 6.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": true
+      },
+      "posted_at": "2026-07-27T00:48:06.552864+00:00"
     }
   ],
-  "last_updated": "2026-07-26T18:26:41.584391+00:00"
+  "last_updated": "2026-07-27T00:48:06.552879+00:00"
 }
