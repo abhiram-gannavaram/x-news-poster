@@ -695,7 +695,23 @@
         "used_rewrite": true
       },
       "posted_at": "2026-07-27T09:14:47.072661+00:00"
+    },
+    {
+      "url": "https://github.com/schildep/verified-3d-mesh-intersection",
+      "title": "Show HN: Formally verified 3D CSG: Trust 93 lines spec, not 1000 lines AI code",
+      "source": "Hacker News",
+      "tweet": "93 lines of formal spec, 1000+ lines of AI-generated code. You audit the spec, not the implementation. Correctness stops being a function of how much code you can read.",
+      "tweet_id": "2082117329002115302",
+      "validation": {
+        "quality_score": 8.0,
+        "substance": 8.0,
+        "human": 7.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-07-28T14:53:49.921424+00:00"
     }
   ],
-  "last_updated": "2026-07-27T09:14:47.072701+00:00"
+  "last_updated": "2026-07-28T14:53:49.921438+00:00"
 }
