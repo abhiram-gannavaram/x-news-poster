@@ -727,7 +727,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-07-29T03:07:52.805204+00:00"
+    },
+    {
+      "url": "https://transformer-transformer.github.io",
+      "title": "Transformer Transformer: A Unified Model for Motion-Conditioned Robot Co-Design",
+      "source": "Hacker News",
+      "tweet": "A diffusion transformer takes a motion demo and outputs a complete robot, every link, joint, and motor. Built one for cloth-flinging. 73% less tracking error, 30% lower joint speed. Hardware and policy were never really separate problems.",
+      "tweet_id": "2082332635695562829",
+      "validation": {
+        "quality_score": 7.8,
+        "substance": 8.0,
+        "human": 6.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-07-29T05:09:23.051070+00:00"
     }
   ],
-  "last_updated": "2026-07-29T03:07:52.805220+00:00"
+  "last_updated": "2026-07-29T05:09:23.051092+00:00"
 }
