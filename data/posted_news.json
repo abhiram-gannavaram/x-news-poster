@@ -743,7 +743,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-07-29T05:09:23.051070+00:00"
+    },
+    {
+      "url": "https://echologue.com",
+      "title": "Show HN: Echologue – the private AI voice journal I built for myself",
+      "source": "Hacker News",
+      "tweet": "Echologue stores embeddings locally, which is confirmed. Whether generation ever leaves your device is a harder question, and one worth asking of any AI journaling app.",
+      "tweet_id": "2082478964413702581",
+      "validation": {
+        "quality_score": 7.0,
+        "substance": 7.0,
+        "human": 8.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": true
+      },
+      "posted_at": "2026-07-29T14:50:50.537586+00:00"
     }
   ],
-  "last_updated": "2026-07-29T05:09:23.051092+00:00"
+  "last_updated": "2026-07-29T14:50:50.537601+00:00"
 }
