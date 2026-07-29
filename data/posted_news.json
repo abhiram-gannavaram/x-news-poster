@@ -759,7 +759,23 @@
         "used_rewrite": true
       },
       "posted_at": "2026-07-29T14:50:50.537586+00:00"
+    },
+    {
+      "url": "https://usetokenless.com",
+      "title": "Launch HN: Tokenless (YC S26) – Automatic model switching to save money",
+      "source": "Hacker News",
+      "tweet": "Fan out to N models, pick the winner mid-stream, cancel the rest. Interesting cost bet. But the benchmarks and model names in the comparison are unrecognizable, so the performance claims are currently unverifiable.",
+      "tweet_id": "2082533120625049623",
+      "validation": {
+        "quality_score": 7.3,
+        "substance": 7.0,
+        "human": 8.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-07-29T18:26:02.364173+00:00"
     }
   ],
-  "last_updated": "2026-07-29T14:50:50.537601+00:00"
+  "last_updated": "2026-07-29T18:26:02.364187+00:00"
 }
