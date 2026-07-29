@@ -711,7 +711,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-07-28T14:53:49.921424+00:00"
+    },
+    {
+      "url": "https://learnvector.ai",
+      "title": "LearnVector – Andrew Ng's AI company building one‑to‑one learning experiences",
+      "source": "Hacker News",
+      "tweet": "Andrew Ng's argument for LearnVector isn't about better LLMs. It's that chatbots harm learning by giving answers, and fixing that requires mastery-gating and path planning. That's an architecture problem, not a model problem.",
+      "tweet_id": "2082302058334466558",
+      "validation": {
+        "quality_score": 8.0,
+        "substance": 8.0,
+        "human": 7.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-07-29T03:07:52.805204+00:00"
     }
   ],
-  "last_updated": "2026-07-28T14:53:49.921438+00:00"
+  "last_updated": "2026-07-29T03:07:52.805220+00:00"
 }
