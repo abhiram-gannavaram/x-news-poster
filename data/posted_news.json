@@ -775,7 +775,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-07-29T18:26:02.364173+00:00"
+    },
+    {
+      "url": "https://github.com/YoanWai/agent-manager",
+      "title": "Agent-Manager: A Tmux TUI for Running Claude Code, Codex and OpenCode",
+      "source": "Hacker News",
+      "tweet": "Running parallel coding agents is a supervision problem, not an intelligence one. A tmux-based TUI that lets you review diffs and comment back into live sessions treats agents as reviewable artifacts. That framing is correct.",
+      "tweet_id": "2082808792811712712",
+      "validation": {
+        "quality_score": 7.8,
+        "substance": 8.0,
+        "human": 7.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": true
+      },
+      "posted_at": "2026-07-30T12:41:27.773622+00:00"
     }
   ],
-  "last_updated": "2026-07-29T18:26:02.364187+00:00"
+  "last_updated": "2026-07-30T12:41:27.773638+00:00"
 }
