@@ -791,7 +791,23 @@
         "used_rewrite": true
       },
       "posted_at": "2026-07-30T12:41:27.773622+00:00"
+    },
+    {
+      "url": "https://brandur.org/fragments/pgtestdb",
+      "title": "Pgtestdb's template cloning approach to testing is fast",
+      "source": "Hacker News",
+      "tweet": "pgtestdb clone mean: 98ms. Schema plus migrate mean: 99ms. Nearly identical. The wall-time gap comes from schema pooling and reuse, not clone speed. pgtestdb does not pool yet.",
+      "tweet_id": "2083589766143205752",
+      "validation": {
+        "quality_score": 7.3,
+        "substance": 8.0,
+        "human": 8.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": true
+      },
+      "posted_at": "2026-08-01T16:24:46.267199+00:00"
     }
   ],
-  "last_updated": "2026-07-30T12:41:27.773638+00:00"
+  "last_updated": "2026-08-01T16:24:46.267219+00:00"
 }
