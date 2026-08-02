@@ -823,7 +823,23 @@
         "used_rewrite": true
       },
       "posted_at": "2026-08-02T03:10:55.077817+00:00"
+    },
+    {
+      "url": "https://costperprompt.com",
+      "title": "Show HN: CostPerPrompt – Live AI API pricing and real-workload cost calculators",
+      "source": "Hacker News",
+      "tweet": "Output tokens cost 3 to 5x more than input. Prompt caching can cut repeated input costs by 90%. Batch APIs cut another 50%. Most production cost estimates ignore both and then wonder why the bill is wrong.",
+      "tweet_id": "2083810014586937618",
+      "validation": {
+        "quality_score": 8.0,
+        "substance": 8.0,
+        "human": 7.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-08-02T06:59:57.580833+00:00"
     }
   ],
-  "last_updated": "2026-08-02T03:10:55.077837+00:00"
+  "last_updated": "2026-08-02T06:59:57.580848+00:00"
 }
