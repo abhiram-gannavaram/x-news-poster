@@ -871,7 +871,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-08-02T14:34:52.127334+00:00"
+    },
+    {
+      "url": "https://github.com/paoloanzn/microcodex",
+      "title": "Show HN: MicroCodex Coding Agent – OpenAI/codex reimplemented in C++ <1MB binary",
+      "source": "Hacker News",
+      "tweet": "Reimplementing a Node.js coding agent in C++ to get under 1MB is a real tradeoff. You gain portability and fast startup. You give up the ecosystem that made the original easy to extend. 44 commits to find out where that line sits.",
+      "tweet_id": "2084042159247000058",
+      "validation": {
+        "quality_score": 7.8,
+        "substance": 7.0,
+        "human": 8.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-08-02T22:22:25.189792+00:00"
     }
   ],
-  "last_updated": "2026-08-02T14:34:52.127349+00:00"
+  "last_updated": "2026-08-02T22:22:25.189808+00:00"
 }
