@@ -855,7 +855,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-08-02T12:29:10.808331+00:00"
+    },
+    {
+      "url": "https://fstar-lang.org",
+      "title": "F*: A general-purpose proof-oriented programming language",
+      "source": "Hacker News",
+      "tweet": "F* crypto primitives are already in Firefox, the Linux kernel, and WireGuard. Proof-oriented languages sound academic until the verified C is running in production at that scale.",
+      "tweet_id": "2083924496084299893",
+      "validation": {
+        "quality_score": 7.5,
+        "substance": 7.0,
+        "human": 7.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-08-02T14:34:52.127334+00:00"
     }
   ],
-  "last_updated": "2026-08-02T12:29:10.808348+00:00"
+  "last_updated": "2026-08-02T14:34:52.127349+00:00"
 }
