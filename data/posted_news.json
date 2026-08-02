@@ -807,7 +807,23 @@
         "used_rewrite": true
       },
       "posted_at": "2026-08-01T16:24:46.267199+00:00"
+    },
+    {
+      "url": "https://github.com/ats4321/walsh",
+      "title": "Walsh: Multi-agent research pipeline with risk manager that can veto trades",
+      "source": "Hacker News",
+      "tweet": "Walsh pipeline: 76.2% win rate, +75.52% return vs +119.75% buy-and-hold. The risk gate cut losers and winners equally. Conservative veto logic is asymmetric in a bull market.",
+      "tweet_id": "2083752374259105840",
+      "validation": {
+        "quality_score": 7.7,
+        "substance": 8.0,
+        "human": 7.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": true
+      },
+      "posted_at": "2026-08-02T03:10:55.077817+00:00"
     }
   ],
-  "last_updated": "2026-08-01T16:24:46.267219+00:00"
+  "last_updated": "2026-08-02T03:10:55.077837+00:00"
 }
