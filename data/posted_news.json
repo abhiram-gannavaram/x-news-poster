@@ -839,7 +839,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-08-02T06:59:57.580833+00:00"
+    },
+    {
+      "url": "https://arxiv.org/abs/2607.20349",
+      "title": "Generative AI floods and dilutes the market for books",
+      "source": "Hacker News",
+      "tweet": "Catalog grew 19x. Revenue grew 9x. Revenue per book fell. That's what AI supply flooding looks like in practice. Engineers building content tools should treat this as a baseline, not an edge case.",
+      "tweet_id": "2083892865583939827",
+      "validation": {
+        "quality_score": 7.5,
+        "substance": 7.0,
+        "human": 6.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-08-02T12:29:10.808331+00:00"
     }
   ],
-  "last_updated": "2026-08-02T06:59:57.580848+00:00"
+  "last_updated": "2026-08-02T12:29:10.808348+00:00"
 }
