@@ -903,7 +903,23 @@
         "used_rewrite": true
       },
       "posted_at": "2026-08-03T05:18:42.651429+00:00"
+    },
+    {
+      "url": "https://octanejs.dev",
+      "title": "Octane – React's programming model, compiled",
+      "source": "Hacker News",
+      "tweet": "Octane infers your useEffect arrays and lets you put hooks behind conditionals. The tradeoff is a new .tsrx extension and a compiler you have to trust. That is the real cost.",
+      "tweet_id": "2084206674399666214",
+      "validation": {
+        "quality_score": 7.5,
+        "substance": 7.0,
+        "human": 8.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": true
+      },
+      "posted_at": "2026-08-03T09:16:08.828209+00:00"
     }
   ],
-  "last_updated": "2026-08-03T05:18:42.651444+00:00"
+  "last_updated": "2026-08-03T09:16:08.828224+00:00"
 }
