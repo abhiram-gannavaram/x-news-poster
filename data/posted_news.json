@@ -887,7 +887,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-08-02T22:22:25.189792+00:00"
+    },
+    {
+      "url": "https://arxiv.org/abs/2607.28271",
+      "title": "AI migrated legacy COBOL programs to Java, bugs included",
+      "source": "Hacker News",
+      "tweet": "AI migrating COBOL to Java copies the bugs too. The Locksmith Loop runs both versions side by side, uses the old code as oracle, and iterates until behavior matches. That is the right pattern.",
+      "tweet_id": "2084146922281980178",
+      "validation": {
+        "quality_score": 7.7,
+        "substance": 8.0,
+        "human": 7.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": true
+      },
+      "posted_at": "2026-08-03T05:18:42.651429+00:00"
     }
   ],
-  "last_updated": "2026-08-02T22:22:25.189808+00:00"
+  "last_updated": "2026-08-03T05:18:42.651444+00:00"
 }
