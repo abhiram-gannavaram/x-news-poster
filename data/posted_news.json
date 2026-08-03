@@ -919,7 +919,23 @@
         "used_rewrite": true
       },
       "posted_at": "2026-08-03T09:16:08.828209+00:00"
+    },
+    {
+      "url": "https://github.com/garagehq/nightcrawler",
+      "title": "Show HN: Nightcrawler – A local AI pentesting agent running on a smartphone",
+      "source": "Hacker News",
+      "tweet": "A 1.2B parameter model running locally on a phone can now do host discovery, service mapping, and write a pentest report. No cloud. The question stops being about model size and starts being about which tasks actually need scale.",
+      "tweet_id": "2084265586695999602",
+      "validation": {
+        "quality_score": 7.7,
+        "substance": 7.0,
+        "human": 7.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-08-03T13:10:14.505088+00:00"
     }
   ],
-  "last_updated": "2026-08-03T09:16:08.828224+00:00"
+  "last_updated": "2026-08-03T13:10:14.505103+00:00"
 }
