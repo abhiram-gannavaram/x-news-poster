@@ -935,7 +935,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-08-03T13:10:14.505088+00:00"
+    },
+    {
+      "url": "https://epoch.ai/MirrorCode",
+      "title": "What's the largest software project AI can complete on its own?",
+      "source": "Hacker News",
+      "tweet": "Epoch AI built MirrorCode: AI reimplements full programs with no source code or internet. The largest task cost $2,600 and ran 19 days, suggesting cost and time may matter as much as raw capability.",
+      "tweet_id": "2084321815560638688",
+      "validation": {
+        "quality_score": 7.3,
+        "substance": 7.0,
+        "human": 6.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": true
+      },
+      "posted_at": "2026-08-03T16:53:40.453255+00:00"
     }
   ],
-  "last_updated": "2026-08-03T13:10:14.505103+00:00"
+  "last_updated": "2026-08-03T16:53:40.453276+00:00"
 }
