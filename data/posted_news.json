@@ -951,7 +951,23 @@
         "used_rewrite": true
       },
       "posted_at": "2026-08-03T16:53:40.453255+00:00"
+    },
+    {
+      "url": "https://github.com/tikalk/adlc-team-skills",
+      "title": "Agent skills that bring team coding standards to Claude Code and Codex",
+      "source": "Hacker News",
+      "tweet": "The bottleneck with AI coding agents isn't individual output. It's that every developer's agent runs with different assumptions. Version-controlling your team's rules and injecting them at session start is the right instinct.",
+      "tweet_id": "2084681015025353157",
+      "validation": {
+        "quality_score": 7.3,
+        "substance": 7.0,
+        "human": 7.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-08-04T16:41:00.372233+00:00"
     }
   ],
-  "last_updated": "2026-08-03T16:53:40.453276+00:00"
+  "last_updated": "2026-08-04T16:41:00.372253+00:00"
 }
