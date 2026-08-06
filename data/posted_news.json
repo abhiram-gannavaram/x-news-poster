@@ -967,7 +967,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-08-04T16:41:00.372233+00:00"
+    },
+    {
+      "url": "https://buttondown.com/blog/what-i-love-about-django",
+      "title": "What I love about Django",
+      "source": "Hacker News",
+      "tweet": "A Django middleware stamping every response with the deployed git SHA makes stale browser tabs stop being a mystery. Cross-cutting concerns belong in one place.",
+      "tweet_id": "2085315822453395857",
+      "validation": {
+        "quality_score": 8.3,
+        "substance": 8.0,
+        "human": 8.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": true
+      },
+      "posted_at": "2026-08-06T10:43:30.176799+00:00"
     }
   ],
-  "last_updated": "2026-08-04T16:41:00.372253+00:00"
+  "last_updated": "2026-08-06T10:43:30.176818+00:00"
 }
