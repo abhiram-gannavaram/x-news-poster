@@ -210,7 +210,6 @@ def fetch_article_text(url: str) -> str:
     current = url
     try:
         session = requests.Session()
-        session.max_redirects = 0
         for _hop in range(5):
             if not is_safe_public_url(current):
                 logger.warning("Blocked redirect target: %s", current)
