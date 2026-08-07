@@ -999,7 +999,23 @@
         "used_rewrite": true
       },
       "posted_at": "2026-08-07T09:03:49.054598+00:00"
+    },
+    {
+      "url": "https://app.dealroom.co/news/feed/oracle-bans-ai-generated-code-from-openjdk-despite-ellison-s-claim-oracle-isn-t-writing-its-own-code",
+      "title": "Oracle bans AI-generated code from OpenJDK",
+      "source": "Hacker News",
+      "tweet": "Oracle bans AI-generated code from OpenJDK contributions citing IP risk. Larry Ellison says AI writes Oracle's own code. Those two positions cannot both be comfortable at the same time.",
+      "tweet_id": "2085803717828178336",
+      "validation": {
+        "quality_score": 8.7,
+        "substance": 8.0,
+        "human": 9.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-08-07T19:02:13.484000+00:00"
     }
   ],
-  "last_updated": "2026-08-07T09:03:49.054614+00:00"
+  "last_updated": "2026-08-07T19:02:13.484016+00:00"
 }
