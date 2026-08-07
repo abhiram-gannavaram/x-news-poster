@@ -983,7 +983,23 @@
         "used_rewrite": true
       },
       "posted_at": "2026-08-06T10:43:30.176799+00:00"
+    },
+    {
+      "url": "https://mccormick.cx/news/entries/why-i-won-t-read-llm-authored-fiction",
+      "title": "I won't read LLM authored fiction",
+      "source": "Hacker News",
+      "tweet": "McCormick argues LLMs produce statistically average writing, which is the wrong property for fiction, where the outlier thought is the whole point.",
+      "tweet_id": "2085653123771572607",
+      "validation": {
+        "quality_score": 7.5,
+        "substance": 7.0,
+        "human": 7.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": true
+      },
+      "posted_at": "2026-08-07T09:03:49.054598+00:00"
     }
   ],
-  "last_updated": "2026-08-06T10:43:30.176818+00:00"
+  "last_updated": "2026-08-07T09:03:49.054614+00:00"
 }
