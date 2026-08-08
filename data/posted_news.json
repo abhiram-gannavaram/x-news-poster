@@ -1079,7 +1079,23 @@
         "used_rewrite": true
       },
       "posted_at": "2026-08-08T12:56:29.036326+00:00"
+    },
+    {
+      "url": "https://techcrunch.com/2026/08/08/x-replaces-misaligned-revenue-sharing-program-with-original-content-rewards",
+      "title": "X replaces ‘misaligned’ revenue sharing program with Original Content Rewards",
+      "source": "TechCrunch",
+      "tweet": "X is replacing engagement-based creator payouts with an originality score. The hard part isn't the policy. It's that 'meaningful transformation' is adversarially gameable at scale the moment you publish the detection signal.",
+      "tweet_id": "2086129863023280227",
+      "validation": {
+        "quality_score": 7.5,
+        "substance": 8.0,
+        "human": 7.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-08-08T16:38:12.562122+00:00"
     }
   ],
-  "last_updated": "2026-08-08T12:56:29.036343+00:00"
+  "last_updated": "2026-08-08T16:38:12.562139+00:00"
 }
