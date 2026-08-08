@@ -1015,7 +1015,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-08-07T19:02:13.484000+00:00"
+    },
+    {
+      "url": "https://techcrunch.com/2026/08/07/after-rippling-blew-millions-on-ai-in-months-it-built-an-employee-roi-tool",
+      "title": "After Rippling blew millions on AI in months, it built an employee ROI tool",
+      "source": "TechCrunch",
+      "tweet": "One Rippling engineer spent $50k/month on AI tokens. 10-15% of staff drove 60% of spend. At that rate, tokens would hit ~90% of their R&D comp budget within a year. Model routing is now an infrastructure problem.",
+      "tweet_id": "2085907033430384843",
+      "validation": {
+        "quality_score": 7.8,
+        "substance": 7.0,
+        "human": 7.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": true
+      },
+      "posted_at": "2026-08-08T01:52:45.846504+00:00"
     }
   ],
-  "last_updated": "2026-08-07T19:02:13.484016+00:00"
+  "last_updated": "2026-08-08T01:52:45.846535+00:00"
 }
