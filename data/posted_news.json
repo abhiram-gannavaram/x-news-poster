@@ -1031,7 +1031,23 @@
         "used_rewrite": true
       },
       "posted_at": "2026-08-08T01:52:45.846504+00:00"
+    },
+    {
+      "url": "https://techcrunch.com/2026/08/07/openai-says-it-slowed-astra-model-development-over-security-concerns",
+      "title": "OpenAI says it slowed Astra model development over security concerns",
+      "source": "TechCrunch",
+      "tweet": "OpenAI suspended some Astra work after evaluations couldn't rule out it hitting their critical cyberattack threshold. That published capability gate gives engineers something concrete to design against.",
+      "tweet_id": "2085954620275204444",
+      "validation": {
+        "quality_score": 7.2,
+        "substance": 7.0,
+        "human": 6.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": true
+      },
+      "posted_at": "2026-08-08T05:01:51.466681+00:00"
     }
   ],
-  "last_updated": "2026-08-08T01:52:45.846535+00:00"
+  "last_updated": "2026-08-08T05:01:51.466700+00:00"
 }
