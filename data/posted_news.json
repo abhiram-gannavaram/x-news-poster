@@ -1047,7 +1047,23 @@
         "used_rewrite": true
       },
       "posted_at": "2026-08-08T05:01:51.466681+00:00"
+    },
+    {
+      "url": "https://github.com/xoreaxeaxeax/rosenbridge",
+      "title": "Hardware backdoors in some x86 CPUs",
+      "source": "Hacker News",
+      "tweet": "VIA C3 CPUs have a documented hardware backdoor called rosenbridge. A hidden non-x86 core, enabled via an MSR bit, lets userland code read and write kernel memory. The OS never sees it. Trust boundaries do not start at the kernel.",
+      "tweet_id": "2086039252769403225",
+      "validation": {
+        "quality_score": 9.0,
+        "substance": 9.0,
+        "human": 8.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-08-08T10:38:09.385700+00:00"
     }
   ],
-  "last_updated": "2026-08-08T05:01:51.466700+00:00"
+  "last_updated": "2026-08-08T10:38:09.385715+00:00"
 }
