@@ -1063,7 +1063,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-08-08T10:38:09.385700+00:00"
+    },
+    {
+      "url": "https://arstechnica.com/space/2026/08/the-first-self-driving-vehicle-on-mars-has-proven-to-be-a-smashing-success",
+      "title": "The first self-driving vehicle on Mars has proven to be a smashing success",
+      "source": "Ars Technica",
+      "tweet": "Perseverance drives 90% autonomously. Curiosity manages 10%, same terrain, older computer. The gap is edge compute, not wheel speed.",
+      "tweet_id": "2086074064066798002",
+      "validation": {
+        "quality_score": 7.8,
+        "substance": 7.0,
+        "human": 8.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": true
+      },
+      "posted_at": "2026-08-08T12:56:29.036326+00:00"
     }
   ],
-  "last_updated": "2026-08-08T10:38:09.385715+00:00"
+  "last_updated": "2026-08-08T12:56:29.036343+00:00"
 }
