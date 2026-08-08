@@ -1111,7 +1111,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-08-08T18:42:48.023613+00:00"
+    },
+    {
+      "url": "https://techcrunch.com/2026/08/08/planned-amazon-data-center-could-become-the-biggest-climate-polluter-in-the-u-s",
+      "title": "Planned Amazon data center could become the biggest climate polluter in the U.S.",
+      "source": "TechCrunch",
+      "tweet": "Amazon's carbon emissions rose 16% last year, blamed largely on AI. Their response is a Texas data center with a 33M-ton CO2 permit. The 2040 Climate Pledge is still on the website.",
+      "tweet_id": "2086219318119850027",
+      "validation": {
+        "quality_score": 7.5,
+        "substance": 6.0,
+        "human": 7.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-08-08T22:33:40.308209+00:00"
     }
   ],
-  "last_updated": "2026-08-08T18:42:48.023631+00:00"
+  "last_updated": "2026-08-08T22:33:40.308224+00:00"
 }
