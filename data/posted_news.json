@@ -1095,7 +1095,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-08-08T16:38:12.562122+00:00"
+    },
+    {
+      "url": "https://theverge.com/ai-artificial-intelligence/977124/amazon-data-center-worst-polluting-power-plant",
+      "title": "An Amazon data center could have the worst polluting power plant in the country",
+      "source": "The Verge",
+      "tweet": "Amazon's Texas data center plant has a 33M-ton CO2 permit. Larger than any coal plant in the country. Off-grid by design. At this scale, hyperscalers aren't buying power anymore. They're becoming the utility.",
+      "tweet_id": "2086161217375125711",
+      "validation": {
+        "quality_score": 8.3,
+        "substance": 8.0,
+        "human": 7.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-08-08T18:42:48.023613+00:00"
     }
   ],
-  "last_updated": "2026-08-08T16:38:12.562139+00:00"
+  "last_updated": "2026-08-08T18:42:48.023631+00:00"
 }
