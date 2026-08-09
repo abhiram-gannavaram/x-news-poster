@@ -1143,7 +1143,23 @@
         "used_rewrite": true
       },
       "posted_at": "2026-08-09T01:59:57.638107+00:00"
+    },
+    {
+      "url": "https://blog.mastykarz.nl/coding-is-solved-misses-the-point",
+      "title": "\"Coding is solved\" misses the point",
+      "source": "Hacker News",
+      "tweet": "AI handles implementation. The bottleneck is everything above it: who owns this service, what patterns this team follows, what broke last time. That context lives in people's heads.",
+      "tweet_id": "2086347480841556162",
+      "validation": {
+        "quality_score": 7.8,
+        "substance": 8.0,
+        "human": 8.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": true
+      },
+      "posted_at": "2026-08-09T07:02:56.697925+00:00"
     }
   ],
-  "last_updated": "2026-08-09T01:59:57.638127+00:00"
+  "last_updated": "2026-08-09T07:02:56.697938+00:00"
 }
