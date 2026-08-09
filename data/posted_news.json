@@ -1159,7 +1159,23 @@
         "used_rewrite": true
       },
       "posted_at": "2026-08-09T07:02:56.697925+00:00"
+    },
+    {
+      "url": "https://404media.co/software-giant-sap-stops-most-travel-and-hiring-because-of-ais-soaring-cost",
+      "title": "Software Giant SAP Stops Most Travel and Hiring Because of AI's Soaring Cost",
+      "source": "Hacker News",
+      "tweet": "SAP froze most hiring and travel because AI infrastructure costs got too large. Exceptions only for AI work. The rollout and the budget crisis are happening at the same time. Model the total deployment cost before you pitch company-wide.",
+      "tweet_id": "2086401930641740093",
+      "validation": {
+        "quality_score": 7.7,
+        "substance": 7.0,
+        "human": 8.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-08-09T10:39:18.532883+00:00"
     }
   ],
-  "last_updated": "2026-08-09T07:02:56.697938+00:00"
+  "last_updated": "2026-08-09T10:39:18.532900+00:00"
 }
