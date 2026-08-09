@@ -1207,7 +1207,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-08-09T16:40:24.015069+00:00"
+    },
+    {
+      "url": "https://unyolo.io",
+      "title": "UnYOLO: Agent credential broker and policy engine for your GitHub account",
+      "source": "Hacker News",
+      "tweet": "Giving an AI agent a GitHub token means it holds that token for everything. The safer pattern: broker-client secret, deny-first decision order, single-use expiring grants for elevated ops. The agent gets just enough, then it expires.",
+      "tweet_id": "2086524723283046561",
+      "validation": {
+        "quality_score": 7.2,
+        "substance": 7.0,
+        "human": 6.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-08-09T18:47:14.579356+00:00"
     }
   ],
-  "last_updated": "2026-08-09T16:40:24.015080+00:00"
+  "last_updated": "2026-08-09T18:47:14.579376+00:00"
 }
