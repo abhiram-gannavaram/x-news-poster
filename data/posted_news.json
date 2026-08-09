@@ -1127,7 +1127,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-08-08T22:33:40.308209+00:00"
+    },
+    {
+      "url": "https://os8088.com",
+      "title": "Os8088: A powerful Mac-like OS for the IBM XT, 286, 386",
+      "source": "Hacker News",
+      "tweet": "Someone built a pre-emptive multitasking GUI OS in 52KB of hand-written 8086 assembly. No C, no runtime, boots from a 512-byte sector. Tight constraints force clarity that abstraction layers let you avoid.",
+      "tweet_id": "2086271232417366166",
+      "validation": {
+        "quality_score": 8.0,
+        "substance": 7.0,
+        "human": 7.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": true
+      },
+      "posted_at": "2026-08-09T01:59:57.638107+00:00"
     }
   ],
-  "last_updated": "2026-08-08T22:33:40.308224+00:00"
+  "last_updated": "2026-08-09T01:59:57.638127+00:00"
 }
