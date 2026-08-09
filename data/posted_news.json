@@ -1175,7 +1175,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-08-09T10:39:18.532883+00:00"
+    },
+    {
+      "url": "https://oskrim.github.io/hardware/2026/08/09/remarkable-over-ssh.html",
+      "title": "Reviving a four year old reMarkable 2",
+      "source": "Hacker News",
+      "tweet": "Four-year-old reMarkable had a drifted clock that silently broke TLS, auth, and cloud sync. Fixed via SSH. The real bug: swupdate fired before DNS was ready and never retried, so I restarted it manually.",
+      "tweet_id": "2086437070495678494",
+      "validation": {
+        "quality_score": 7.7,
+        "substance": 8.0,
+        "human": 7.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": true
+      },
+      "posted_at": "2026-08-09T12:58:56.533834+00:00"
     }
   ],
-  "last_updated": "2026-08-09T10:39:18.532900+00:00"
+  "last_updated": "2026-08-09T12:58:56.533850+00:00"
 }
