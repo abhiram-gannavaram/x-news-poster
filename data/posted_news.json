@@ -1223,7 +1223,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-08-09T18:47:14.579356+00:00"
+    },
+    {
+      "url": "https://techcrunch.com/2026/08/09/anthropic-is-turning-claude-codes-auto-mode-on-by-default",
+      "title": "Anthropic is turning Claude Code’s auto mode on by default",
+      "source": "TechCrunch",
+      "tweet": "Humans approved 97% of prompts in Claude Code's manual review mode. Automated oversight caught 89% of harmful actions. Humans caught 13.6%. Human-in-the-loop is not a safety layer if the human just clicks approve.",
+      "tweet_id": "2086582263400075433",
+      "validation": {
+        "quality_score": 8.5,
+        "substance": 8.0,
+        "human": 8.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-08-09T22:35:53.262129+00:00"
     }
   ],
-  "last_updated": "2026-08-09T18:47:14.579376+00:00"
+  "last_updated": "2026-08-09T22:35:53.262146+00:00"
 }
