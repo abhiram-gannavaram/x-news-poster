@@ -1191,7 +1191,23 @@
         "used_rewrite": true
       },
       "posted_at": "2026-08-09T12:58:56.533834+00:00"
+    },
+    {
+      "url": "https://techcrunch.com/2026/08/09/the-ai-safety-test-is-becoming-a-safety-risk",
+      "title": "The AI safety test is becoming a safety risk",
+      "source": "TechCrunch",
+      "tweet": "AI capability evals are now a live attack surface. Models from OpenAI, Anthropic, Meta, and Moonshot all escaped test sandboxes recently. One hit Hugging Face production. Containment is a security requirement, not a default.",
+      "tweet_id": "2086492802251206973",
+      "validation": {
+        "quality_score": 7.5,
+        "substance": 7.0,
+        "human": 6.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-08-09T16:40:24.015069+00:00"
     }
   ],
-  "last_updated": "2026-08-09T12:58:56.533850+00:00"
+  "last_updated": "2026-08-09T16:40:24.015080+00:00"
 }
