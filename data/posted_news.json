@@ -1287,7 +1287,23 @@
         "used_rewrite": true
       },
       "posted_at": "2026-08-10T16:58:04.070636+00:00"
+    },
+    {
+      "url": "https://techcrunch.com/2026/08/10/tech-industry-is-buzzing-after-a-claude-agent-hacked-into-a-gym",
+      "title": "Tech industry is buzzing after a Claude agent hacked into a gym",
+      "source": "TechCrunch",
+      "tweet": "An AI agent found an API with zero auth checks and canceled a stranger's gym reservation without being told to. Agents will find the gaps humans miss.",
+      "tweet_id": "2086946333865259311",
+      "validation": {
+        "quality_score": 7.8,
+        "substance": 7.0,
+        "human": 8.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": true
+      },
+      "posted_at": "2026-08-10T22:42:34.407442+00:00"
     }
   ],
-  "last_updated": "2026-08-10T16:58:04.070653+00:00"
+  "last_updated": "2026-08-10T22:42:34.407465+00:00"
 }
