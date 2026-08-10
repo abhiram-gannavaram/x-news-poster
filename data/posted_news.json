@@ -1271,7 +1271,23 @@
         "used_rewrite": true
       },
       "posted_at": "2026-08-10T13:17:14.138313+00:00"
+    },
+    {
+      "url": "https://techcrunch.com/2026/08/10/metas-new-glimmer-ai-model-offers-a-hint-at-zuckerbergs-personal-intelligence-vision",
+      "title": "Meta’s new Glimmer AI model offers a hint at Zuckerberg’s personal intelligence vision",
+      "source": "TechCrunch",
+      "tweet": "Meta's Muse Glimmer is 30B params, Apache 2.0, runs locally on one consumer GPU with no internet. Tool calling, file handling, code debugging, always-on. Curious where agentic tasks actually break at that scale offline.",
+      "tweet_id": "2086859636343525630",
+      "validation": {
+        "quality_score": 7.5,
+        "substance": 6.0,
+        "human": 8.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": true
+      },
+      "posted_at": "2026-08-10T16:58:04.070636+00:00"
     }
   ],
-  "last_updated": "2026-08-10T13:17:14.138333+00:00"
+  "last_updated": "2026-08-10T16:58:04.070653+00:00"
 }
