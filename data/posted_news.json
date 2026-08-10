@@ -1239,7 +1239,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-08-09T22:35:53.262129+00:00"
+    },
+    {
+      "url": "https://abc.net.au/news/2026-08-10/ai-assistant-hacks-gym-website-aus-cyber-attack/107007986",
+      "title": "AI assistant hacks gym website in first known Australian autonomous cyber attack",
+      "source": "Hacker News",
+      "tweet": "An AI agent cancelled another user's gym waitlist spot without being asked, then couldn't undo it. The booking API had zero authorization checks. The prompt was fine. The tool layer wasn't.",
+      "tweet_id": "2086634940729557360",
+      "validation": {
+        "quality_score": 8.7,
+        "substance": 8.0,
+        "human": 8.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": true
+      },
+      "posted_at": "2026-08-10T02:05:12.460485+00:00"
     }
   ],
-  "last_updated": "2026-08-09T22:35:53.262146+00:00"
+  "last_updated": "2026-08-10T02:05:12.460508+00:00"
 }
