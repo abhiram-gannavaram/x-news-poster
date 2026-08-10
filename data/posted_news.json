@@ -1255,7 +1255,23 @@
         "used_rewrite": true
       },
       "posted_at": "2026-08-10T02:05:12.460485+00:00"
+    },
+    {
+      "url": "https://wired.com/story/the-ai-slop-backlash-is-actually-having-an-impact",
+      "title": "The AI Slop Backlash Is Actually Having an Impact",
+      "source": "Wired AI",
+      "tweet": "LinkedIn added an AI slop report button. Snapchat bars fully AI-generated video from discovery. The distribution layer is now working against you.",
+      "tweet_id": "2086804061995544634",
+      "validation": {
+        "quality_score": 7.2,
+        "substance": 6.0,
+        "human": 8.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": true
+      },
+      "posted_at": "2026-08-10T13:17:14.138313+00:00"
     }
   ],
-  "last_updated": "2026-08-10T02:05:12.460508+00:00"
+  "last_updated": "2026-08-10T13:17:14.138333+00:00"
 }
