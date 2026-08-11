@@ -1335,7 +1335,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-08-11T05:14:10.065191+00:00"
+    },
+    {
+      "url": "https://github.com/activeing123/mcptoon",
+      "title": "Show HN: Mcptoon – Token-efficient MCP CLI client",
+      "source": "Hacker News",
+      "tweet": "Tool discovery for 96 MCP tools costs ~2,000 tokens in JSON and ~60 in a compressed format. That overhead disappears before your agent does anything. The real question is whether the client should own this problem, not the server.",
+      "tweet_id": "2087102357284729235",
+      "validation": {
+        "quality_score": 7.8,
+        "substance": 8.0,
+        "human": 8.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-08-11T09:02:33.246695+00:00"
     }
   ],
-  "last_updated": "2026-08-11T05:14:10.065211+00:00"
+  "last_updated": "2026-08-11T09:02:33.246708+00:00"
 }
