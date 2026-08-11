@@ -1319,7 +1319,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-08-11T02:00:07.713483+00:00"
+    },
+    {
+      "url": "https://techcrunch.com/2026/08/10/as-ai-led-attacks-multiply-openai-launches-a-new-cyber-model",
+      "title": "As AI-led attacks multiply, OpenAI launches a new cyber model",
+      "source": "TechCrunch",
+      "tweet": "OpenAI gating its best cyber model behind a tiered access program sounds responsible. It also means the offense/defense gap is now partly controlled by who gets approved. That approval process matters more than the model itself.",
+      "tweet_id": "2087044881935900964",
+      "validation": {
+        "quality_score": 7.3,
+        "substance": 7.0,
+        "human": 7.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-08-11T05:14:10.065191+00:00"
     }
   ],
-  "last_updated": "2026-08-11T02:00:07.713498+00:00"
+  "last_updated": "2026-08-11T05:14:10.065211+00:00"
 }
