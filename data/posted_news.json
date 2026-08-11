@@ -1367,7 +1367,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-08-11T13:14:01.580180+00:00"
+    },
+    {
+      "url": "https://wired.com/story/a-zoom-screen-sharing-bug-let-anyone-take-over-other-devices-on-a-call",
+      "title": "A Zoom Screen-Sharing Bug Let Anyone Take Over Other Devices on a Call",
+      "source": "Wired AI",
+      "tweet": "Fewer than 20 prompts on a public model found a Zoom zero-day that let any call participant take over your device. The attack surface your team hasn't audited is now someone else's afternoon project.",
+      "tweet_id": "2087222802625835475",
+      "validation": {
+        "quality_score": 8.0,
+        "substance": 7.0,
+        "human": 7.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-08-11T17:01:09.651228+00:00"
     }
   ],
-  "last_updated": "2026-08-11T13:14:01.580196+00:00"
+  "last_updated": "2026-08-11T17:01:09.651247+00:00"
 }
