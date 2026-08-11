@@ -1303,7 +1303,23 @@
         "used_rewrite": true
       },
       "posted_at": "2026-08-10T22:42:34.407442+00:00"
+    },
+    {
+      "url": "https://cactuscompute.com/needle",
+      "title": "Show HN: Needle2: 14MB agentic LLM for phones, wearables, smart home and robots",
+      "source": "Hacker News",
+      "tweet": "45M params, 14MB, 28MB RAM peak, 500 tokens/sec on a Raspberry Pi 5. At some point extreme quantization on-device beats a cloud call. The question is where that floor actually sits for your task.",
+      "tweet_id": "2086996050368409693",
+      "validation": {
+        "quality_score": 8.7,
+        "substance": 8.0,
+        "human": 9.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-08-11T02:00:07.713483+00:00"
     }
   ],
-  "last_updated": "2026-08-10T22:42:34.407465+00:00"
+  "last_updated": "2026-08-11T02:00:07.713498+00:00"
 }
