@@ -1383,7 +1383,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-08-11T17:01:09.651228+00:00"
+    },
+    {
+      "url": "https://techcrunch.com/2026/08/11/googles-gemini-app-surges-to-one-billion-users",
+      "title": "Google’s Gemini app surges to 1 billion users",
+      "source": "TechCrunch",
+      "tweet": "63% of Gemini's 1B monthly users use voice. 150M images generated per day. The multimodal surface isn't a feature anymore. It's where the usage actually is.",
+      "tweet_id": "2087361641935675891",
+      "validation": {
+        "quality_score": 7.2,
+        "substance": 6.0,
+        "human": 7.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-08-12T02:12:51.520583+00:00"
     }
   ],
-  "last_updated": "2026-08-11T17:01:09.651247+00:00"
+  "last_updated": "2026-08-12T02:12:51.520597+00:00"
 }
