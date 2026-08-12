@@ -1463,7 +1463,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-08-12T19:06:21.180605+00:00"
+    },
+    {
+      "url": "https://techcrunch.com/2026/08/12/as-ai-safety-concerns-mount-three-pioneers-make-the-case-for-staying-open",
+      "title": "As AI safety concerns mount, three pioneers make the case for staying open",
+      "source": "TechCrunch",
+      "tweet": "Hinton at Ai4: open-weight models are not open source. Releasing weights kills the training cost barrier. Fine-tuning for attacks is now cheap. Build your threat model accordingly.",
+      "tweet_id": "2087671836846805308",
+      "validation": {
+        "quality_score": 7.3,
+        "substance": 6.0,
+        "human": 7.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": true
+      },
+      "posted_at": "2026-08-12T22:45:27.804634+00:00"
     }
   ],
-  "last_updated": "2026-08-12T19:06:21.180622+00:00"
+  "last_updated": "2026-08-12T22:45:27.804653+00:00"
 }
