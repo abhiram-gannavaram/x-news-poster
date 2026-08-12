@@ -1415,7 +1415,23 @@
         "used_rewrite": true
       },
       "posted_at": "2026-08-12T07:39:29.876105+00:00"
+    },
+    {
+      "url": "https://wired.com/story/ai-newsrooms-are-breaking-news-now-haha-im-in-danger",
+      "title": "Oh Lord, AI Reporters Are Actually Breaking Big News",
+      "source": "Wired AI",
+      "tweet": "An AI pipeline published a Black Hat story in six minutes for $100/day and beat a staffed newsroom by three hours. The bottleneck was never writing speed. It was the approval gate.",
+      "tweet_id": "2087495163497046351",
+      "validation": {
+        "quality_score": 7.3,
+        "substance": 6.0,
+        "human": 6.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-08-12T11:03:25.558089+00:00"
     }
   ],
-  "last_updated": "2026-08-12T07:39:29.876122+00:00"
+  "last_updated": "2026-08-12T11:03:25.558101+00:00"
 }
