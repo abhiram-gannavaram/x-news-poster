@@ -1399,7 +1399,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-08-12T02:12:51.520583+00:00"
+    },
+    {
+      "url": "https://github.com/sgkdev/bad_garbage",
+      "title": "CVE-2026-53361 AF_Unix GC vs. MSG_PEEK use-after-free container escape",
+      "source": "Hacker News",
+      "tweet": "CVE-2026-53361: third AF-UNIX GC patch in five years. A flag is not a lock. Public container-escape PoC targets RHEL 10 (6.12) and Ubuntu 24.04 HWE (6.17). Patch now.",
+      "tweet_id": "2087443843251650872",
+      "validation": {
+        "quality_score": 7.5,
+        "substance": 7.0,
+        "human": 7.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": true
+      },
+      "posted_at": "2026-08-12T07:39:29.876105+00:00"
     }
   ],
-  "last_updated": "2026-08-12T02:12:51.520597+00:00"
+  "last_updated": "2026-08-12T07:39:29.876122+00:00"
 }
