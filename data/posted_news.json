@@ -1431,7 +1431,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-08-12T11:03:25.558089+00:00"
+    },
+    {
+      "url": "https://knownagents.com/insights",
+      "title": "Someone is running mass vulnerability scans, spoofing AI bots like ClaudeBot",
+      "source": "Hacker News",
+      "tweet": "Someone is spoofing ClaudeBot user agents to run vulnerability scans, per a HN thread. Separately, 98.5% of all tracked bots respect robots.txt. My read: user-agent strings are not identity.",
+      "tweet_id": "2087555231747838387",
+      "validation": {
+        "quality_score": 7.0,
+        "substance": 7.0,
+        "human": 7.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": true
+      },
+      "posted_at": "2026-08-12T15:02:06.952443+00:00"
     }
   ],
-  "last_updated": "2026-08-12T11:03:25.558101+00:00"
+  "last_updated": "2026-08-12T15:02:06.952457+00:00"
 }
