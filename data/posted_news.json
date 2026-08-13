@@ -1495,7 +1495,23 @@
         "used_rewrite": true
       },
       "posted_at": "2026-08-13T02:16:36.310263+00:00"
+    },
+    {
+      "url": "https://techcrunch.com/2026/08/12/some-claude-users-are-mad-that-anthropics-new-watermarks-will-catch-them-cheating-at-their-jobs-classes",
+      "title": "Some Claude users are mad that Anthropic’s new watermarks will catch them using it at their jobs, classes",
+      "source": "TechCrunch",
+      "tweet": "Anthropic watermarks Claude outputs for EU AI Act compliance. Key question: does that watermark survive your post-processing pipeline, or are you silently stripping a compliance signal?",
+      "tweet_id": "2087831002638872871",
+      "validation": {
+        "quality_score": 8.0,
+        "substance": 7.0,
+        "human": 8.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": true
+      },
+      "posted_at": "2026-08-13T09:17:55.861263+00:00"
     }
   ],
-  "last_updated": "2026-08-13T02:16:36.310283+00:00"
+  "last_updated": "2026-08-13T09:17:55.861281+00:00"
 }
