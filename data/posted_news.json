@@ -1511,7 +1511,23 @@
         "used_rewrite": true
       },
       "posted_at": "2026-08-13T09:17:55.861263+00:00"
+    },
+    {
+      "url": "https://404media.co/ai-generated-3d-models-flood-market-but-almost-no-one-is-buying-them",
+      "title": "AI Generated 3D Models Flood Market, but Almost No One Is Buying Them",
+      "source": "Hacker News",
+      "tweet": "1 in 6 models uploaded to CGTrader is AI-generated. AI models earn $1 out of every $90 in revenue. Buyers ranked quality first, and only 4% said AI models work well for 3D printing. Volume was never the bottleneck. Geometry is.",
+      "tweet_id": "2087917624286183501",
+      "validation": {
+        "quality_score": 8.2,
+        "substance": 8.0,
+        "human": 7.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-08-13T15:02:08.060736+00:00"
     }
   ],
-  "last_updated": "2026-08-13T09:17:55.861281+00:00"
+  "last_updated": "2026-08-13T15:02:08.060754+00:00"
 }
