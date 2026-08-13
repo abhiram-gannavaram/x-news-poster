@@ -1479,7 +1479,23 @@
         "used_rewrite": true
       },
       "posted_at": "2026-08-12T22:45:27.804634+00:00"
+    },
+    {
+      "url": "https://arstechnica.com/ai/2026/08/new-font-turns-ordinary-webpages-into-nonsense-for-ai-scrapers",
+      "title": "The web’s newest weapon against AI scrapers is a font",
+      "source": "Ars Technica",
+      "tweet": "ShieldFont puts 'horse' in raw HTML while users see 'potato' via font rendering. Clever poison for scrapers. But render-first scrapers recover the real text, which breaks the whole threat model.",
+      "tweet_id": "2087724972533751963",
+      "validation": {
+        "quality_score": 8.3,
+        "substance": 8.0,
+        "human": 8.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": true
+      },
+      "posted_at": "2026-08-13T02:16:36.310263+00:00"
     }
   ],
-  "last_updated": "2026-08-12T22:45:27.804653+00:00"
+  "last_updated": "2026-08-13T02:16:36.310283+00:00"
 }
