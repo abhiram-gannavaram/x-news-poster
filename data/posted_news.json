@@ -1607,7 +1607,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-08-14T13:14:35.601815+00:00"
+    },
+    {
+      "url": "https://techcrunch.com/2026/08/14/google-will-now-allow-users-to-remove-visible-watermark-from-its-ai-generations",
+      "title": "Google will now allow users to remove visible watermark from its AI generations",
+      "source": "TechCrunch",
+      "tweet": "Google made visible watermarks optional, but SynthID and C2PA metadata stay embedded regardless. Stripping the sparkle does not strip provenance. The open-sourced Credentio library is the part worth reading.",
+      "tweet_id": "2088309341753336055",
+      "validation": {
+        "quality_score": 7.3,
+        "substance": 7.0,
+        "human": 7.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": true
+      },
+      "posted_at": "2026-08-14T16:58:40.827128+00:00"
     }
   ],
-  "last_updated": "2026-08-14T13:14:35.601831+00:00"
+  "last_updated": "2026-08-14T16:58:40.827146+00:00"
 }
