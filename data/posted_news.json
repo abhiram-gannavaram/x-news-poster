@@ -1623,7 +1623,23 @@
         "used_rewrite": true
       },
       "posted_at": "2026-08-14T16:58:40.827128+00:00"
+    },
+    {
+      "url": "https://github.com/lajosdeme/mole",
+      "title": "Show HN: Mole – Deep research agent for your terminal",
+      "source": "Hacker News",
+      "tweet": "Most research agents estimate cost and hope for the best. Mole reserves each model call against a ledger before it runs and discards any claim without a verbatim source quote. Two obvious ideas that almost nobody implements.",
+      "tweet_id": "2088363960340762992",
+      "validation": {
+        "quality_score": 8.2,
+        "substance": 8.0,
+        "human": 8.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": true
+      },
+      "posted_at": "2026-08-14T20:35:42.863959+00:00"
     }
   ],
-  "last_updated": "2026-08-14T16:58:40.827146+00:00"
+  "last_updated": "2026-08-14T20:35:42.863975+00:00"
 }
