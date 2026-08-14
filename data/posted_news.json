@@ -1559,7 +1559,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-08-14T02:12:54.343231+00:00"
+    },
+    {
+      "url": "https://techcrunch.com/2026/08/13/openai-introduces-ultrafast-a-new-mode-that-makes-gpt-5-6-sol-work-at-14x-the-speed",
+      "title": "OpenAI introduces ‘Ultrafast,’ a new mode that makes GPT-5.6 Sol work at 14x the speed",
+      "source": "TechCrunch",
+      "tweet": "750 tokens/sec via Cerebras means inference speed is now an architecture choice, not a model size tradeoff. That changes how you design real-time agentic pipelines. The bottleneck just moved.",
+      "tweet_id": "2088138858428801464",
+      "validation": {
+        "quality_score": 7.3,
+        "substance": 7.0,
+        "human": 6.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-08-14T05:41:14.392754+00:00"
     }
   ],
-  "last_updated": "2026-08-14T02:12:54.343245+00:00"
+  "last_updated": "2026-08-14T05:41:14.392776+00:00"
 }
