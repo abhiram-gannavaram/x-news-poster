@@ -1591,7 +1591,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-08-14T09:12:13.514327+00:00"
+    },
+    {
+      "url": "https://theverge.com/ai-artificial-intelligence/980160/apple-intelligence-china-custom-ai-model-alibaba",
+      "title": "Apple trained its own AI model for China with help from Alibaba",
+      "source": "The Verge",
+      "tweet": "Shipping an LLM in China means co-developing with a domestic partner and clearing government model registration. Apple just went through that process. The compliance layer is not a checkbox. It shapes what you can build and who owns it.",
+      "tweet_id": "2088252948623307202",
+      "validation": {
+        "quality_score": 7.3,
+        "substance": 7.0,
+        "human": 7.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-08-14T13:14:35.601815+00:00"
     }
   ],
-  "last_updated": "2026-08-14T09:12:13.514345+00:00"
+  "last_updated": "2026-08-14T13:14:35.601831+00:00"
 }
