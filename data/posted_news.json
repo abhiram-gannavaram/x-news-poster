@@ -1575,7 +1575,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-08-14T05:41:14.392754+00:00"
+    },
+    {
+      "url": "https://techcrunch.com/2026/08/13/writer-introduces-new-ai-model-and-upgraded-harness-to-contain-token-costs",
+      "title": "Writer introduces new AI model and upgraded harness to contain token costs",
+      "source": "TechCrunch",
+      "tweet": "Writer says harness and orchestration changes drive more of their cost reduction than swapping the model does. If that holds, you are optimizing the wrong layer when you chase benchmark scores instead of your inference infrastructure.",
+      "tweet_id": "2088191954584551517",
+      "validation": {
+        "quality_score": 7.3,
+        "substance": 7.0,
+        "human": 7.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-08-14T09:12:13.514327+00:00"
     }
   ],
-  "last_updated": "2026-08-14T05:41:14.392776+00:00"
+  "last_updated": "2026-08-14T09:12:13.514345+00:00"
 }
