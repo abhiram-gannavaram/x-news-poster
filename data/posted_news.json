@@ -1671,7 +1671,23 @@
         "used_rewrite": true
       },
       "posted_at": "2026-08-15T04:36:19.214152+00:00"
+    },
+    {
+      "url": "https://ampcode.com/notes/thats-not-soc-2-compliant",
+      "title": "\"That's not SoC 2 compliant\"",
+      "source": "Hacker News",
+      "tweet": "A 20-person team got SOC 2 certified pushing directly to main. No PRs. Signed commits, automated CI gates, audit trail linking commits to AI threads. SOC 2 never mentions git. Most teams cargo-culted the PR step.",
+      "tweet_id": "2088516996522467787",
+      "validation": {
+        "quality_score": 8.3,
+        "substance": 8.0,
+        "human": 8.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": true
+      },
+      "posted_at": "2026-08-15T06:43:49.533504+00:00"
     }
   ],
-  "last_updated": "2026-08-15T04:36:19.214172+00:00"
+  "last_updated": "2026-08-15T06:43:49.533520+00:00"
 }
