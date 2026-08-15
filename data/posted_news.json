@@ -1655,7 +1655,23 @@
         "used_rewrite": true
       },
       "posted_at": "2026-08-15T01:26:07.698348+00:00"
+    },
+    {
+      "url": "https://techcrunch.com/2026/08/14/thrives-joshua-kushner-chides-silicon-valley-vcs-over-ai-euphoria",
+      "title": "Thrive’s Joshua Kushner chides Silicon Valley VCs over AI euphoria",
+      "source": "TechCrunch",
+      "tweet": "Thrive Holdings has 35 engineers running AI agents across 70+ companies. 50% of IT tickets resolve themselves. Tax returns 30% faster at 98% accuracy. That last one genuinely surprised me.",
+      "tweet_id": "2088484908620558583",
+      "validation": {
+        "quality_score": 7.0,
+        "substance": 6.0,
+        "human": 7.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": true
+      },
+      "posted_at": "2026-08-15T04:36:19.214152+00:00"
     }
   ],
-  "last_updated": "2026-08-15T01:26:07.698363+00:00"
+  "last_updated": "2026-08-15T04:36:19.214172+00:00"
 }
