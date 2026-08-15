@@ -1687,7 +1687,23 @@
         "used_rewrite": true
       },
       "posted_at": "2026-08-15T06:43:49.533504+00:00"
+    },
+    {
+      "url": "https://wired.com/story/amazon-uses-your-twitch-content-to-train-its-ai-how-to-opt-out",
+      "title": "Amazon Can Use Your Twitch Content to Train Its AI—Unless You Opt Out",
+      "source": "Wired AI",
+      "tweet": "Twitch made AI training opt-out because the head of product said no one would participate if it were opt-in. That quote is the whole story. Every platform with user content faces this exact tradeoff and most will land in the same place.",
+      "tweet_id": "2088573251681489103",
+      "validation": {
+        "quality_score": 7.5,
+        "substance": 7.0,
+        "human": 8.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-08-15T10:27:21.816561+00:00"
     }
   ],
-  "last_updated": "2026-08-15T06:43:49.533520+00:00"
+  "last_updated": "2026-08-15T10:27:21.816577+00:00"
 }
