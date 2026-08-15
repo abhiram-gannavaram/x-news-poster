@@ -1735,7 +1735,23 @@
         "used_rewrite": true
       },
       "posted_at": "2026-08-15T16:29:54.816334+00:00"
+    },
+    {
+      "url": "https://davidepiffer.com/p/ai-isnt-outthinking-mathematicians",
+      "title": "AI Isn't Outthinking Mathematicians. It's Out-Remembering Them",
+      "source": "Hacker News",
+      "tweet": "AI math gains may be a working memory story, not a reasoning story. The model holds every constraint at once. That is thinking with more paper, not thinking better.",
+      "tweet_id": "2088724257878757489",
+      "validation": {
+        "quality_score": 8.3,
+        "substance": 8.0,
+        "human": 9.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": true
+      },
+      "posted_at": "2026-08-15T20:27:24.498768+00:00"
     }
   ],
-  "last_updated": "2026-08-15T16:29:54.816345+00:00"
+  "last_updated": "2026-08-15T20:27:24.498788+00:00"
 }
