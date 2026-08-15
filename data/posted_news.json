@@ -1639,7 +1639,23 @@
         "used_rewrite": true
       },
       "posted_at": "2026-08-14T20:35:42.863959+00:00"
+    },
+    {
+      "url": "https://arstechnica.com/tech-policy/2026/08/suspecting-court-of-using-ai-man-injected-prompts-in-filings-to-try-to-win-case",
+      "title": "Suspecting court of using AI, man injected prompts in filings to try to win case",
+      "source": "Ars Technica",
+      "tweet": "A plaintiff hid white-on-white prompt injection text in court filings to manipulate any AI reading them. Connecticut courts use no AI, so it failed. Judge Spader called it dangerous. The threat is real.",
+      "tweet_id": "2088437045396119938",
+      "validation": {
+        "quality_score": 7.3,
+        "substance": 6.0,
+        "human": 7.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": true
+      },
+      "posted_at": "2026-08-15T01:26:07.698348+00:00"
     }
   ],
-  "last_updated": "2026-08-14T20:35:42.863975+00:00"
+  "last_updated": "2026-08-15T01:26:07.698363+00:00"
 }
