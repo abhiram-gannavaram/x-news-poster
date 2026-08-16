@@ -1767,7 +1767,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-08-16T03:04:15.497217+00:00"
+    },
+    {
+      "url": "https://github.com/yebiguo/ProofRun",
+      "title": "ProofRun – a local verification receipt for AI coding agents",
+      "source": "Hacker News",
+      "tweet": "AI coding agents infer test results instead of running them. ProofRun creates cryptographic receipts binding check outcomes to the exact code state. One byte changes, the receipt flips to STALE.",
+      "tweet_id": "2088879986577121363",
+      "validation": {
+        "quality_score": 7.5,
+        "substance": 8.0,
+        "human": 6.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": true
+      },
+      "posted_at": "2026-08-16T06:46:13.103309+00:00"
     }
   ],
-  "last_updated": "2026-08-16T03:04:15.497233+00:00"
+  "last_updated": "2026-08-16T06:46:13.103325+00:00"
 }
