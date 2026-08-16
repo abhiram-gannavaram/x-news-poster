@@ -1799,7 +1799,23 @@
         "used_rewrite": true
       },
       "posted_at": "2026-08-16T10:28:07.449435+00:00"
+    },
+    {
+      "url": "https://peterbloem.nl/blog/craft-coding",
+      "title": "AI Coding Without the Vibes",
+      "source": "Hacker News",
+      "tweet": "Flip the default. You write the code, AI reviews it. The other way around fails because the failure cases are rare enough that your attention drifts and false trust fills the gap.",
+      "tweet_id": "2088996152343450061",
+      "validation": {
+        "quality_score": 8.0,
+        "substance": 7.0,
+        "human": 8.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-08-16T14:27:49.188841+00:00"
     }
   ],
-  "last_updated": "2026-08-16T10:28:07.449449+00:00"
+  "last_updated": "2026-08-16T14:27:49.188857+00:00"
 }
