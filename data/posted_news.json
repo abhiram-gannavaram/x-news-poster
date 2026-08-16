@@ -1751,7 +1751,23 @@
         "used_rewrite": true
       },
       "posted_at": "2026-08-15T20:27:24.498768+00:00"
+    },
+    {
+      "url": "https://arxiv.org/abs/2608.13122",
+      "title": "AI-Assisted GPU Porting of a 250k Line Legacy Weather Simulation Code",
+      "source": "Hacker News",
+      "tweet": "AI ported 250k lines of legacy Fortran to GPU and caught 5 floating-point bugs humans missed. Branch divergence, cancellation effects. The code generation was expected. The correctness checking was the surprise.",
+      "tweet_id": "2088824128237178941",
+      "validation": {
+        "quality_score": 8.3,
+        "substance": 8.0,
+        "human": 8.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-08-16T03:04:15.497217+00:00"
     }
   ],
-  "last_updated": "2026-08-15T20:27:24.498788+00:00"
+  "last_updated": "2026-08-16T03:04:15.497233+00:00"
 }
