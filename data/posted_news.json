@@ -1831,7 +1831,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-08-16T18:34:19.882342+00:00"
+    },
+    {
+      "url": "https://daringfireball.net/2026/08/anthropics_watermark_text_adulteration_in_claude_is_a_perversion_of_writing",
+      "title": "Anthropic's 'Watermark' Text Adulteration in Claude Is a Perversion of Writing",
+      "source": "Hacker News",
+      "tweet": "Anthropic says Claude's text watermark doesn't affect quality or meaning. It works by biasing every token choice toward a green list. Those two claims are in tension. Worth knowing before you ship this in any quality-sensitive pipeline.",
+      "tweet_id": "2089116419048845493",
+      "validation": {
+        "quality_score": 8.0,
+        "substance": 8.0,
+        "human": 8.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": true
+      },
+      "posted_at": "2026-08-16T22:25:42.998744+00:00"
     }
   ],
-  "last_updated": "2026-08-16T18:34:19.882362+00:00"
+  "last_updated": "2026-08-16T22:25:42.998762+00:00"
 }
