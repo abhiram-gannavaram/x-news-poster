@@ -1815,7 +1815,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-08-16T14:27:49.188841+00:00"
+    },
+    {
+      "url": "https://vectoral.com/blog/who-are-the-token-brokers",
+      "title": "The AI Credit Resale Economy",
+      "source": "Hacker News",
+      "tweet": "There is a gray market for AI API credits. Startups with unused credits sell them, brokers pool the keys, buyers run inference at 40-60% off list. Your competitors may already be using it. Worth knowing before you price anything.",
+      "tweet_id": "2089058189018804462",
+      "validation": {
+        "quality_score": 8.0,
+        "substance": 8.0,
+        "human": 7.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-08-16T18:34:19.882342+00:00"
     }
   ],
-  "last_updated": "2026-08-16T14:27:49.188857+00:00"
+  "last_updated": "2026-08-16T18:34:19.882362+00:00"
 }
