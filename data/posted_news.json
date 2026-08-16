@@ -1783,7 +1783,23 @@
         "used_rewrite": true
       },
       "posted_at": "2026-08-16T06:46:13.103309+00:00"
+    },
+    {
+      "url": "https://littlelearner-ll.github.io",
+      "title": "What happens when an LLM never sees material beyond fifth grade?",
+      "source": "Hacker News",
+      "tweet": "GRPO boosted in-scope K-5 tasks but did nothing for out-of-scope ones. The pretraining corpus sets the capability ceiling, not the fine-tuning recipe.",
+      "tweet_id": "2088935830966738991",
+      "validation": {
+        "quality_score": 7.5,
+        "substance": 7.0,
+        "human": 7.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": true
+      },
+      "posted_at": "2026-08-16T10:28:07.449435+00:00"
     }
   ],
-  "last_updated": "2026-08-16T06:46:13.103325+00:00"
+  "last_updated": "2026-08-16T10:28:07.449449+00:00"
 }
