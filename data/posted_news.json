@@ -1927,7 +1927,23 @@
         "used_rewrite": true
       },
       "posted_at": "2026-08-17T14:32:27.048677+00:00"
+    },
+    {
+      "url": "https://rickmanelius.com/p/aidr-ai-didnt-read",
+      "title": "AI;DR (AI; Didn't Read)",
+      "source": "Hacker News",
+      "tweet": "A tweet coining 'AI;DR' (AI; Didn't Read) hit 346K views in two days. The norm it signals: unedited AI output from a colleague gets skipped entirely. If you're shipping a writing copilot, that's your real adoption problem now.",
+      "tweet_id": "2089450082231886050",
+      "validation": {
+        "quality_score": 7.2,
+        "substance": 6.0,
+        "human": 7.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-08-17T20:31:34.512528+00:00"
     }
   ],
-  "last_updated": "2026-08-17T14:32:27.048696+00:00"
+  "last_updated": "2026-08-17T20:31:34.512548+00:00"
 }
