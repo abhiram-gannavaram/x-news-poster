@@ -1879,7 +1879,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-08-17T04:47:30.227087+00:00"
+    },
+    {
+      "url": "https://newsletter.semianalysis.com/p/12b-of-us-ratepayers-money-wasted",
+      "title": "$12B of US ratepayers' money wasted on a modeling mistake in PJM",
+      "source": "Hacker News",
+      "tweet": "SemiAnalysis spent 6 months reverse-engineering PJM's grid model and found a 4GW accounting error. Estimated cost to ratepayers: $12B. Opaque infrastructure models have real consequences.",
+      "tweet_id": "2089246734627319979",
+      "validation": {
+        "quality_score": 7.7,
+        "substance": 7.0,
+        "human": 6.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": true
+      },
+      "posted_at": "2026-08-17T07:03:32.647855+00:00"
     }
   ],
-  "last_updated": "2026-08-17T04:47:30.227108+00:00"
+  "last_updated": "2026-08-17T07:03:32.647877+00:00"
 }
