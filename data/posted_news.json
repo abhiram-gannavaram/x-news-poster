@@ -1863,7 +1863,23 @@
         "used_rewrite": true
       },
       "posted_at": "2026-08-17T01:27:48.559551+00:00"
+    },
+    {
+      "url": "https://techcrunch.com/2026/08/16/stripe-will-reportedly-acquire-ai-gateway-startup-openrouter-for-7b",
+      "title": "Stripe will reportedly acquire AI gateway startup OpenRouter for $7B+",
+      "source": "TechCrunch",
+      "tweet": "If Stripe acquires OpenRouter, the neutral multi-model gateway you're routing through just became infrastructure owned by a payments company. 400 models, 8M users, one new set of incentives. Watch the pricing terms closely.",
+      "tweet_id": "2089212498834764129",
+      "validation": {
+        "quality_score": 7.3,
+        "substance": 6.0,
+        "human": 7.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-08-17T04:47:30.227087+00:00"
     }
   ],
-  "last_updated": "2026-08-17T01:27:48.559563+00:00"
+  "last_updated": "2026-08-17T04:47:30.227108+00:00"
 }
