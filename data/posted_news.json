@@ -1847,7 +1847,23 @@
         "used_rewrite": true
       },
       "posted_at": "2026-08-16T22:25:42.998744+00:00"
+    },
+    {
+      "url": "https://theverge.com/ai-artificial-intelligence/980817/openai-disbands-preparedness-team",
+      "title": "OpenAI reportedly disbanded its preparedness team",
+      "source": "The Verge",
+      "tweet": "OpenAI has now dissolved its preparedness, superalignment, and AGI readiness teams. Safety work got distributed into product teams. That is not the same thing. Incentives differ.",
+      "tweet_id": "2089162244185891044",
+      "validation": {
+        "quality_score": 8.0,
+        "substance": 7.0,
+        "human": 8.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": true
+      },
+      "posted_at": "2026-08-17T01:27:48.559551+00:00"
     }
   ],
-  "last_updated": "2026-08-16T22:25:42.998762+00:00"
+  "last_updated": "2026-08-17T01:27:48.559563+00:00"
 }
