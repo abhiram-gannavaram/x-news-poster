@@ -1895,7 +1895,23 @@
         "used_rewrite": true
       },
       "posted_at": "2026-08-17T07:03:32.647855+00:00"
+    },
+    {
+      "url": "https://duti.dev/blog/2026/spr",
+      "title": "HackEurope 2026: A short rant on AI and hackathons",
+      "source": "Hacker News",
+      "tweet": "A hackathon grand prize just went to a team with 1 engineer and 3 non-technicals. AI didn't level the playing field. It shifted the judging criteria toward pitch and polish and away from what you actually built.",
+      "tweet_id": "2089300155027853443",
+      "validation": {
+        "quality_score": 8.2,
+        "substance": 7.0,
+        "human": 9.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-08-17T10:35:49.074162+00:00"
     }
   ],
-  "last_updated": "2026-08-17T07:03:32.647877+00:00"
+  "last_updated": "2026-08-17T10:35:49.074183+00:00"
 }
