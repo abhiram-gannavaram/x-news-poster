@@ -1911,7 +1911,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-08-17T10:35:49.074162+00:00"
+    },
+    {
+      "url": "https://404media.co/we-tracked-a-shipment-of-rare-books-it-ended-at-an-amazon-ai-training-facility",
+      "title": "We Tracked a Shipment of Rare Books. It Ended at an Amazon AI Training Facility",
+      "source": "Hacker News",
+      "tweet": "Amazon is buying physical books, cutting off bindings, scanning them, and destroying the originals. Pre-2022 print is valuable because it is guaranteed free of AI-generated text.",
+      "tweet_id": "2089359705529307522",
+      "validation": {
+        "quality_score": 7.0,
+        "substance": 6.0,
+        "human": 8.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": true
+      },
+      "posted_at": "2026-08-17T14:32:27.048677+00:00"
     }
   ],
-  "last_updated": "2026-08-17T10:35:49.074183+00:00"
+  "last_updated": "2026-08-17T14:32:27.048696+00:00"
 }
