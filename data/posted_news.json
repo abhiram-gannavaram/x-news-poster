@@ -1959,7 +1959,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-08-18T06:50:44.727243+00:00"
+    },
+    {
+      "url": "https://theregister.com/ai-and-ml/2026/08/18/google-buys-crashed-airline-spirits-data-at-auction-because-ai/5288962",
+      "title": "Google buys crashed airline Spirit's data at auction, because AI",
+      "source": "Hacker News",
+      "tweet": "Google paid $10M for Spirit's bankruptcy data. 30 million recorded customer calls, 500 million Teams messages. 'Deidentified' is doing a lot of work in that sentence, and nobody can audit it.",
+      "tweet_id": "2089697169817407851",
+      "validation": {
+        "quality_score": 8.5,
+        "substance": 8.0,
+        "human": 9.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-08-18T12:53:24.778291+00:00"
     }
   ],
-  "last_updated": "2026-08-18T06:50:44.727265+00:00"
+  "last_updated": "2026-08-18T12:53:24.778307+00:00"
 }
