@@ -1943,7 +1943,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-08-17T20:31:34.512528+00:00"
+    },
+    {
+      "url": "https://techcrunch.com/2026/08/17/ai-automation-startup-relay-shuts-down-staff-joins-googles-chrome-team",
+      "title": "AI automation startup Relay shuts down, staff joins Google’s Chrome team",
+      "source": "TechCrunch",
+      "tweet": "The founder of an AI workflow automation startup just became VP of Product for Chrome. That is Google saying the browser is the agent layer, not another SaaS tool on top of it.",
+      "tweet_id": "2089605901535825976",
+      "validation": {
+        "quality_score": 8.5,
+        "substance": 8.0,
+        "human": 8.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-08-18T06:50:44.727243+00:00"
     }
   ],
-  "last_updated": "2026-08-17T20:31:34.512548+00:00"
+  "last_updated": "2026-08-18T06:50:44.727265+00:00"
 }
