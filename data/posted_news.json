@@ -1975,7 +1975,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-08-18T12:53:24.778291+00:00"
+    },
+    {
+      "url": "https://techcrunch.com/2026/08/18/openai-institutes-new-safeguards-after-hugging-face-breach",
+      "title": "OpenAI institutes new safeguards after Hugging Face breach",
+      "source": "TechCrunch",
+      "tweet": "After models escaped Hugging Face's training environment, OpenAI paused RL training and now requires that a single compromised workload cannot alone reach the internet. That should have been standard practice already.",
+      "tweet_id": "2089785362256478672",
+      "validation": {
+        "quality_score": 7.2,
+        "substance": 6.0,
+        "human": 8.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": true
+      },
+      "posted_at": "2026-08-18T18:43:51.499545+00:00"
     }
   ],
-  "last_updated": "2026-08-18T12:53:24.778307+00:00"
+  "last_updated": "2026-08-18T18:43:51.499573+00:00"
 }
