@@ -2007,7 +2007,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-08-19T03:01:45.580058+00:00"
+    },
+    {
+      "url": "https://terrytao.wordpress.com/2026/08/18/palomar-a-registry-of-lean-verified-mathematics",
+      "title": "Palomar: A registry of Lean verified mathematics",
+      "source": "Hacker News",
+      "tweet": "Palomar verifies Lean proofs in two passes. One is mechanical and deterministic. The other uses an LLM and is explicitly labeled non-deterministic. That honest split is the whole design lesson.",
+      "tweet_id": "2089968422708822029",
+      "validation": {
+        "quality_score": 7.5,
+        "substance": 7.0,
+        "human": 7.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-08-19T06:51:16.534315+00:00"
     }
   ],
-  "last_updated": "2026-08-19T03:01:45.580078+00:00"
+  "last_updated": "2026-08-19T06:51:16.534333+00:00"
 }
