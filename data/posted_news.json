@@ -2055,7 +2055,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-08-19T12:54:30.220054+00:00"
+    },
+    {
+      "url": "https://openai.com/index/replit",
+      "title": "Replit expands access to software creation with GPT-5.6 Luna",
+      "source": "OpenAI Blog",
+      "tweet": "Replit routes cheap model for exploration, escalates to the stronger one only when reasoning gets hard, then drops back down. That tiered handoff pattern is the real product design lesson here, not the free tier.",
+      "tweet_id": "2090115672982622432",
+      "validation": {
+        "quality_score": 7.5,
+        "substance": 7.0,
+        "human": 7.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-08-19T16:36:23.710336+00:00"
     }
   ],
-  "last_updated": "2026-08-19T12:54:30.220074+00:00"
+  "last_updated": "2026-08-19T16:36:23.710352+00:00"
 }
