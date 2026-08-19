@@ -2071,7 +2071,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-08-19T16:36:23.710336+00:00"
+    },
+    {
+      "url": "https://openai.com/index/offering-zero-data-retention-for-frontier-models",
+      "title": "Offering Zero Data Retention for frontier models",
+      "source": "OpenAI Blog",
+      "tweet": "OpenAI's new zero retention mode sounds clean until you hit Private Safety Processing. It still analyzes patterns across related requests. What exactly is in that signal? That unknown is the whole compliance question.",
+      "tweet_id": "2090175323140690422",
+      "validation": {
+        "quality_score": 7.5,
+        "substance": 7.0,
+        "human": 8.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-08-19T20:33:25.410962+00:00"
     }
   ],
-  "last_updated": "2026-08-19T16:36:23.710352+00:00"
+  "last_updated": "2026-08-19T20:33:25.410981+00:00"
 }
