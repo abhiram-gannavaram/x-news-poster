@@ -2023,7 +2023,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-08-19T06:51:16.534315+00:00"
+    },
+    {
+      "url": "https://wired.com/story/flock-safety-os-investigate",
+      "title": "Flock Has a Powerful New AI Tool for Police. We Got Its Code",
+      "source": "Wired AI",
+      "tweet": "69 prewritten prompts. 45 tool integrations. SSNs, relatives, movement patterns. That is not a lookup tool. That is population inference with a clean UI on top.",
+      "tweet_id": "2090024350791483400",
+      "validation": {
+        "quality_score": 8.3,
+        "substance": 8.0,
+        "human": 9.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-08-19T10:33:30.798479+00:00"
     }
   ],
-  "last_updated": "2026-08-19T06:51:16.534333+00:00"
+  "last_updated": "2026-08-19T10:33:30.798492+00:00"
 }
