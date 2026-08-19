@@ -1991,7 +1991,23 @@
         "used_rewrite": true
       },
       "posted_at": "2026-08-18T18:43:51.499545+00:00"
+    },
+    {
+      "url": "https://techcrunch.com/2026/08/18/cursor-capitalizes-on-github-frustration-launches-rival-hosting-platform",
+      "title": "Cursor capitalizes on GitHub frustration, launches rival hosting platform",
+      "source": "TechCrunch",
+      "tweet": "Cursor's new code host syncs with GitHub instead of forcing a migration. That's the real move. Zero switching cost means teams can hedge without committing. The 'agent native' features are still vague, but the interop bet is smart.",
+      "tweet_id": "2089910663246131691",
+      "validation": {
+        "quality_score": 7.2,
+        "substance": 7.0,
+        "human": 7.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-08-19T03:01:45.580058+00:00"
     }
   ],
-  "last_updated": "2026-08-18T18:43:51.499573+00:00"
+  "last_updated": "2026-08-19T03:01:45.580078+00:00"
 }
