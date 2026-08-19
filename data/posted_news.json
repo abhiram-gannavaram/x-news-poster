@@ -2039,7 +2039,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-08-19T10:33:30.798479+00:00"
+    },
+    {
+      "url": "https://techcrunch.com/2026/08/19/ai-isnt-close-to-curing-cancer-this-startup-says-it-knows-what-it-will-take",
+      "title": "AI isn’t close to curing cancer. This startup says it knows what it will take.",
+      "source": "TechCrunch",
+      "tweet": "The bottleneck in AI drug discovery isn't model quality. It's that training data comes from animal models that fail 90% of the time in human trials. Garbage in, garbage out, no matter how good the architecture.",
+      "tweet_id": "2090059832141226170",
+      "validation": {
+        "quality_score": 8.3,
+        "substance": 7.0,
+        "human": 8.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-08-19T12:54:30.220054+00:00"
     }
   ],
-  "last_updated": "2026-08-19T10:33:30.798492+00:00"
+  "last_updated": "2026-08-19T12:54:30.220074+00:00"
 }
