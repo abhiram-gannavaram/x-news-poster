@@ -2135,7 +2135,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-08-20T12:55:39.109802+00:00"
+    },
+    {
+      "url": "https://blog.yaros.ae/anti-ai-fonts-are-useless-and-harmful",
+      "title": "Anti-AI fonts are useless and harmful",
+      "source": "Hacker News",
+      "tweet": "Anti-AI fonts break screen readers. The scrambled text is exactly what those tools parse. Any fix that adds machine-readable metadata for accessibility defeats the obfuscation. You can't solve both at once.",
+      "tweet_id": "2090478855522058274",
+      "validation": {
+        "quality_score": 8.3,
+        "substance": 8.0,
+        "human": 8.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-08-20T16:39:33.186297+00:00"
     }
   ],
-  "last_updated": "2026-08-20T12:55:39.109824+00:00"
+  "last_updated": "2026-08-20T16:39:33.186313+00:00"
 }
