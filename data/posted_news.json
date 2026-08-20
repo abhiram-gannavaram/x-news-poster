@@ -2087,7 +2087,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-08-19T20:33:25.410962+00:00"
+    },
+    {
+      "url": "https://wired.com/story/generalist-ai-robots-learn-like-clever-toddlers",
+      "title": "I Saw the Future of AI in a Robot That Can Learn on the Spot",
+      "source": "Wired AI",
+      "tweet": "A robot arm had its brush removed mid-task and grabbed a dustpan instead. Learned from one short video, no task-specific training. The founders won't say how. That silence is the most interesting part of the demo.",
+      "tweet_id": "2090298154482881013",
+      "validation": {
+        "quality_score": 8.2,
+        "substance": 7.0,
+        "human": 8.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-08-20T04:41:30.690656+00:00"
     }
   ],
-  "last_updated": "2026-08-19T20:33:25.410981+00:00"
+  "last_updated": "2026-08-20T04:41:30.690671+00:00"
 }
