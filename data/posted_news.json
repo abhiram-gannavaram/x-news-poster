@@ -2167,7 +2167,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-08-20T18:44:51.859878+00:00"
+    },
+    {
+      "url": "https://techcrunch.com/2026/08/20/chatgpt-can-now-send-texts-for-you-with-new-apple-messages-plugin",
+      "title": "ChatGPT can now send texts for you with new Apple Messages plug-in",
+      "source": "TechCrunch",
+      "tweet": "ChatGPT's Messages plug-in 'runs locally' and 'doesn't index your messages.' It also connects to Codex and ChatGPT Work, which are cloud endpoints. Those two facts need to be reconciled before you hand it your inbox.",
+      "tweet_id": "2090567901233418421",
+      "validation": {
+        "quality_score": 8.2,
+        "substance": 8.0,
+        "human": 8.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-08-20T22:33:23.312721+00:00"
     }
   ],
-  "last_updated": "2026-08-20T18:44:51.859898+00:00"
+  "last_updated": "2026-08-20T22:33:23.312735+00:00"
 }
