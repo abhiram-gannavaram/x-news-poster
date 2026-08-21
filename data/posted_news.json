@@ -2231,7 +2231,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-08-21T10:34:36.243814+00:00"
+    },
+    {
+      "url": "https://arstechnica.com/tech-policy/2026/08/meta-ai-glasses-may-get-creepier-and-apps-that-detect-them-arent-perfect",
+      "title": "As demand for Meta AI glasses explodes, it’s harder to avoid creepy recordings",
+      "source": "Ars Technica",
+      "tweet": "A sticker can cover Meta's glasses recording light. That's the entire hardware consent model. When venues start banning the device outright, it's a signal that physical indicators don't scale. Consent enforcement belongs in software.",
+      "tweet_id": "2090784693323260364",
+      "validation": {
+        "quality_score": 8.3,
+        "substance": 8.0,
+        "human": 7.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-08-21T12:54:50.582067+00:00"
     }
   ],
-  "last_updated": "2026-08-21T10:34:36.243834+00:00"
+  "last_updated": "2026-08-21T12:54:50.582085+00:00"
 }
