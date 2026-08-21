@@ -2183,7 +2183,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-08-20T22:33:23.312721+00:00"
+    },
+    {
+      "url": "https://techcrunch.com/2026/08/20/openai-is-gaining-on-anthropic-with-business-users-new-data-indicates",
+      "title": "OpenAI is gaining on Anthropic with business users, new data indicates",
+      "source": "TechCrunch",
+      "tweet": "Among 70k+ businesses tracked by Ramp, AI market share shifted meaningfully between OpenAI and Anthropic in months. Low switching costs are real. Building on one provider is a bet, not a foundation.",
+      "tweet_id": "2090636941624836121",
+      "validation": {
+        "quality_score": 7.2,
+        "substance": 6.0,
+        "human": 7.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": true
+      },
+      "posted_at": "2026-08-21T03:07:43.827111+00:00"
     }
   ],
-  "last_updated": "2026-08-20T22:33:23.312735+00:00"
+  "last_updated": "2026-08-21T03:07:43.827132+00:00"
 }
