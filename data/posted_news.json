@@ -2247,7 +2247,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-08-21T12:54:50.582067+00:00"
+    },
+    {
+      "url": "https://github.com/alibaba/anolisa/blob/main/docs/user-guide/en/agent-observability/agentsight.md",
+      "title": "Show HN: AgentSight – eBPF observability for AI agents, no code changes",
+      "source": "Hacker News",
+      "tweet": "AgentSight intercepts LLM calls at the kernel via eBPF, giving you token usage and crash signals across any framework with zero code changes. Constraint: Linux only, root required.",
+      "tweet_id": "2090841207014662317",
+      "validation": {
+        "quality_score": 8.2,
+        "substance": 8.0,
+        "human": 7.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": true
+      },
+      "posted_at": "2026-08-21T16:39:24.548071+00:00"
     }
   ],
-  "last_updated": "2026-08-21T12:54:50.582085+00:00"
+  "last_updated": "2026-08-21T16:39:24.548086+00:00"
 }
