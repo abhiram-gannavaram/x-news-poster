@@ -2263,7 +2263,23 @@
         "used_rewrite": true
       },
       "posted_at": "2026-08-21T16:39:24.548071+00:00"
+    },
+    {
+      "url": "https://circleback.ai/blog/how-we-rebuilt-our-electron-recording-engine-in-swift",
+      "title": "Rebuilding our Electron meeting-recording engine in Swift",
+      "source": "Hacker News",
+      "tweet": "Electron's GC pauses and throttling aren't bugs you can work around. They're features of a browser runtime. If your task is real-time audio capture, you picked the wrong substrate. No amount of thread management fixes that.",
+      "tweet_id": "2090872142522900813",
+      "validation": {
+        "quality_score": 7.5,
+        "substance": 7.0,
+        "human": 8.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-08-21T18:42:20.104175+00:00"
     }
   ],
-  "last_updated": "2026-08-21T16:39:24.548086+00:00"
+  "last_updated": "2026-08-21T18:42:20.104192+00:00"
 }
