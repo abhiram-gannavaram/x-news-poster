@@ -2279,7 +2279,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-08-21T18:42:20.104175+00:00"
+    },
+    {
+      "url": "https://techcrunch.com/2026/08/21/nvidia-just-showed-that-the-harness-not-the-ai-model-is-now-the-real-hero",
+      "title": "Nvidia just showed that the harness, not the AI model, is now the real hero",
+      "source": "TechCrunch",
+      "tweet": "Claude Opus 5 scored 30% on ARC-AGI-3. Nvidia wrapped it in a custom harness with a supervisor and hit 100%. Same model. Scaffolding is the ceiling, not the model.",
+      "tweet_id": "2090929368474235228",
+      "validation": {
+        "quality_score": 8.3,
+        "substance": 7.0,
+        "human": 8.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": true
+      },
+      "posted_at": "2026-08-21T22:29:43.832872+00:00"
     }
   ],
-  "last_updated": "2026-08-21T18:42:20.104192+00:00"
+  "last_updated": "2026-08-21T22:29:43.832891+00:00"
 }
