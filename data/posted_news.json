@@ -2199,7 +2199,23 @@
         "used_rewrite": true
       },
       "posted_at": "2026-08-21T03:07:43.827111+00:00"
+    },
+    {
+      "url": "https://github.com/openai/codex/issues/37674",
+      "title": "Codex on AWS bedrock bug causing 10x charges",
+      "source": "Hacker News",
+      "tweet": "Running Codex CLI on AWS Bedrock? Check your bill. One user found 85% of model spend went to cache writes that produced zero cache hits over four days. The feature fires on every request and you cannot turn it off.",
+      "tweet_id": "2090693833050759466",
+      "validation": {
+        "quality_score": 8.5,
+        "substance": 8.0,
+        "human": 8.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-08-21T06:53:47.807357+00:00"
     }
   ],
-  "last_updated": "2026-08-21T03:07:43.827132+00:00"
+  "last_updated": "2026-08-21T06:53:47.807372+00:00"
 }
