@@ -2343,7 +2343,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-08-22T10:28:01.045452+00:00"
+    },
+    {
+      "url": "https://arstechnica.com/science/2026/08/memories-stick-around-even-after-half-the-synapses-are-gone",
+      "title": "Putting mice into hibernation causes a major loss of synapses",
+      "source": "Ars Technica",
+      "tweet": "Mice lost 50%+ of synapses during induced hibernation and woke up with memories intact. Memory may not need weight-level precision to survive.",
+      "tweet_id": "2091144977942262070",
+      "validation": {
+        "quality_score": 8.7,
+        "substance": 8.0,
+        "human": 8.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": true
+      },
+      "posted_at": "2026-08-22T12:46:29.129716+00:00"
     }
   ],
-  "last_updated": "2026-08-22T10:28:01.045470+00:00"
+  "last_updated": "2026-08-22T12:46:29.129734+00:00"
 }
