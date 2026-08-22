@@ -2327,7 +2327,23 @@
         "used_rewrite": true
       },
       "posted_at": "2026-08-22T04:37:54.214700+00:00"
+    },
+    {
+      "url": "https://techcrunch.com/2026/08/21/nvidia-partners-with-data-center-developer-cloverleaf",
+      "title": "Nvidia partners with data center developer Cloverleaf",
+      "source": "TechCrunch",
+      "tweet": "Nvidia took a stake in a company that brokers power and land for data centers. Same week, $1.5B into an Ohio site deal. The chip company is now betting that grid access is the binding constraint, not compute.",
+      "tweet_id": "2091110131215839281",
+      "validation": {
+        "quality_score": 8.0,
+        "substance": 8.0,
+        "human": 7.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-08-22T10:28:01.045452+00:00"
     }
   ],
-  "last_updated": "2026-08-22T04:37:54.214719+00:00"
+  "last_updated": "2026-08-22T10:28:01.045470+00:00"
 }
