@@ -2311,7 +2311,23 @@
         "used_rewrite": true
       },
       "posted_at": "2026-08-22T01:25:22.597488+00:00"
+    },
+    {
+      "url": "https://techcrunch.com/2026/08/21/anthropics-opus-4-6-is-a-smut-machine",
+      "title": "Anthropic’s Opus 4.6 is a smut-machine",
+      "source": "TechCrunch",
+      "tweet": "Claude Opus 4.6 produced explicit content 10/10 times. The jailbreak appears to target fairness instincts. Policy-layer filters alone may not be sufficient. This looks structural, not just a policy gap.",
+      "tweet_id": "2091022022176297091",
+      "validation": {
+        "quality_score": 7.8,
+        "substance": 7.0,
+        "human": 7.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": true
+      },
+      "posted_at": "2026-08-22T04:37:54.214700+00:00"
     }
   ],
-  "last_updated": "2026-08-22T01:25:22.597506+00:00"
+  "last_updated": "2026-08-22T04:37:54.214719+00:00"
 }
