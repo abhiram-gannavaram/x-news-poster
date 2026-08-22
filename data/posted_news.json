@@ -2295,7 +2295,23 @@
         "used_rewrite": true
       },
       "posted_at": "2026-08-21T22:29:43.832872+00:00"
+    },
+    {
+      "url": "https://wired.com/story/the-unlikely-place-at-the-center-of-chinas-ai-boom",
+      "title": "The Unlikely Place at the Center of China’s AI Boom",
+      "source": "Wired AI",
+      "tweet": "China pledged 12.5 GW of AI compute in semi-arid Ulanqab. Stargate totals 10 GW. The binding constraint is water, and the city is already managing acute peak demand shortfalls before the bulk of newly pledged capacity comes online.",
+      "tweet_id": "2090973571224842270",
+      "validation": {
+        "quality_score": 7.7,
+        "substance": 8.0,
+        "human": 7.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": true
+      },
+      "posted_at": "2026-08-22T01:25:22.597488+00:00"
     }
   ],
-  "last_updated": "2026-08-21T22:29:43.832891+00:00"
+  "last_updated": "2026-08-22T01:25:22.597506+00:00"
 }
