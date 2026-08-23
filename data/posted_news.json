@@ -2391,7 +2391,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-08-23T12:46:56.279435+00:00"
+    },
+    {
+      "url": "https://techcrunch.com/2026/08/23/flock-ceo-calls-for-compromise-as-surveillance-company-faces-growing-backlash",
+      "title": "Flock CEO calls for ‘compromise’ as surveillance company faces growing backlash",
+      "source": "TechCrunch",
+      "tweet": "A default that can be silently overridden by privileged users is not a default. It's theater. Flock cut retention to 7 days, then shipped an override that undoes it. That pattern shows up in a lot of internal tooling too.",
+      "tweet_id": "2091563995295863051",
+      "validation": {
+        "quality_score": 7.8,
+        "substance": 8.0,
+        "human": 8.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-08-23T16:31:30.664489+00:00"
     }
   ],
-  "last_updated": "2026-08-23T12:46:56.279455+00:00"
+  "last_updated": "2026-08-23T16:31:30.664506+00:00"
 }
