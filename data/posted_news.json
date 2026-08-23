@@ -2375,7 +2375,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-08-23T08:34:37.463818+00:00"
+    },
+    {
+      "url": "https://xda-developers.com/qwen-3-8-27b-reverse-engineering-job-frontier-model",
+      "title": "I gave Qwen 3.8 27B a reverse-engineering job and it finished in 30 minutes",
+      "source": "Hacker News",
+      "tweet": "A 27B model running locally audited a commercial app's license check in 30 minutes, documented every weakness, and refused to build the bypass. The model is drawing that line. That should make you uncomfortable either way.",
+      "tweet_id": "2091507479675072676",
+      "validation": {
+        "quality_score": 8.0,
+        "substance": 7.0,
+        "human": 8.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-08-23T12:46:56.279435+00:00"
     }
   ],
-  "last_updated": "2026-08-23T08:34:37.463844+00:00"
+  "last_updated": "2026-08-23T12:46:56.279455+00:00"
 }
