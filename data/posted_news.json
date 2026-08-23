@@ -2359,7 +2359,23 @@
         "used_rewrite": true
       },
       "posted_at": "2026-08-22T12:46:29.129716+00:00"
+    },
+    {
+      "url": "https://malisper.me/jit-compiling-code-in-5-us",
+      "title": "JIT Compiling Code in 5μs",
+      "source": "Hacker News",
+      "tweet": "LLVM JIT is too slow to compile every SQL query, so databases skip it for short queries. A 5μs compile time changes that math. Every query becomes a JIT candidate. The bottleneck was never the idea, it was the compile cost.",
+      "tweet_id": "2091443982865695064",
+      "validation": {
+        "quality_score": 8.3,
+        "substance": 8.0,
+        "human": 8.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-08-23T08:34:37.463818+00:00"
     }
   ],
-  "last_updated": "2026-08-22T12:46:29.129734+00:00"
+  "last_updated": "2026-08-23T08:34:37.463844+00:00"
 }
