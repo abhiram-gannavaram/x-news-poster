@@ -2423,7 +2423,23 @@
         "used_rewrite": true
       },
       "posted_at": "2026-08-23T18:35:15.216899+00:00"
+    },
+    {
+      "url": "https://techcrunch.com/2026/08/23/uber-faces-fine-of-nearly-1b-over-automated-driver-suspensions",
+      "title": "Uber faces fine of nearly $1B over automated driver suspensions",
+      "source": "TechCrunch",
+      "tweet": "Dutch DPA is fining Uber 825M euros under GDPR for automated driver deactivations without human review. Second largest GDPR fine ever. Auditable override paths belong in the architecture, not bolted on after.",
+      "tweet_id": "2091653363050119459",
+      "validation": {
+        "quality_score": 7.8,
+        "substance": 7.0,
+        "human": 7.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": true
+      },
+      "posted_at": "2026-08-23T22:26:37.609226+00:00"
     }
   ],
-  "last_updated": "2026-08-23T18:35:15.216921+00:00"
+  "last_updated": "2026-08-23T22:26:37.609240+00:00"
 }
