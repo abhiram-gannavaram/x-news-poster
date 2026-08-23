@@ -2407,7 +2407,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-08-23T16:31:30.664489+00:00"
+    },
+    {
+      "url": "https://techcrunch.com/2026/08/23/is-it-legal-to-train-ai-models-on-copyrighted-books-its-complicated",
+      "title": "Is it legal to train AI models on copyrighted books? It’s complicated",
+      "source": "TechCrunch",
+      "tweet": "Alsup ruled AI training is fair use. The $1.5B penalty was for sourcing from pirate libraries. Your data provenance is the legal risk, not training itself.",
+      "tweet_id": "2091595136153084051",
+      "validation": {
+        "quality_score": 8.2,
+        "substance": 7.0,
+        "human": 8.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": true
+      },
+      "posted_at": "2026-08-23T18:35:15.216899+00:00"
     }
   ],
-  "last_updated": "2026-08-23T16:31:30.664506+00:00"
+  "last_updated": "2026-08-23T18:35:15.216921+00:00"
 }
