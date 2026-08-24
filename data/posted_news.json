@@ -2455,7 +2455,23 @@
         "used_rewrite": true
       },
       "posted_at": "2026-08-24T01:36:42.944763+00:00"
+    },
+    {
+      "url": "https://techcrunch.com/2026/08/23/techcrunch-mobility-the-custom-chip-driving-waymos-robotaxi-ambitions",
+      "title": "TechCrunch Mobility: The custom chip driving Waymo’s robotaxi ambitions",
+      "source": "TechCrunch",
+      "tweet": "Waymo built a custom 5nm ASIC to preprocess sensor data from 13 cameras before it hits the main inference stack. Over 1,000 TOPS that never makes a driving decision. Smart separation of ingestion from reasoning.",
+      "tweet_id": "2091750107515334809",
+      "validation": {
+        "quality_score": 7.2,
+        "substance": 6.0,
+        "human": 6.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": true
+      },
+      "posted_at": "2026-08-24T04:51:03.274807+00:00"
     }
   ],
-  "last_updated": "2026-08-24T01:36:42.944777+00:00"
+  "last_updated": "2026-08-24T04:51:03.274824+00:00"
 }
