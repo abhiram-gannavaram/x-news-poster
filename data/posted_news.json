@@ -2439,7 +2439,23 @@
         "used_rewrite": true
       },
       "posted_at": "2026-08-23T22:26:37.609226+00:00"
+    },
+    {
+      "url": "https://risky.biz/risky-bulletin-slovakia-finds-russian-backdoor-in-traffic-speed-cameras",
+      "title": "Slovakia finds Russian backdoor in traffic speed cameras",
+      "source": "Hacker News",
+      "tweet": "Slovakia's NBU flagged traffic cameras with an SMS backdoor tied to hardcoded Russian numbers. SecureBoot disabled. The ministry said closed network made it safe. SMS is out-of-band. Procurement is your attack surface.",
+      "tweet_id": "2091701200567906449",
+      "validation": {
+        "quality_score": 8.7,
+        "substance": 9.0,
+        "human": 8.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": true
+      },
+      "posted_at": "2026-08-24T01:36:42.944763+00:00"
     }
   ],
-  "last_updated": "2026-08-23T22:26:37.609240+00:00"
+  "last_updated": "2026-08-24T01:36:42.944777+00:00"
 }
