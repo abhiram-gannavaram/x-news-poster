@@ -2487,7 +2487,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-08-24T10:41:03.944757+00:00"
+    },
+    {
+      "url": "https://techcrunch.com/2026/08/24/openai-is-building-an-ai-agent-for-everything-will-everyone-use-them",
+      "title": "OpenAI is building AI agents for everything. Will everyone use them?",
+      "source": "TechCrunch",
+      "tweet": "Codex was actively hostile to OpenAI's own non-engineers before they softened it. Showing diffs to non-coders is a context scoping problem, not just UX.",
+      "tweet_id": "2091929182083195000",
+      "validation": {
+        "quality_score": 7.3,
+        "substance": 7.0,
+        "human": 8.0,
+        "fact_score": 8.0,
+        "risk_level": "low",
+        "used_rewrite": true
+      },
+      "posted_at": "2026-08-24T16:42:37.994448+00:00"
     }
   ],
-  "last_updated": "2026-08-24T10:41:03.944773+00:00"
+  "last_updated": "2026-08-24T16:42:37.994472+00:00"
 }
