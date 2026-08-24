@@ -2471,7 +2471,23 @@
         "used_rewrite": true
       },
       "posted_at": "2026-08-24T04:51:03.274807+00:00"
+    },
+    {
+      "url": "https://theverge.com/tech/983688/world-humanoid-robot-games-sprint-record-2026",
+      "title": "Humanoid robots smash Usain Bolt&#8217;s 100-meter record",
+      "source": "The Verge",
+      "tweet": "Humanoid robots just ran 100m faster than Usain Bolt. The hard part they haven't solved is stopping. Peak speed is a benchmark. Controlled deceleration is a deployment requirement.",
+      "tweet_id": "2091838190722433366",
+      "validation": {
+        "quality_score": 7.8,
+        "substance": 7.0,
+        "human": 7.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-08-24T10:41:03.944757+00:00"
     }
   ],
-  "last_updated": "2026-08-24T04:51:03.274824+00:00"
+  "last_updated": "2026-08-24T10:41:03.944773+00:00"
 }
