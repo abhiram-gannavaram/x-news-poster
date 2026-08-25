@@ -2535,7 +2535,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-08-24T22:30:54.379960+00:00"
+    },
+    {
+      "url": "https://arstechnica.com/ai/2026/08/ai-is-hitting-entry-level-jobs-hardest-stanford-study-finds",
+      "title": "AI is hitting entry-level jobs hardest, Stanford study finds",
+      "source": "Ars Technica",
+      "tweet": "Stanford found a 19% employment gap for workers aged 22-25: AI-exposed fields down 11%, least-exposed up 10%. It's a hiring collapse, not layoffs. The junior pipeline matters.",
+      "tweet_id": "2092061061599854654",
+      "validation": {
+        "quality_score": 7.5,
+        "substance": 7.0,
+        "human": 6.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": true
+      },
+      "posted_at": "2026-08-25T01:26:40.510688+00:00"
     }
   ],
-  "last_updated": "2026-08-24T22:30:54.379978+00:00"
+  "last_updated": "2026-08-25T01:26:40.510705+00:00"
 }
