@@ -2631,7 +2631,23 @@
         "used_rewrite": true
       },
       "posted_at": "2026-08-25T16:41:47.792673+00:00"
+    },
+    {
+      "url": "https://perplexity.ai/hub/blog/introducing-portable-computer-for-local-first-ai",
+      "title": "Perplexity Portable Computer",
+      "source": "Hacker News",
+      "tweet": "Perplexity Portable Computer runs the full orchestrator, planner, tool router, task queue, and local search index on-device. Cloud is an explicit opt-in. That changes the threat model entirely.",
+      "tweet_id": "2092349801849372711",
+      "validation": {
+        "quality_score": 7.5,
+        "substance": 7.0,
+        "human": 7.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": true
+      },
+      "posted_at": "2026-08-25T20:34:01.555395+00:00"
     }
   ],
-  "last_updated": "2026-08-25T16:41:47.792696+00:00"
+  "last_updated": "2026-08-25T20:34:01.555412+00:00"
 }
