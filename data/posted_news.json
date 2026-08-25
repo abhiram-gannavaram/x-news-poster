@@ -2567,7 +2567,23 @@
         "used_rewrite": true
       },
       "posted_at": "2026-08-25T04:43:18.674742+00:00"
+    },
+    {
+      "url": "https://github.com/dragthelake/ambient-context",
+      "title": "Show HN: Screen memory without screenshots, just text to Markdown",
+      "source": "Hacker News",
+      "tweet": "macOS tool that reads focused window text via the Accessibility API every few seconds and writes plain markdown. No screenshots, no OCR, nothing leaves your machine. You only get what the accessibility tree exposes.",
+      "tweet_id": "2092143779704934455",
+      "validation": {
+        "quality_score": 7.3,
+        "substance": 7.0,
+        "human": 7.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": true
+      },
+      "posted_at": "2026-08-25T06:55:22.025626+00:00"
     }
   ],
-  "last_updated": "2026-08-25T04:43:18.674753+00:00"
+  "last_updated": "2026-08-25T06:55:22.025645+00:00"
 }
