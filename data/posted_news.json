@@ -2551,7 +2551,23 @@
         "used_rewrite": true
       },
       "posted_at": "2026-08-25T01:26:40.510688+00:00"
+    },
+    {
+      "url": "https://laude.org/updates/headlong-a-microharness-for-persistent-agents",
+      "title": "Headlong: A Microharness for Persistent Agents",
+      "source": "Hacker News",
+      "tweet": "Headlong runs one shared thought stream across all users. No sessions. Messages drop in as observations. The agent decides when to reply. No privacy between users. That is the tradeoff, not an oversight.",
+      "tweet_id": "2092110546766332173",
+      "validation": {
+        "quality_score": 8.3,
+        "substance": 8.0,
+        "human": 8.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": true
+      },
+      "posted_at": "2026-08-25T04:43:18.674742+00:00"
     }
   ],
-  "last_updated": "2026-08-25T01:26:40.510705+00:00"
+  "last_updated": "2026-08-25T04:43:18.674753+00:00"
 }
