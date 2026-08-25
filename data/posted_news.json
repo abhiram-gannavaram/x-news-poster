@@ -2599,7 +2599,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-08-25T10:37:05.780572+00:00"
+    },
+    {
+      "url": "https://wired.com/story/applying-for-a-job-is-too-damn-easy",
+      "title": "It Should Be Harder to Apply for a Job. No, Really",
+      "source": "Wired AI",
+      "tweet": "Zero marginal cost to apply means recruiters now filter thousands of submissions to find the same signal that 100 used to carry. The channel is broken. Friction was load-bearing and we removed it.",
+      "tweet_id": "2092233950857154600",
+      "validation": {
+        "quality_score": 8.5,
+        "substance": 9.0,
+        "human": 8.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-08-25T12:53:40.501824+00:00"
     }
   ],
-  "last_updated": "2026-08-25T10:37:05.780593+00:00"
+  "last_updated": "2026-08-25T12:53:40.501842+00:00"
 }
