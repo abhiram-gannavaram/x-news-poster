@@ -2583,7 +2583,23 @@
         "used_rewrite": true
       },
       "posted_at": "2026-08-25T06:55:22.025626+00:00"
+    },
+    {
+      "url": "https://wired.com/story/spirit-airlines-wants-to-sell-its-data-to-google-former-flight-attendants-are-freaked-out",
+      "title": "Spirit Airlines Wants to Sell Its Data to Google. Former Flight Attendants Are Freaked Out",
+      "source": "Wired AI",
+      "tweet": "Google outbid an AI training company for Spirit Airlines' data. $10M vs $7.5M. Bankruptcy court is now a data acquisition channel, and workers have almost no say in what happens to 34 years of their communications.",
+      "tweet_id": "2092199579554869250",
+      "validation": {
+        "quality_score": 8.0,
+        "substance": 7.0,
+        "human": 8.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-08-25T10:37:05.780572+00:00"
     }
   ],
-  "last_updated": "2026-08-25T06:55:22.025645+00:00"
+  "last_updated": "2026-08-25T10:37:05.780593+00:00"
 }
