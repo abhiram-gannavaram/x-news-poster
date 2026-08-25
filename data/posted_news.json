@@ -2615,7 +2615,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-08-25T12:53:40.501824+00:00"
+    },
+    {
+      "url": "https://arstechnica.com/health/2026/08/ai-wont-replace-radiologists-but-it-will-dramatically-change-their-jobs",
+      "title": "AI won’t replace radiologists, but it will dramatically change their jobs",
+      "source": "Ars Technica",
+      "tweet": "Physicians override rule-based AI alerts about half the time. The real challenge is interface design, not model accuracy. Nobody has solved the handoff yet.",
+      "tweet_id": "2092291359466049711",
+      "validation": {
+        "quality_score": 7.2,
+        "substance": 7.0,
+        "human": 8.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": true
+      },
+      "posted_at": "2026-08-25T16:41:47.792673+00:00"
     }
   ],
-  "last_updated": "2026-08-25T12:53:40.501842+00:00"
+  "last_updated": "2026-08-25T16:41:47.792696+00:00"
 }
