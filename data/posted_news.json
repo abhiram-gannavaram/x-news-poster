@@ -2663,7 +2663,23 @@
         "used_rewrite": true
       },
       "posted_at": "2026-08-26T01:35:47.569015+00:00"
+    },
+    {
+      "url": "https://wired.com/story/ai-slop-is-ruining-the-internets-cute-animal-economy",
+      "title": "AI Slop Is Ruining Cute Animals on the Internet",
+      "source": "Wired AI",
+      "tweet": "A scammer sent an AI photo of a missing cat and requested payment for 'temporary care.' The tell: garbled label text on a Torani bottle. AI still can't fake fine print.",
+      "tweet_id": "2092597701418565834",
+      "validation": {
+        "quality_score": 8.3,
+        "substance": 7.0,
+        "human": 8.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": true
+      },
+      "posted_at": "2026-08-26T12:59:05.416074+00:00"
     }
   ],
-  "last_updated": "2026-08-26T01:35:47.569032+00:00"
+  "last_updated": "2026-08-26T12:59:05.416090+00:00"
 }
