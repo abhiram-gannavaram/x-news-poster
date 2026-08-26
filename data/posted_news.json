@@ -2695,7 +2695,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-08-26T19:53:38.288135+00:00"
+    },
+    {
+      "url": "https://arstechnica.com/ai/2026/08/google-announces-gemini-3-5-transcribe-for-ai-powered-speech-to-text",
+      "title": "Google announces Gemini 3.5 Transcribe for AI-powered speech-to-text",
+      "source": "Ars Technica",
+      "tweet": "Gemini 3.5 Transcribe cuts error rate from 7.3% to 5.5% and removes filler words automatically. Great for notes. Actively wrong for legal, medical, or accessibility work where what someone actually said is the record.",
+      "tweet_id": "2092747781698146556",
+      "validation": {
+        "quality_score": 8.0,
+        "substance": 8.0,
+        "human": 8.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": false
+      },
+      "posted_at": "2026-08-26T22:55:27.335234+00:00"
     }
   ],
-  "last_updated": "2026-08-26T19:53:38.288152+00:00"
+  "last_updated": "2026-08-26T22:55:27.335251+00:00"
 }
