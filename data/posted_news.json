@@ -2647,7 +2647,23 @@
         "used_rewrite": true
       },
       "posted_at": "2026-08-25T20:34:01.555395+00:00"
+    },
+    {
+      "url": "https://techcrunch.com/2026/08/25/openai-loses-a-top-data-center-exec-as-stream-of-high-profile-departures-continues",
+      "title": "OpenAI loses a top data center exec, as stream of high-profile departures continues",
+      "source": "TechCrunch",
+      "tweet": "OpenAI split data center oversight among three execs while Stargate is mid-build. The restructuring matters more than the departure.",
+      "tweet_id": "2092425743900791018",
+      "validation": {
+        "quality_score": 7.2,
+        "substance": 6.0,
+        "human": 8.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": true
+      },
+      "posted_at": "2026-08-26T01:35:47.569015+00:00"
     }
   ],
-  "last_updated": "2026-08-25T20:34:01.555412+00:00"
+  "last_updated": "2026-08-26T01:35:47.569032+00:00"
 }
