@@ -2711,7 +2711,23 @@
         "used_rewrite": false
       },
       "posted_at": "2026-08-26T22:55:27.335234+00:00"
+    },
+    {
+      "url": "https://wired.com/story/openai-is-developing-a-persistent-ai-agent",
+      "title": "OpenAI Is Developing a ‘Persistent’ AI Agent",
+      "source": "Wired AI",
+      "tweet": "Codex Persistent mode generates its own follow-up tasks but cannot expand its own permissions. That one constraint is doing a lot of work.",
+      "tweet_id": "2093069631921528856",
+      "validation": {
+        "quality_score": 7.8,
+        "substance": 8.0,
+        "human": 8.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": true
+      },
+      "posted_at": "2026-08-27T20:14:22.395836+00:00"
     }
   ],
-  "last_updated": "2026-08-26T22:55:27.335251+00:00"
+  "last_updated": "2026-08-27T20:14:22.395856+00:00"
 }
