@@ -2727,7 +2727,23 @@
         "used_rewrite": true
       },
       "posted_at": "2026-08-27T20:14:22.395836+00:00"
+    },
+    {
+      "url": "https://arstechnica.com/ai/2026/08/anthropics-new-hardware-standard-lets-ai-agents-control-the-physical-world",
+      "title": "Anthropic's new hardware standard lets AI agents control the physical world",
+      "source": "Ars Technica",
+      "tweet": "Anthropic's MHS lets AI agents control physical devices via MCP using natural language. It's a research preview. Security and failure handling aren't documented yet. That order matters.",
+      "tweet_id": "2093217542555021328",
+      "validation": {
+        "quality_score": 7.8,
+        "substance": 7.0,
+        "human": 8.0,
+        "fact_score": 9.0,
+        "risk_level": "low",
+        "used_rewrite": true
+      },
+      "posted_at": "2026-08-28T06:02:07.047756+00:00"
     }
   ],
-  "last_updated": "2026-08-27T20:14:22.395856+00:00"
+  "last_updated": "2026-08-28T06:02:07.047773+00:00"
 }
